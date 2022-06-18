@@ -1,0 +1,32 @@
+//---------BREAKPOINTS---------//
+// Small tablets and large smartphones
+$screen-sm-min: 576px;
+// Small tablets
+$screen-md-min: 768px;
+// Tablets and small desktops
+$screen-lg-min: 992px;
+// Large tablets and medium desktops
+$screen-xl-min: 1200px;
+// Large desktops
+$screen-xxl-min: 1400px;
+
+//---------COLORS---------//
+//System
+$system-color-error: #d9304e;
+$system-color-success: #38b66d;
+//Brand colors
+$brand-color-pink: #f90074;
+$brand-color-black: #000000;
+//Backgrounds
+$background-colors-white: #f4f4f4;
+$background-colors-black: #14151b;
+//Buttons
+$button-color-pink-l1: #f90074;
+$button-color-pink-l2: #fa4c9d;
+$button-color-pink-l3: #e5006a;
+$button-color-pink-l4: #fcdaa4;
+//Text
+$text-color-black: #17181e;
+$text-color-dark-blue: #5e6a7b;
+$text-color-gray: #a7a7a7;
+$text-color-white: #ffffff;
