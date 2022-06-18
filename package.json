@@ -5,20 +5,29 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "major": "npm version major -m \"Фиксирует версию релиза - %s\"",
+    "minor": "npm version minor -m \"Фиксирует промежуточную версию - %s\"",
+    "patch": "npm version patch -m \"Фиксирует версию патча - %s\"",
+    "prepare": "husky instal",
+    "pre-commit": "npx lint-staged"
   },
   "dependencies": {
-    "core-js": "^3.8.3",
-    "vue": "^3.2.13"
+    "core-js": "~3.23.1",
+    "vue": "~3.2.13"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
+    "@babel/core": "~7.18.5",
+    "@babel/eslint-parser": "~7.18.2",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "eslint": "~7.32.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "~8.7.1",
+    "husky": "^8.0.1",
+    "prettier": "2.7.1"
   },
   "eslintConfig": {
     "root": true,
@@ -27,12 +36,29 @@
     },
     "extends": [
       "plugin:vue/vue3-essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "prettier"
     ],
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
+    "plugins": [
+      "prettier"
+    ],
     "rules": {}
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "printWidth": 100,
+    "singleQuote": false
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "eslint --fix"
+    ],
+    "*.{html,css,scss,json}": [
+      "prettier --write"
+    ]
   },
   "browserslist": [
     "> 1%",
