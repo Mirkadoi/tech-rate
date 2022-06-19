@@ -1,5 +1,5 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+<!--  <img alt="Vue logo" src="./assets/logo.png">-->
   <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
 
@@ -15,12 +15,13 @@ export default {
 </script>
 
 <style>
+    @import "./assets/scss/variables.scss";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: $color-secondary;
   margin-top: 60px;
 }
 </style>
