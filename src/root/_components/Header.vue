@@ -1,11 +1,15 @@
 <template>
-  <div>
-    Хеадер
-  </div>
+<!--  <div>-->
+    <Button title="ТестКнопка" mode="primary"/>
+<!--  </div>-->
 </template>
 
 <script>
-  export default {
+  import Button from '@/components/Button';
 
+  export default {
+    components: {
+      Button,
+    }
   }
 </script>

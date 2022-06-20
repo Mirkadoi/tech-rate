@@ -29,3 +29,13 @@
     @content;
   }
 }
+
+//---------FONT---------//
+
+@mixin font-face($font-family, $pathname, $font-weight, $font-style: normal) {
+  font-family: $font-family, sans-serif;
+  //src: url("@/assets/font/" + $font-family + "/" + $pathname + ".ttf") format("truetype");
+  src: url("@/assets/font/Cairo/Cairo-ExtraBold.ttf") format("truetype");
+  font-weight: $font-weight;
+  font-style: $font-style;
+}
