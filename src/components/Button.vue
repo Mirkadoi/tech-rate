@@ -27,7 +27,7 @@
     border-radius: 8px;
     cursor: pointer;
     transition-property: background-color, border, color;
-    transition-duration: 0.3s;
+    transition-duration: 0.2s;
     transition-timing-function: ease-in;
 
     &--primary {

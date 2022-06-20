@@ -3,16 +3,16 @@
       xmlns="http://www.w3.org/2000/svg"
        :width="width"
        :height="height"
-       viewBox="0 0 18 18"
+       :viewBox="`0 0 ${width} ${height}`"
        :aria-labelledby="iconName"
        role="img"
   >
     <title :id="iconName">{{ iconName }}</title>
-    <g :fill="iconColor">
-      <slot>
+    <slot>
+      <g :fill="iconColor">
         <component :is="iconCode"/>
-      </slot>
-    </g>
+      </g>
+    </slot>
   </svg>
 </template>
 
@@ -34,7 +34,7 @@
       Magnifier,
       GithubLogo,
       TelegramLogo,
-      TwitterLogo
+      TwitterLogo,
     },
 
     props: {
