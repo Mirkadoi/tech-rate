@@ -1,7 +1,9 @@
 <template>
-<!--  <div>-->
+  <div style="background-color: #38b66d">
     <Button title="ТестКнопка" mode="primary"/>
-<!--  </div>-->
+    <Button title="ТестКнопка2" mode="secondary"/>
+    <Button title="ТестКнопка3" mode="tertiary"/>
+  </div>
 </template>
 
 <script>

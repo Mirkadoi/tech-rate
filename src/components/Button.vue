@@ -20,13 +20,15 @@
 </script>
 
 <style scoped lang="scss">
-
   .btn {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
     cursor: pointer;
+    transition-property: background-color, border, color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
 
     &--primary {
       font-family: $font-base;
@@ -49,8 +51,50 @@
       }
     }
 
-    &--secondory {
+    &--secondary {
+      font-family: $font-alt;
+      font-weight: 700;
+      padding: 18px 20px;
+      color: $text-color-black;
+      background-color: $color-white;
+      border: 1px solid $border-color-l1;
 
+      &:hover {
+        background-color: transparent;
+      }
+
+      &:active {
+        background-color: transparent;
+        border: 2px solid $brand-color-pink;
+      }
+
+      &.disabled {
+        color: rgba(23, 24, 30, 0.5);
+        background-color: transparent;
+        pointer-events: none;
+      }
+    }
+
+    &--tertiary {
+      font-family: $font-base;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 150%;
+      text-transform: uppercase;
+      color: $button-color-pink-l1;
+
+      &:hover {
+        color: $button-color-pink-l2;
+      }
+
+      &:active {
+        color: $button-color-pink-l3;
+      }
+
+      &.disabled {
+        color: #FAC8DF;
+        pointer-events: none;
+      }
     }
   }
 </style>
