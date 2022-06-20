@@ -29,6 +29,8 @@
     cursor: pointer;
 
     &--primary {
+      font-family: $font-base;
+      font-weight: 600;
       padding: 9px 20px;
       color: $background-colors-white;
       background-color: $button-color-pink-l1;
