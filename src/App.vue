@@ -21,13 +21,12 @@ export default {
 </script>
 
 <style>
-    @import "./assets/scss/variables.scss";
+    /*@import "./assets/scss/variables.scss";*/
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: $color-secondary;
   margin-top: 60px;
 }
 </style>

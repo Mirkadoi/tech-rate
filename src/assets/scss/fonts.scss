@@ -2,7 +2,7 @@
 @font-face {
   font-family: "Cairo";
   src: local("Cairo ExtraLight"), local("Cairo-ExtraLight"),
-    url("./src/assets/font/Cairo/Cairo-ExtraLight.ttf") format("truetype");
+    url("@/assets/font/Cairo/Cairo-ExtraLight.ttf") format("truetype");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -10,7 +10,7 @@
 @font-face {
   font-family: "Cairo";
   src: local("Cairo ExtraBold"), local("Cairo-ExtraBold"),
-    url("./src/assets/font/Cairo/Cairo-ExtraBold.ttf") format("truetype");
+    url("@/assets/font/Cairo/Cairo-ExtraBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -18,7 +18,7 @@
 @font-face {
   font-family: "Cairo";
   src: local("Cairo Light"), local("Cairo-Light"),
-    url("./src/assets/font/Cairo/Cairo-Light.ttf") format("truetype");
+    url("@/assets/font/Cairo/Cairo-Light.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -26,7 +26,7 @@
 @font-face {
   font-family: "Cairo";
   src: local("Cairo Regular"), local("Cairo-Regular"),
-    url("./src/assets/font/Cairo/Cairo-Regular.ttf") format("truetype");
+    url("@/assets/font/Cairo/Cairo-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -35,7 +35,7 @@
 @font-face {
   font-family: "Cairo";
   src: local("Cairo Medium"), local("Cairo-Medium"),
-    url("./src/assets/font/Cairo/Cairo-Medium.ttf") format("truetype");
+    url("@/assets/font/Cairo/Cairo-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
