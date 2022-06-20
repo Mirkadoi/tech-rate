@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "core-js": "~3.23.1",
-    "vue": "~3.2.13"
+    "vue": "~3.2.13",
+    "vue-router": "^4.0.16"
   },
   "devDependencies": {
     "@babel/core": "~7.18.5",
@@ -45,7 +46,11 @@
     "plugins": [
       "prettier"
     ],
-    "rules": {}
+    "rules": {
+      "vue/multi-word-component-names": [
+        "off"
+      ]
+    }
   },
   "prettier": {
     "tabWidth": 2,
