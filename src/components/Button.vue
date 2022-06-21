@@ -1,7 +1,7 @@
 <template>
   <div
       class="btn"
-      :class="{[`btn--${mode}`]: mode, 'disabled': disabled }"
+      :class="{[`btn--${mode}`]: mode, 'disabled': disabled, 'btn--block': block }"
       role="button"
       @click="$emit('onClick')"
   >
@@ -14,6 +14,7 @@
     props: {
       title: { type: String, default: '' },
       mode: { type: String, default: 'primary'},
+      block: { type: Boolean, default: false },
       disabled: { type: Boolean, default: false}
     },
   }
@@ -29,6 +30,11 @@
     transition-property: background-color, border, color;
     transition-duration: 0.2s;
     transition-timing-function: ease-in;
+    box-sizing: border-box;
+
+    &--block {
+      width: 100%;
+    }
 
     &--primary {
       font-family: $font-base;

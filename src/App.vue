@@ -2,9 +2,7 @@
   <section class="app">
     <Header />
 
-    <router-view>
-
-    </router-view>
+    <router-view/>
 
     <Footer />
 
@@ -14,8 +12,8 @@
 
 <script>
 
-import Header from '@/root/_components/Header';
-import Footer from '@/root/_components/Footer';
+import Header from '@/components/layout/header/Header';
+import Footer from '@/components/layout/footer/Footer';
 import { GDialogRoot } from 'gitart-vue-dialog'
 
 export default {

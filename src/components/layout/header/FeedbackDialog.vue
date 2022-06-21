@@ -1,0 +1,183 @@
+<template>
+  <GDialog v-model="dialogState" max-width="535" border-radius="20">
+    <div class="modal-wrapper">
+      <h2 class="title"> Reach out to us </h2>
+
+      <h4 class="subtitle"> Apply for the Audit and DM in telegram @EmilTechrate </h4>
+
+      <Form class="form" v-slot="{ validate }">
+        <div class="field">
+          <label class="field__label" for="name">Name</label>
+          <Field class="field__input" id="name" name="name" />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="email">Email</label>
+          <Field class="field__input" id="email" name="email"/>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="contact">Personal telegram ID / phone <span>*</span></label>
+          <Field class="field__input field__input--with-error" id="contact" name="contact" :rules="isRequired" />
+          <div class="field__error field__error--with-error">
+            <ErrorMessage  name="contact" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="comments">Comments (link to the contract)</label>
+          <Field class="field__textarea" id="comments" name="comments" as="textarea" />
+        </div>
+
+        <Button class="btn-apply" title="Apply" block @onClick="submit(validate)"></Button>
+      </Form>
+    </div>
+  </GDialog>
+</template>
+
+<script>
+  import { defineComponent } from 'vue'
+  import { Field, Form, ErrorMessage } from 'vee-validate';
+  import Button from '@/components/Button';
+
+  export default defineComponent({
+    components: {
+      Field,
+      Form,
+      ErrorMessage,
+      Button,
+    },
+
+    props: {
+      modelValue: {
+        type: Boolean,
+        default: false,
+      },
+    },
+
+    emits: ['update:modelValue'],
+
+    computed: {
+      dialogState: {
+        get() {
+          return this.modelValue
+        },
+
+        set(value) {
+          this.$emit('update:modelValue', value)
+        },
+      },
+    },
+
+    methods: {
+      isRequired(value) {
+        return value && value.trim() ? true : 'This field is required';
+      },
+
+      async submit(validate) {
+        const { valid } = await validate()
+        console.log(valid);
+      }
+    },
+  })
+</script>
+
+<style lang="scss" scoped>
+  .modal-wrapper {
+    padding: 45px 40px;
+  }
+
+  .title {
+    font-family: $font-base;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    color: $text-color-black;
+    margin: 0 0 8px 0;
+  }
+
+  .subtitle {
+    font-family: $font-base;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: $text-color-dark-blue;
+    margin: 0 0 30px 0;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+
+    &__label {
+      font-family: $font-base;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+      color: $text-color-dark-blue;
+
+      span {
+        color: $brand-color-pink;
+      }
+    }
+
+    &__input, &__textarea {
+      background-color: $background-colors-white;
+      border: 1px solid $border-color-l1;
+      border-radius: 8px;
+      font-family: $font-base;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+      color: $text-color-black;
+      padding: 13px 16px;
+      margin-bottom: 26px;
+
+      &:focus {
+        background-color: $color-white;
+        border: 1px solid $border-color-l2;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+
+      &--with-error {
+        margin-bottom: 6px;
+      }
+    }
+
+    &__textarea {
+      resize: none;
+    }
+
+    &__error {
+      height: 18px;
+      font-family: $font-base;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 150%;
+      color: $system-color-error;
+
+      &--with-error {
+        margin-bottom: 6px;
+      }
+    }
+  }
+
+  .btn-apply {
+    margin-top: 20px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+</style>

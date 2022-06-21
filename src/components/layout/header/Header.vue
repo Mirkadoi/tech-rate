@@ -1,16 +1,15 @@
 <template>
   <header class="header">
-<!--    <Button title="ТестКнопка" mode="primary"/>-->
-<!--    <Button title="ТестКнопка2" mode="secondary"/>-->
-<!--    <Button title="ТестКнопка3" mode="tertiary"/>-->
     <Icon width="83" height="32" iconName="TechRate">
       <TechRateLogo />
     </Icon>
 
-    <div class="nav">
-      <router-link class="nav-link" to="/">Products</router-link>
+    <div class="btn-group">
+      <div class="nav">
+        <router-link class="nav-link" to="/">Products</router-link>
 
-      <router-link class="nav-link" to="/blog">Blog</router-link>
+        <router-link class="nav-link" to="/blog">Blog</router-link>
+      </div>
 
       <Button title="Get Audit" mode="primary" @onClick="onOpenFeedbackWindow"/>
     </div>
@@ -23,7 +22,7 @@
   import Button from '@/components/Button';
   import Icon from '@/components/Icon';
   import TechRateLogo from '@/components/icons/TechRateLogo';
-  import Dialog from '@/components/Dialog';
+  import FeedbackDialog from '@/components/layout/header/FeedbackDialog';
 
   export default defineComponent({
     components: {
@@ -35,10 +34,10 @@
     methods: {
       onOpenFeedbackWindow() {
         this.$dialog.addDialog({
-          component: Dialog,
-          props: {
-            info: 'Some kind of message from outside InfoDialog',
-          },
+          component: FeedbackDialog,
+          // props: {
+          //   info: 'Some kind of message from outside InfoDialog',
+          // },
         });
       }
     }
@@ -59,11 +58,15 @@
     }
   }
 
-  .nav {
+  .btn-group {
     display: flex;
     align-items: center;
+    gap: 50px;
+  }
+
+  .nav {
+    display: flex;
     font-size: 16px;
-    flex-direction: row;
     gap: 50px;
   }
 

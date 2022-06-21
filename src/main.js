@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from './root/App.vue'
+import App from './App.vue'
 import router from "./router";
 
 import  "@/assets/scss/normalize.scss";
