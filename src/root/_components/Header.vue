@@ -12,17 +12,20 @@
 
       <router-link class="nav-link" to="/blog">Blog</router-link>
 
-      <Button title="Get Audit" mode="primary" @click="openFeedbackWindow"/>
+      <Button title="Get Audit" mode="primary" @onClick="onOpenFeedbackWindow"/>
     </div>
   </header>
 </template>
 
 <script>
+  import { defineComponent } from 'vue'
+
   import Button from '@/components/Button';
   import Icon from '@/components/Icon';
   import TechRateLogo from '@/components/icons/TechRateLogo';
+  import Dialog from '@/components/Dialog';
 
-  export default {
+  export default defineComponent({
     components: {
       Button,
       Icon,
@@ -30,11 +33,16 @@
     },
 
     methods: {
-      openFeedbackWindow() {
-        console.log('открыть')
+      onOpenFeedbackWindow() {
+        this.$dialog.addDialog({
+          component: Dialog,
+          props: {
+            info: 'Some kind of message from outside InfoDialog',
+          },
+        });
       }
     }
-  }
+  })
 </script>
 
 <style scoped lang="scss">

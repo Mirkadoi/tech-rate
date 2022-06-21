@@ -7,6 +7,8 @@
     </router-view>
 
     <Footer />
+
+    <GDialogRoot />
   </section>
 </template>
 
@@ -14,12 +16,14 @@
 
 import Header from '@/root/_components/Header';
 import Footer from '@/root/_components/Footer';
+import { GDialogRoot } from 'gitart-vue-dialog'
 
 export default {
   name: 'App',
   components: {
     Header,
     Footer,
+    GDialogRoot
   }
 }
 </script>

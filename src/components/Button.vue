@@ -3,7 +3,7 @@
       class="btn"
       :class="{[`btn--${mode}`]: mode, 'disabled': disabled }"
       role="button"
-      @click="$emit('click')"
+      @click="$emit('onClick')"
   >
     <slot>{{ title }}</slot>
   </div>
