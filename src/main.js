@@ -19,6 +19,11 @@ app.use(dialogPlugin)
 app.component('GDialog', GDialog)
 
 /////////////////////
+///vue-inline-svg///
+
+import InlineSvg from 'vue-inline-svg';
+app.component('InlineSvg', InlineSvg);
+
 ///////////////
 
 app.mount('#app')
