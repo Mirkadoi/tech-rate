@@ -1,8 +1,6 @@
 <template>
   <header class="header">
-    <Icon width="83" height="32" iconName="TechRate">
-      <TechRateLogo />
-    </Icon>
+    <InlineSvg :src="require('@/assets/icons/tech-rate-logo.svg')" width="83" height="32" fill="white" title="TechRate"/>
 
     <div class="btn-group">
       <div class="nav">
@@ -19,16 +17,12 @@
 <script>
   import { defineComponent } from 'vue'
 
-  import Button from '@/components/Button';
-  import Icon from '@/components/Icon';
-  import TechRateLogo from '@/components/icons/TechRateLogo';
+  import Button from '@/components/button/Button';
   import FeedbackDialog from '@/components/layout/header/FeedbackDialog';
 
   export default defineComponent({
     components: {
       Button,
-      Icon,
-      TechRateLogo,
     },
 
     methods: {

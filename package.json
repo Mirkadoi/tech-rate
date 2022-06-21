@@ -17,6 +17,7 @@
     "gitart-vue-dialog": "^2.2.2",
     "vee-validate": "^4.5.11",
     "vue": "~3.2.13",
+    "vue-inline-svg": "^3.1.0",
     "vue-router": "~4.0.16"
   },
   "devDependencies": {

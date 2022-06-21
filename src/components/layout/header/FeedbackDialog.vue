@@ -1,6 +1,11 @@
 <template>
   <GDialog v-model="dialogState" max-width="535" border-radius="20">
     <div class="modal-wrapper">
+      <div class="btn-close" @click="close">
+        <InlineSvg :src="require('@/assets/icons/close.svg')" width="12" height="12" title="Закрыть"/>
+      </div>
+
+
       <h2 class="title"> Reach out to us </h2>
 
       <h4 class="subtitle"> Apply for the Audit and DM in telegram @EmilTechrate </h4>
@@ -38,7 +43,7 @@
 <script>
   import { defineComponent } from 'vue'
   import { Field, Form, ErrorMessage } from 'vee-validate';
-  import Button from '@/components/Button';
+  import Button from '@/components/button/Button';
 
   export default defineComponent({
     components: {
@@ -74,6 +79,10 @@
         return value && value.trim() ? true : 'This field is required';
       },
 
+      close() {
+        this.dialogState = false;
+      },
+
       async submit(validate) {
         const { valid } = await validate()
         console.log(valid);
@@ -84,7 +93,7 @@
 
 <style lang="scss" scoped>
   .modal-wrapper {
-    padding: 45px 40px;
+    padding: 35px 40px 45px 40px;
   }
 
   .title {
@@ -172,6 +181,20 @@
       &--with-error {
         margin-bottom: 6px;
       }
+    }
+  }
+
+  .btn-close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    margin-left: auto;
+    cursor: pointer;
+
+    svg {
+      fill: $text-color-gray;
     }
   }
 
