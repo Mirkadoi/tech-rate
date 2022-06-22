@@ -46,6 +46,7 @@
     padding: 0 100px;
     height: 30px;
     background-color: $color-black;
+    box-sizing: border-box;
 
     @include xl {
       height: 78px;
