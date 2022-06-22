@@ -3,7 +3,9 @@
     <table>
       <thead>
         <tr>
-          <th v-for="(el, i) in tableHeader" :key="i" @click="sort(el)">{{ el }}</th>
+          <th v-for="(el, i) in tableHeader" :key="i" @click="sort(el)">
+            <p class="d-flex">{{ el }}<span class="arrows"/></p>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -51,8 +53,8 @@ export default defineComponent({
         img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
         name: 'Carbon',
         price: '$ 39 043.65',
-        security: { stocks: false, value: "5.79%" },
-        last: { stocks: true, value: "5.79%" },
+        security: { stocks: false, value: "5.69%" },
+        last: { stocks: true, value: "5.69%" },
         market: '$ 741 601 948.65',
         volume: '$ 27 601 948.65',
       },
@@ -133,12 +135,46 @@ export default defineComponent({
       line-height: 16px;
       th {
         padding-top: 25px;
-        text-align: right;
         cursor: pointer;
 
         &:first-child,
         &:nth-child(2) {
-          text-align: left;
+          p {
+            justify-content: start;
+          }
+        }
+
+        p {
+          justify-content: end;
+        }
+
+        .arrows {
+          display: block;
+          width: 9px;
+          height: 12px;
+          position: relative;
+          margin-left: 6px;
+
+          &::before, &::after {
+            content: '';
+            display: block;
+            border-left: 4.5px solid transparent;
+            border-right: 4.5px solid transparent;
+            border-bottom: 5px solid #C4C4C4;
+          }
+
+          &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+
+          &::after {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transform: rotate(180deg);
+          }
         }
       }
     }
