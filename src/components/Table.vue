@@ -38,7 +38,15 @@
         </tr>
       </tbody>
     </table>
-    <table-controls @prev="prevPage" @next="nextPage" :values="tableContent" :currentPage="currentPage"/>
+
+    <table-controls
+      @prev="prevPage"
+      @next="nextPage"
+      @changeRowsCount="pageSize=$event"
+      @toFirstPage="currentPage = 1"
+      :values="tableContent"
+      :currentPage="currentPage"
+    />
 
     debug: sort={{currentSort}}, dir={{currentSortDir}}, page={{currentPage}}
   </div>
@@ -76,13 +84,12 @@ export default defineComponent({
     ],
     currentSort:'name',
     currentSortDir:'asc',
-    pageSize:3,
+    pageSize:10,
     currentPage:1
   }),
 
   methods:{
     sort(column) {
-      //if column == current sort, reverse
       if(column === this.currentSort) {
         this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
       }
