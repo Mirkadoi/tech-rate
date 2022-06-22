@@ -3,12 +3,12 @@
     <table>
       <thead>
         <tr>
-          <th v-for="(el, i) in tableHeader" :key="i" @click="sort(el)">
+          <th v-for="(el, i) in tableHeader" :key="i" @click="sort(el.key)">
             <p class="d-flex">
-              {{ el }}
+              {{ el.text }}
               <span class="arrows" :class="{
-                'up': el === currentSort && currentSortDir === 'asc',
-                'down': el === currentSort && currentSortDir === 'desc',
+                'up': el.key === currentSort && currentSortDir === 'asc',
+                'down': el.key === currentSort && currentSortDir === 'desc',
               }"/>
             </p>
           </th>
@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         <tr v-for="(el, i) in sortedValues" :key="i">
-          <td>{{ i += 1 }}</td>
+          <td>{{ el.num }}</td>
 
           <td class="d-flex">
             <img :src="el.img" width="24" height="24">
@@ -42,13 +42,11 @@
     <table-controls
       @prev="prevPage"
       @next="nextPage"
-      @changeRowsCount="pageSize=$event"
+      @changeRowsCount="pageSize = $event"
       @toFirstPage="currentPage = 1"
       :values="tableContent"
       :currentPage="currentPage"
     />
-
-    debug: sort={{currentSort}}, dir={{currentSortDir}}, page={{currentPage}}
   </div>
 </template>
 
@@ -61,9 +59,18 @@ export default defineComponent({
   components: { Stock, TableControls },
 
   data: () => ({
-    tableHeader: ['#', 'Name', 'Price', 'Security Score/24h', 'Last 7 days', 'Market Cap', 'Volume (24h)'],
+    tableHeader: [
+      { text: '#', key: 'num' },
+      { text: 'Name', key: 'name' },
+      { text: 'Price', key: 'price' },
+      { text: 'Security Score/24h', key: 'security' },
+      { text: 'Last 7 days', key: 'last' },
+      { text: 'Market Cap', key: 'market' },
+      { text: 'Volume (24h)', key: 'volume' },
+    ],
     tableContent: [
       {
+        num: 2,
         img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
         name: 'Carbon',
         price: '$ 39 043.65',
@@ -73,13 +80,14 @@ export default defineComponent({
         volume: '$ 27 601 948.65',
       },
       {
+        num: 1,
         img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
         name: 'Aave',
-        price: '$ 39 043.65',
+        price: '$ 39 043.55',
         security: { stocks: false, value: "5.79%" },
         last: { stocks: true, value: "5.79%" },
-        market: '$ 741 601 948.65',
-        volume: '$ 27 601 948.65',
+        market: '$ 741 601 948.55',
+        volume: '$ 27 601 948.55',
       },
     ],
     currentSort:'name',
@@ -106,12 +114,15 @@ export default defineComponent({
   computed:{
     sortedValues() {
       return [...this.tableContent].sort((a,b) => {
-        const sortBy = this.currentSort?.toLowerCase()
         let modifier = 1;
 
         if(this.currentSortDir === 'desc') modifier = -1;
-        if(a[sortBy] < b[sortBy]) return -1 * modifier;
-        if(a[sortBy] > b[sortBy]) return 1 * modifier;
+
+        const aItem = a[this.currentSort].value || a[this.currentSort]
+        const bItem = b[this.currentSort].value || b[this.currentSort]
+
+        if(aItem < bItem) return -1 * modifier;
+        if(aItem > bItem) return 1 * modifier;
         return 0;
       }).filter((row, index) => {
         let start = (this.currentPage-1)*this.pageSize;
