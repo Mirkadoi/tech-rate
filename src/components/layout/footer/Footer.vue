@@ -2,11 +2,7 @@
   <footer class="footer">
     <BrandInfo class="brand"/>
 
-    <div class="nav">
-      <MenuList title="Navigation" :items="navigationItems"/>
-      <MenuList title="Products" :items="productsItems"/>
-      <MenuList title="Documents" :items="documentsItems"/>
-    </div>
+    <MenuList class="nav" title="Navigation" :items="navigationItems"/>
 
     <Social class="social"/>
   </footer>
@@ -38,11 +34,8 @@
 
 <style lang="scss" scoped>
   .footer {
-    position: fixed;
     display: flex;
     justify-content: space-between;
-    left: 0;
-    bottom: 0;
     height: 285px;
     width: 100%;
     background-color: $color-black;
@@ -57,8 +50,6 @@
 
   .nav {
     margin-top: 55px;
-    display: flex;
-    gap: 150px;
   }
 
   .social {

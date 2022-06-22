@@ -2,7 +2,9 @@
   <section class="app">
     <Header />
 
-    <router-view/>
+    <main class="main">
+      <router-view/>
+    </main>
 
     <Footer />
 
@@ -28,6 +30,12 @@ export default {
 
 <style scoped lang="scss">
   .app {
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .main {
+    flex: 1;
   }
 </style>
