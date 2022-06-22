@@ -4,7 +4,13 @@
       <thead>
         <tr>
           <th v-for="(el, i) in tableHeader" :key="i" @click="sort(el)">
-            <p class="d-flex">{{ el }}<span class="arrows"/></p>
+            <p class="d-flex">
+              {{ el }}
+              <span class="arrows" :class="{
+                'up': el === currentSort && currentSortDir === 'asc',
+                'down': el === currentSort && currentSortDir === 'desc',
+              }"/>
+            </p>
           </th>
         </tr>
       </thead>
@@ -93,10 +99,12 @@ export default defineComponent({
   computed:{
     sortedValues() {
       return [...this.tableContent].sort((a,b) => {
+        const sortBy = this.currentSort?.toLowerCase()
         let modifier = 1;
+
         if(this.currentSortDir === 'desc') modifier = -1;
-        if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
-        if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
+        if(a[sortBy] < b[sortBy]) return -1 * modifier;
+        if(a[sortBy] > b[sortBy]) return 1 * modifier;
         return 0;
       }).filter((row, index) => {
         let start = (this.currentPage-1)*this.pageSize;
@@ -119,15 +127,13 @@ export default defineComponent({
   }
 
   .table-wrapper {
-    width: calc(100% - 200px);
-    margin: 0 100px;
+    font-family: 'Open Sans';
+    color: #17181E;
   }
 
   table {
     border-spacing: 0px;
-    font-family: 'Open Sans';
     font-weight: 400;
-    color: #17181E;
     width: 100%;
 
     thead {
@@ -136,6 +142,7 @@ export default defineComponent({
       th {
         padding-top: 25px;
         cursor: pointer;
+        user-select: none;
 
         &:first-child,
         &:nth-child(2) {
@@ -157,6 +164,8 @@ export default defineComponent({
 
           &::before, &::after {
             content: '';
+            position: absolute;
+            left: 0;
             display: block;
             border-left: 4.5px solid transparent;
             border-right: 4.5px solid transparent;
@@ -164,16 +173,32 @@ export default defineComponent({
           }
 
           &::before {
-            position: absolute;
             top: 0;
-            left: 0;
           }
 
           &::after {
-            position: absolute;
             bottom: 0;
-            left: 0;
             transform: rotate(180deg);
+          }
+
+          &.up {
+            &::after {
+              display: none;
+            }
+            &::before {
+              bottom: 3px;
+              border-bottom-color: #388E3C;
+            }
+          }
+
+          &.down {
+            &::after {
+              top: 3px;
+              border-bottom-color: #F90074;
+            }
+            &::before {
+              display: none;
+            }
           }
         }
       }

@@ -72,12 +72,12 @@ export default {
     justify-content: space-between;
     padding: 17px 0;
     font-size: 14px;
-    color: #17181E;
 
     .dots {
       display: block;
       display: flex;
       align-items: end;
+      padding-bottom: 5px;
     }
 
     p {
@@ -127,6 +127,7 @@ export default {
       border-radius: 8px;
       width: 63px;
       height: 35px;
+      border: none;
     }
   }
 </style>
