@@ -15,7 +15,10 @@
                 <p>{{ el.text }}</p>
               </div>
             </td>
-            <td>{{ el.value }}</td>
+            <td>
+              <p v-if="el.value">{{ el.value }}</p>
+              <pie-chart v-else-if="el.chart" :value="el.chart"/>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -24,7 +27,11 @@
 </template>
 
 <script>
+import PieChart from "@/components/PieChart";
+
 export default {
+  components: { PieChart },
+
   data: () => ({
     trends: [
       {
@@ -55,9 +62,9 @@ export default {
           text: 'Curently Onboarding'
         },
         list: [
-          { img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg', text: 'Aave',  value: '$ 66.20'},
-          { img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg', text: 'Carbon',  value: '$ 66.20'},
-          { img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg', text: 'The Sandbox',  value: '$ 66.20'}
+          { img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg', text: 'Aave',  chart: 50},
+          { img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg', text: 'Carbon',  chart: 70},
+          { img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg', text: 'The Sandbox',  chart: 80}
         ]
       },
     ]
@@ -117,7 +124,7 @@ export default {
         border-spacing: 0px;
 
         td {
-          padding: 14px 0;
+          height: 48px;
           border-top: 1px solid #EEEEEE;
           font-size: 14px;
 
