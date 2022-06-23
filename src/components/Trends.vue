@@ -75,8 +75,6 @@ export default {
 <style scoped lang="scss">
   .trends-wrapper {
     display: flex;
-    font-family: 'Open Sans';
-    color: #17181E;
     margin-top: 60px;
 
     .trends-item {

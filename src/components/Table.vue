@@ -145,8 +145,6 @@ export default defineComponent({
   }
 
   .table-wrapper {
-    font-family: 'Open Sans';
-    color: #17181E;
     border-radius: 8px;
   }
 

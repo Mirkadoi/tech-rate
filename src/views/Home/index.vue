@@ -1,8 +1,9 @@
 <template>
   <section class="container">
     <Headline title="TechRate" subtitle="Provable Trust For All"/>
-    <Table/>
-    <Trends/>
+
+    <Tabs />
+    <Trends />
   </section>
 </template>
 
@@ -10,14 +11,14 @@
   import { defineComponent } from 'vue';
 
   import Headline from '@/components/Headline';
-  import Table from "@/components/Table";
   import Trends from "@/components/Trends";
+  import Tabs from "@/components/Tabs";
 
   export default defineComponent ({
     components: {
       Headline,
-      Table,
-      Trends
+      Trends,
+      Tabs
     }
   })
 </script>
@@ -25,5 +26,7 @@
 <style scoped lang="scss">
   .container {
     padding: 55px 100px 80px 100px;
+    font-family: 'Open Sans';
+    color: #17181E;
   }
 </style>
