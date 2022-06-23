@@ -2,6 +2,7 @@
   <section class="container">
     <Headline title="TechRate" subtitle="Provable Trust For All"/>
     <Table/>
+    <Trends/>
   </section>
 </template>
 
@@ -10,11 +11,13 @@
 
   import Headline from '@/components/Headline';
   import Table from "@/components/Table";
+  import Trends from "@/components/Trends";
 
   export default defineComponent ({
     components: {
       Headline,
-      Table
+      Table,
+      Trends
     }
   })
 </script>
