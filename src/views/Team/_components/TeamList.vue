@@ -39,8 +39,10 @@ export default {
 
 <style scoped lang="scss">
  .team-list {
-   display: flex;
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
    margin-bottom: 80px;
+   grid-gap: 30px;
 
    .team-item {
      flex: 1;
@@ -48,10 +50,6 @@ export default {
      border: 1px solid $border-color-l1;
      border-radius: 8px;
      padding: 25px 25px 35px;
-
-     &:not(:last-child) {
-       margin-right: 30px;
-     }
 
      .team-img {
        width: 90px;

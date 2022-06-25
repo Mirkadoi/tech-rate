@@ -49,18 +49,14 @@ export default {
 
 <style scoped lang="scss">
   .news-list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
 
     .news-item {
-      flex: 1;
-      border: 1px solid $border-color-l1;
       border-radius: 8px;
       filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.1));
       background-color: $color-white;
-
-      &:not(:last-child) {
-        margin-right: 30px;
-      }
 
       .news-img {
         width: 100%;
