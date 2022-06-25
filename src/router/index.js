@@ -19,7 +19,7 @@ const routes = [
   {
     path: "/disclaimer",
     name: "disclaimer",
-    component: () => import("../views/Desclimer/Index"),
+    component: () => import("../views/Desclimer"),
   },
   {
     path: "/about",

@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="container-home">
     <Headline title="TechRate" subtitle="Provable Trust For All"/>
 
     <Tabs />
@@ -24,7 +24,8 @@
 </script>
 
 <style scoped lang="scss">
-  .container {
+  .container-home {
+    width: 100%;
     padding: 55px 100px 80px 100px;
     font-family: $font-base;
     color: $text-color-black;

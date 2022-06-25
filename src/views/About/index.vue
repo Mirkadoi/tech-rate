@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="container-about">
     <h1 class="title">About Us</h1>
 
     <div class="description-block">
@@ -28,7 +28,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container {
+.container-about {
+  width: 100%;
   padding: 24px 40px 80px;
   font-family: $font-base;
   color: $text-color-black;

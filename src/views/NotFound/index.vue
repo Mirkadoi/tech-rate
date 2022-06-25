@@ -1,5 +1,5 @@
 <template>
-  <div class="error-container">
+  <div class="container-error">
     <div class="error">404 - Page is not found</div>
   </div>
 </template>
@@ -11,7 +11,7 @@
 <!--</script>-->
 
 <style lang="scss" scoped>
-  .error-container {
+  .container-error {
     display: flex;
     justify-content: center;
     align-self: center;

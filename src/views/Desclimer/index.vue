@@ -1,6 +1,6 @@
 <template>
-  <section class="container">
-    <h1 class="desclimer-title">Desclimer</h1>
+  <section class="container-disclaimer">
+    <h1 class="desclimer-title">Disclaimer</h1>
 
     <div v-for="(block, i) in textBlocks" :key="i" class="desclimer-block">
       <h2 v-if="block.title" class="desclimer-block-title">{{ block.title }}</h2>
@@ -48,7 +48,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .container {
+  .container-disclaimer {
+    width: 100%;
     padding: 24px 40px 80px;
     font-family: $font-base;
     color: $text-color-black;
