@@ -16,6 +16,16 @@ const routes = [
   //   name: "blog",
   //   component: () => import("../view/EditPerson"),
   // },
+  {
+    path: "/desclimer",
+    name: "desclimer",
+    component: () => import("../views/Desclimer/Index"),
+  },
+  {
+    path: "/team",
+    name: "team",
+    component: () => import("../views/Team/Index"),
+  },
 ];
 
 const router = createRouter({

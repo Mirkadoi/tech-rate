@@ -17,7 +17,7 @@
 <script>
   import { defineComponent } from 'vue'
 
-  import Button from '@/components/button/Button';
+  import Button from '@/components/ui/Button';
   import FeedbackDialog from '@/components/layout/header/FeedbackDialog';
 
   export default defineComponent({
