@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory} from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
   {
@@ -26,12 +26,21 @@ const routes = [
     name: "about",
     component: () => import("../views/About/index"),
   },
+  {
+    path: "/about",
+    name: "about",
+    component: () => import("../views/About/index"),
+  },
+  { path: '/:pathMatch(.*)*',
+    name: "notFound",
+    component: () => import("../views/NotFound/index")
+  }
 ];
 
 const router = createRouter({
   // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
   //   history: createWebHashHistory(),
-    history: createWebHashHistory(process.env.BASE_URL),
+    history: createWebHistory(process.env.BASE_URL),
     routes, // short for `routes: routes`
 })
 
