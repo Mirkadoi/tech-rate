@@ -26,5 +26,18 @@ app.component('InlineSvg', InlineSvg);
 
 ///////////////
 
+
+//////////////////
+///vue-inline-svg///
+import FloatingVue, { Menu } from 'floating-vue'
+
+app.use(FloatingVue)
+// app.component('VDropdown', Dropdown)
+// app.component('VTooltip', Tooltip)
+app.component('VMenu', Menu)
+
+import 'floating-vue/dist/style.css'
+///////////////
+
 app.mount('#app')
 

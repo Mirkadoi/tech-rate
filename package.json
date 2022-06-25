@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "core-js": "~3.23.1",
+    "floating-vue": "^2.0.0-beta.17",
     "gitart-vue-dialog": "^2.2.2",
     "vee-validate": "^4.5.11",
     "vue": "~3.2.13",

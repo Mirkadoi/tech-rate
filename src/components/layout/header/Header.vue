@@ -4,7 +4,23 @@
 
     <div class="btn-group">
       <div class="nav">
-        <router-link class="nav-link" to="/">Products</router-link>
+          <VMenu :arrow-padding="999">
+            <div class="nav-link">
+              <span>Products</span>
+              <InlineSvg :src="require('@/assets/icons/arrow.svg')" width="14" height="14" fill="white" title="TechRate"/>
+            </div>
+
+            <template #popper>
+              <div class="menu-list">
+                <router-link class="menu-list__element" v-for="{ title, to } in products" :key="title" :to="to">
+                  {{ title }}
+                </router-link>
+              </div>
+
+            </template>
+
+          </VMenu>
+
 
         <router-link class="nav-link" to="/blog">Blog</router-link>
       </div>
@@ -34,6 +50,12 @@
           // },
         });
       }
+    },
+
+    setup() {
+      const products = [{title: ' Defi Generator', to: ''}]
+
+      return { products }
     }
   })
 </script>
@@ -66,9 +88,31 @@
   }
 
   .nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: $font-base;
     font-weight: 400;
     color: $color-white;
     text-decoration: none;
+    gap: 5px;
+  }
+
+  .menu-list {
+    padding: 20px 10px;
+
+    &__element {
+      padding: 5px 10px;
+      font-family: $font-alt;
+      font-size: 16px;
+      font-weight: 400;
+      text-decoration: none;
+      color: $text-color-black;
+      transition: background-color 0.3s ease-in;
+
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.1);
+      }
+    }
   }
 </style>
