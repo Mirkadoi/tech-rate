@@ -36,6 +36,7 @@ export default {
   }
 
   .main {
+    background-color: $background-colors-white;
     display: flex;
     flex: 1;
   }
