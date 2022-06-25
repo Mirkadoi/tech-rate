@@ -78,8 +78,8 @@ export default {
     margin-top: 60px;
 
     .trends-item {
-      background: #FFFFFF;
-      border: 1px solid #EEEEEE;
+      background: $color-white;
+      border: 1px solid $border-color-l1;
       border-radius: 20px;
       padding: 19px 25px 25px;
       flex: 1;
@@ -90,7 +90,7 @@ export default {
 
       .trends-item-title {
         display: flex;
-        align-items: end;
+        align-items: flex-end;
         margin-bottom: 16px;
 
         img {
@@ -119,11 +119,11 @@ export default {
 
       table {
         width: 100%;
-        border-spacing: 0px;
+        border-spacing: 0;
 
         td {
           height: 48px;
-          border-top: 1px solid #EEEEEE;
+          border-top: 1px solid $border-color-l1;
           font-size: 14px;
 
           p {

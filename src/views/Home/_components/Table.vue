@@ -211,7 +211,7 @@ export default defineComponent({
           &.down {
             &::after {
               top: 3px;
-              border-bottom-color: #F90074;
+              border-bottom-color: $brand-color-pink;
             }
             &::before {
               display: none;
@@ -228,7 +228,7 @@ export default defineComponent({
       tr {
         td {
           padding: 20px 0;
-          border-bottom: 2px solid #EEEEEE;
+          border-bottom: 2px solid $border-color-l1;
 
           &:first-child {
             text-align: left;

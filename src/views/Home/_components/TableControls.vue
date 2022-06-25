@@ -94,7 +94,7 @@ export default {
 
     .dots {
       display: block;
-      display: flex;
+      //display: flex;
       align-items: end;
       padding-bottom: 5px;
     }
@@ -111,7 +111,7 @@ export default {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: #fff;
+    background-color: $color-white;
     cursor: pointer;
     border: none;
     margin: 0 7px;
@@ -128,8 +128,8 @@ export default {
         display: block;
         width: 6px;
         height: 6px;
-        border-left: 2px solid #17181E;
-        border-bottom: 2px solid #17181E;
+        border-left: 2px solid $text-color-black;
+        border-bottom: 2px solid $text-color-black;
       }
       &:first-child {
         margin-right: 10px;
@@ -152,9 +152,9 @@ export default {
     }
 
     &.current-page {
-      background: #000000;
+      background: $color-black;
       border: none;
-      color: #FFFFFF;
+      color: $color-white;
       cursor: default;
     }
   }

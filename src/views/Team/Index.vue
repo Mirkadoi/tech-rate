@@ -32,7 +32,7 @@ export default {
 
 .container {
   padding: 24px 40px 80px;
-  font-family: 'Open Sans';
+  font-family: $font-base;
   color: $text-color-black;
   background: #FAFAFA;
 }

@@ -26,7 +26,7 @@
 <style scoped lang="scss">
   .container {
     padding: 55px 100px 80px 100px;
-    font-family: 'Open Sans';
-    color: #17181E;
+    font-family: $font-base;
+    color: $text-color-black;
   }
 </style>

@@ -58,8 +58,8 @@ export default {
     }
 
     .tab-selected {
-      color: #F90074;
-      border-bottom: 3px solid #F90074;
+      color: $brand-color-pink;
+      border-bottom: 3px solid $brand-color-pink;
     }
   }
 </style>
