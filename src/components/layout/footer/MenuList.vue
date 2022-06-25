@@ -1,11 +1,11 @@
 <template>
   <div class="list">
-    <span class="list__title list__item">{{ title }}</span>
+<!--    <span class="list__title list__item">{{ title }}</span>-->
 
     <div class="list__body list__item">
-      <a href="" v-for="item in items" :key="item">
-        {{ item }}
-      </a>
+      <router-link :to="path" v-for="{title, path } in items" :key="title">
+        {{ title }}
+      </router-link>
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@
 <style scoped lang="scss">
   .list {
     display: flex;
-    flex-direction: column;
+    //flex-direction: column;
 
     &__item {
       font-family: $font-base;
@@ -43,18 +43,18 @@
       font-weight: 600;
       font-size: 16px;
       line-height: 22px;
-      margin-bottom: 24px;
+      margin-right: 10px;
       text-decoration: none;
     }
 
     &__body {
       display: flex;
-      flex-direction: column;
+      //flex-direction: column;
       font-style: normal;
       font-weight: 400;
       font-size: 14px;
       line-height: 19px;
-      gap: 10px;
+      gap: 20px;
 
       a {
         text-decoration: none;

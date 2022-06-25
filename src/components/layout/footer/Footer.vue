@@ -21,13 +21,17 @@
       MenuList,
       Social
     },
-
     setup() {
-      const navigationItems = ['About us', 'Blog', 'Desclimer', 'Contact'];
-      const productsItems = ['TimeWarp', 'LaborX', 'PaymentX', 'Audit', 'Time Bridge'];
-      const documentsItems = ['TimeWarp', 'PaymentX'];
+      const navigationItems = [
+          { title: 'About us', path: '/about'},
+          { title: 'Blog', path: '/blog'},
+          { title: 'Disclaimer', path: '/disclaimer'},
+          { title: 'Contact', path: '/about'},
+      ];
+      // const productsItems = ['TimeWarp', 'LaborX', 'PaymentX', 'Audit', 'Time Bridge'];
+      // const documentsItems = ['TimeWarp', 'PaymentX'];
 
-      return { navigationItems, productsItems, documentsItems }
+      return { navigationItems }
     }
   })
 </script>

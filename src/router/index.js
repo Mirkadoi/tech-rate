@@ -17,14 +17,14 @@ const routes = [
   //   component: () => import("../view/EditPerson"),
   // },
   {
-    path: "/desclimer",
-    name: "desclimer",
+    path: "/disclaimer",
+    name: "disclaimer",
     component: () => import("../views/Desclimer/Index"),
   },
   {
-    path: "/team",
-    name: "team",
-    component: () => import("../views/Team/Index"),
+    path: "/about",
+    name: "about",
+    component: () => import("../views/About/index"),
   },
 ];
 

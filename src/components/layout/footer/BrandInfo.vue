@@ -2,7 +2,7 @@
   <div class="wrapper">
     <InlineSvg :src="require('@/assets/icons/tech-rate-logo.svg')" width="83" height="32" fill="white" title="TechRate"/>
 
-    <span class="text">@ 2022 by TechRate. All Rights Reserved</span>
+    <span class="text">@ 2018 by TechRate. All Rights Reserved</span>
   </div>
 </template>
 

@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import TeamList from "@/views/Team/_components/TeamList";
-import NewsList from "@/views/Team/_components/NewsList";
+import TeamList from "@/views/About/_components/TeamList";
+import NewsList from "@/views/About/_components/NewsList";
 
 export default {
   components: { TeamList, NewsList }
@@ -28,8 +28,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Sen:wght@700&display=swap');
-
 .container {
   padding: 24px 40px 80px;
   font-family: $font-base;
@@ -38,7 +36,7 @@ export default {
 }
 
 .title {
-  font-family: 'Cairo';
+  font-family: $font-alt;
   font-size: 46px;
   line-height: 68px;
   margin-bottom: 30px;
