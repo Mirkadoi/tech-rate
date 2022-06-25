@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Table from "@/components/Table";
+import Table from "@/views/Home/_components/Table";
 
 export default {
   components: {

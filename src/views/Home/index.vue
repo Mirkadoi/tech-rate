@@ -11,8 +11,8 @@
   import { defineComponent } from 'vue';
 
   import Headline from '@/components/Headline';
-  import Trends from "@/components/Trends";
-  import Tabs from "@/components/Tabs";
+  import Trends from "@/views/Home/_components/Trends";
+  import Tabs from "@/views/Home/_components/Tabs";
 
   export default defineComponent ({
     components: {

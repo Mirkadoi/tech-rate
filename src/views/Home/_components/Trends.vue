@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import PieChart from "@/components/PieChart";
+import PieChart from "@/views/Home/_components/PieChart";
 
 export default {
   components: { PieChart },

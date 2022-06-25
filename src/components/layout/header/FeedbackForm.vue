@@ -47,7 +47,7 @@
     Field,
     Form
   } from 'vee-validate';
-  import Button from '@/components/button/Button';
+  import Button from '@/components/ui/Button';
 
   export default defineComponent ({
     components: {
