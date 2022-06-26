@@ -3,7 +3,7 @@
     <div class="wrapper-group">
       <div class="board">
         <template v-for="({ logo, title, number, subtitle}, index) in columns" :key="title">
-          <div class="board-item" >
+          <div class="board-item">
             <img class="board-item__img" :src="require('@/assets/images/'+ logo +'.png')" :alt="logo">
             <span class="board-item__title">{{ title }}</span>
             <div class="board-item__number">{{ number }}</div>
@@ -21,10 +21,11 @@
 
     <div class="wrapper-carousel">
       <div class="carousel-controller">
-        <ArrowButton />
-        <ArrowButton rotate />
+        <ArrowButton @onClick="myCarousel.prev()" />
+        <ArrowButton @onClick="myCarousel.next()" rotate />
+<!--        <ArrowButton @onClick="myCarousel.next()" rotate />-->
       </div>
-      <Carousel :items-to-show="2.5">
+      <Carousel ref="myCarousel" :settings="settings" :breakpoints="breakpoints">
         <Slide v-for="slide in slides" :key="slide.id">
           <Card :item="slide" />
         </Slide>
@@ -34,16 +35,19 @@
 </template>
 
 <script>
-  import { defineComponent } from 'vue';
+  import { defineComponent, ref } from 'vue';
 
-  import { Carousel, Slide } from 'vue3-carousel';
+  import {
+    Carousel,
+    Slide
+  } from 'vue3-carousel';
   import 'vue3-carousel/dist/carousel.css';
 
   import Card from '@/components/ui/Card';
   import ArrowButton from '@/components/ArrowButton';
 
 
-  export default defineComponent ({
+  export default defineComponent({
     components: {
       Carousel,
       Slide,
@@ -53,21 +57,94 @@
 
     setup() {
       const columns = [
-        {logo: 'rocket', title: 'Projects audited', number: 0, subtitle: 'Current finantial year'},
-        {logo: 'rocket', title: 'BSC projects', number: 0, subtitle: 'Current finantial year'},
+        { logo: 'rocket', title: 'Projects audited', number: 0, subtitle: 'Current finantial year' },
+        { logo: 'rocket', title: 'BSC projects', number: 0, subtitle: 'Current finantial year' },
       ]
 
       const slides = [
-        { img: 'https://via.placeholder.com/620x400', title: 'Bitcoin and the Stock to Flow Model#1', tag: 'Crypto', date: 'Mar 4, 2022', id: '1'},
-        { img: 'https://via.placeholder.com/620x400', title: 'Bitcoin and the Stock to Flow Model#2', tag: 'Crypto', date: 'Mar 4, 2022', id: '2'},
-        { img: 'https://via.placeholder.com/620x400', title: 'Bitcoin and the Stock to Flow Model#3', tag: 'Crypto', date: 'Mar 4, 2022', id: '3'},
-        { img: 'https://via.placeholder.com/620x400', title: 'Bitcoin and the Stock to Flow Model#4', tag: 'Crypto', date: 'Mar 4, 2022', id: '4'},
-        { img: 'https://via.placeholder.com/620x400', title: 'Bitcoin and the Stock to Flow Model#5', tag: 'Crypto', date: 'Mar 4, 2022', id: '5'},
-        { img: 'https://via.placeholder.com/620x400', title: 'Bitcoin and the Stock to Flow Model#6', tag: 'Crypto', date: 'Mar 4, 2022', id: '6'},
-        { img: 'https://via.placeholder.com/620x400', title: 'Bitcoin and the Stock to Flow Model#7', tag: 'Crypto', date: 'Mar 4, 2022', id: '7'},
+        {
+          img: 'https://via.placeholder.com/620x400',
+          title: 'Bitcoin and the Stock to Flow Model#1',
+          tag: 'Crypto',
+          date: 'Mar 4, 2022',
+          id: '1'
+        },
+        {
+          img: 'https://via.placeholder.com/620x400',
+          title: 'Bitcoin and the Stock to Flow Model#2',
+          tag: 'Crypto',
+          date: 'Mar 4, 2022',
+          id: '2'
+        },
+        {
+          img: 'https://via.placeholder.com/620x400',
+          title: 'Bitcoin and the Stock to Flow Model#3',
+          tag: 'Crypto',
+          date: 'Mar 4, 2022',
+          id: '3'
+        },
+        {
+          img: 'https://via.placeholder.com/620x400',
+          title: 'Bitcoin and the Stock to Flow Model#4',
+          tag: 'Crypto',
+          date: 'Mar 4, 2022',
+          id: '4'
+        },
+        {
+          img: 'https://via.placeholder.com/620x400',
+          title: 'Bitcoin and the Stock to Flow Model#5',
+          tag: 'Crypto',
+          date: 'Mar 4, 2022',
+          id: '5'
+        },
+        {
+          img: 'https://via.placeholder.com/620x400',
+          title: 'Bitcoin and the Stock to Flow Model#6',
+          tag: 'Crypto',
+          date: 'Mar 4, 2022',
+          id: '6'
+        },
+        {
+          img: 'https://via.placeholder.com/620x400',
+          title: 'Bitcoin and the Stock to Flow Model#7',
+          tag: 'Crypto',
+          date: 'Mar 4, 2022',
+          id: '7'
+        },
       ]
 
-      return { columns, slides}
+      const  settings =  {
+        itemsToShow: 1.5,
+          // snapAlign: 'center',
+        snapAlign: 'center',
+      }
+
+      const breakpoints = {
+        // 576: {
+          // itemsToShow: 2.5,
+          // snapAlign: 'center',
+        // },
+        // 768: {
+        //   itemsToShow: 5,
+        //   snapAlign: 'start',
+        // },
+        1200: {
+          itemsToShow: 1.5,
+          // snapAlign: 'center',
+        },
+        1400: {
+          itemsToShow: 2.5,
+          // snapAlign: 'start',
+        },
+        1800: {
+          itemsToShow: 3.5,
+          // snapAlign: 'start',
+        },
+      }
+
+      const myCarousel = ref(null);
+
+      return { columns, slides, breakpoints, settings, myCarousel  }
     }
   })
 </script>
@@ -75,16 +152,24 @@
 <style scoped lang="scss">
   .wrapper-preview {
     display: flex;
-    gap: 30px;
   }
 
   .wrapper-group {
-    flex: 0 1 100%;
+    flex: 0 0 auto;
   }
 
   .wrapper-carousel {
     position: relative;
-    flex: 0 1 100%;
+    width: calc(100% - 360px);
+
+    //@media (min-width: #{variables.$screen-xxl-min}) {
+    //  @content;
+    //}
+    //
+    //@include xxl() {
+    //  width: auto;
+    //}
+    //flex: 1 0 calc(100% - 389px);
 
     .carousel-controller {
       position: absolute;

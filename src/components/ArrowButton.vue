@@ -1,5 +1,5 @@
 <template>
-  <div class="btn-arrow" :title="title">
+  <div class="btn-arrow" :title="title" @click="$emit('onClick')">
     <InlineSvg class="btn-arrow__icon" :class="{'rotate': rotate}" :src="require('@/assets/icons/arrow-outline.svg')" width="6" height="12" fill="#17181E" />
   </div>
 </template>

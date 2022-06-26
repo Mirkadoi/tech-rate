@@ -34,6 +34,7 @@
     padding: 55px 100px 80px 100px;
     font-family: $font-base;
     color: $text-color-black;
+    box-sizing: border-box;
   }
 
   .headline {

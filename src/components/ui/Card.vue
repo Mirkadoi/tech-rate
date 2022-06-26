@@ -35,8 +35,8 @@
 <style lang="scss" scoped>
   .card {
     background-color: $color-white;
-    border: 1px solid $border-color-l1;
     border-radius: 20px;
+    //width: 100%;
 
     &__img {
       width: 100%;
@@ -64,6 +64,7 @@
 
       &__footer {
         display: flex;
+        align-items: baseline;
         gap: 15px;
         //font-family: $font-base;
         //font-style: normal;
