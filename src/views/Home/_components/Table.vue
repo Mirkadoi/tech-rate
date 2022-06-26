@@ -52,7 +52,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import Stock from "@/components/layout/Stock";
+import Stock from "@/views/Home/_components/Stock";
 import TableControls from "@/views/Home/_components/TableControls";
 
 export default defineComponent({
