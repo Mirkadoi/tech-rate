@@ -6,6 +6,9 @@
     </div>
 
     <blog-category category-name="Latest Releases"/>
+
+    <topics/>
+
     <blog-category category-name="Essentials"/>
     <blog-category category-name="Blockchain"/>
     <subscription/>
@@ -17,13 +20,15 @@
   import BlogCategory from "@/views/Blogs/_components/BlogCategory";
   import BlogAbout from "@/views/Blogs/_components/BlogAbout";
   import BlogFeatured from "@/views/Blogs/_components/BlogFeatured";
+  import Topics from "@/views/Blogs/_components/Topics";
 
   export default {
     components: {
       Subscription,
       BlogCategory,
       BlogAbout,
-      BlogFeatured
+      BlogFeatured,
+      Topics
     }
   }
 </script>

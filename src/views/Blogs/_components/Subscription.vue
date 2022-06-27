@@ -51,7 +51,9 @@ export default defineComponent ({
   .subscription {
     display: flex;
     align-items: center;
-    padding: 13px 0 25px;
+    padding: 13px 100px 25px;
+    margin: 0 -100px;
+    background: #F5F5F5;
 
     .subscription-img {
       width: 360px;
@@ -87,6 +89,7 @@ export default defineComponent ({
           width: 592px;
           padding: 16px 15px;
           margin-right: 10px;
+          border: 1px solid $border-color-l1;
         }
 
         button {
