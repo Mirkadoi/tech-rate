@@ -51,7 +51,7 @@ export default defineComponent ({
   .subscription {
     display: flex;
     align-items: center;
-    padding: 13px 125px 25px;
+    padding: 13px 0 25px;
 
     .subscription-img {
       width: 360px;

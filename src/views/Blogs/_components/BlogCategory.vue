@@ -65,7 +65,6 @@ export default {
 
 <style scoped lang="scss">
 .posts-wrapper {
-  padding: 0 100px;
   margin-top: 100px;
 }
 
