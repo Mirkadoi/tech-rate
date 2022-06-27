@@ -11,11 +11,11 @@ const routes = [
     name: "blogs",
     component: () => import("../views/Blogs/index"),
   },
-  // {
-  //   path: "/blogs/:id",
-  //   name: "blog",
-  //   component: () => import("../view/EditPerson"),
-  // },
+  {
+    path: "/blogs/:id",
+    name: "blog",
+    component: () => import("../views/Blog/Index"),
+  },
   {
     path: "/disclaimer",
     name: "disclaimer",
