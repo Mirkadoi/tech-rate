@@ -25,7 +25,7 @@
         <ArrowButton @onClick="myCarousel.next()" rotate />
 <!--        <ArrowButton @onClick="myCarousel.next()" rotate />-->
       </div>
-      <Carousel ref="myCarousel" :settings="settings" :breakpoints="breakpoints">
+      <Carousel wrapAround ref="myCarousel" :settings="settings" :breakpoints="breakpoints">
         <Slide v-for="slide in slides" :key="slide.id">
           <Card :item="slide" />
         </Slide>
@@ -58,7 +58,7 @@
     setup() {
       const columns = [
         { logo: 'rocket', title: 'Projects audited', number: 0, subtitle: 'Current finantial year' },
-        { logo: 'rocket', title: 'BSC projects', number: 0, subtitle: 'Current finantial year' },
+        { logo: 'binance-logo', title: 'BSC projects', number: 0, subtitle: 'Current finantial year' },
       ]
 
       const slides = [
@@ -129,13 +129,13 @@
         //   snapAlign: 'start',
         // },
         1200: {
-          itemsToShow: 1.5,
+          itemsToShow: 2.5,
           // snapAlign: 'center',
         },
-        1400: {
-          itemsToShow: 2.5,
-          // snapAlign: 'start',
-        },
+        // 1400: {
+        //   itemsToShow: 2.5,
+        //   // snapAlign: 'start',
+        // },
         1800: {
           itemsToShow: 3.5,
           // snapAlign: 'start',
@@ -152,6 +152,7 @@
 <style scoped lang="scss">
   .wrapper-preview {
     display: flex;
+    gap: 30px;
   }
 
   .wrapper-group {
