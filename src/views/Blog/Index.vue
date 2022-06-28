@@ -3,22 +3,22 @@
     <button class="back-button" @click="$router.push({name: 'blogs'})"/>
 
     <post-content />
-    <recommendation />
+<!--    <recommendation />-->
   </section>
 </template>
 
 <script>
-import Recommendation from "@/views/Blog/_components/Recommendation";
+// import Recommendation from "@/views/Blog/_components/Recommendation";
 import PostContent from "@/views/Blog/_components/PostContent";
 
 export default {
-  components: { Recommendation, PostContent }
+  components: { PostContent }
 }
 </script>
 
 <style scoped lang="scss">
 .blog {
-  font-family: 'Open Sans';
+  font-family: $font-base;
   width: 100%;
   padding: 0 100px;
   position: relative;

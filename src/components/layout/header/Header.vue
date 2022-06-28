@@ -22,7 +22,7 @@
           </VMenu>
 
 
-        <router-link class="nav-link" to="/blog">Blog</router-link>
+        <router-link class="nav-link" to="/blogs">Blog</router-link>
       </div>
 
       <Button title="Get Audit" mode="primary" @onClick="onOpenFeedbackWindow"/>

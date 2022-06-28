@@ -6,7 +6,7 @@
     </div>
 
     <div class="posts-list">
-      <div v-for="(item, i) in postList" :key="i" class="posts-item">
+      <div v-for="(item, i) in postList" :key="i" class="posts-item" @click="redirectToBlog(item.id)">
         <div class="posts-img" :style="{ backgroundImage: `url(${item.img})` }"/>
 
         <div class="posts-data">
@@ -36,22 +36,26 @@ export default {
       img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
       title: 'Bdentity Verification. We will collect [multiple forms of] identification ',
       tag: { name: "Forebs", link: 'https://www.google.ru' },
-      date: 'Mar 4, 2022'
+      date: 'Mar 4, 2022',
+      id: 1
     },{
       img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
       title: 'The date indicated in a Badge for a project',
       tag: { name: "Bloomberg", link: 'https://www.google.ru' },
-      date: 'Mar 4, 2022'
+      date: 'Mar 4, 2022',
+      id: 2
     },{
       img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
       title: 'What Is Leverage in Crypto Trading?',
       tag: { name: "The Block", link: 'https://www.google.ru' },
-      date: 'Mar 4, 2022'
+      date: 'Mar 4, 2022',
+      id: 3
     },{
       img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
       title: 'Badge is NOT a guarantee that the information that a developer',
       tag: { name: "Coindesk", link: 'https://www.google.ru' },
-      date: 'Mar 4, 2022'
+      date: 'Mar 4, 2022',
+      id: 4
     },]
   }),
 
@@ -60,12 +64,19 @@ export default {
       return this.showAll ? this.posts : this.posts.slice(0, 3);
     }
   },
+
+  methods: {
+    redirectToBlog(id) {
+      this.$router.push({ name: 'blog', params: { id } })
+
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .posts-wrapper {
-  margin-top: 100px;
+  //margin-top: 1px;
 }
 
 .posts-top {
@@ -95,6 +106,7 @@ export default {
   margin-bottom: 100px;
 
   .posts-item {
+    cursor: pointer;
     border-radius: 8px;
     filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.1));
     background-color: $color-white;

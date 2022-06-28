@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-featured">
+  <div class="blog-featured" @click="redirectToBlog(post.id)">
     <h4 class="blog-category">{{ post.category }}</h4>
 
     <div class="blog-img" :style="{ backgroundImage: `url(${post.img})` }"/>
@@ -19,13 +19,22 @@ export default {
       title: 'What Is Leverage in Crypto Trading?',
       date: 'Mar 4, 2022',
       tag: { name: 'Crypto', link: 'https://www.google.ru' },
+      id: 0
     }
-  })
+  }),
+
+  methods: {
+    redirectToBlog(id) {
+      this.$router.push({ name: 'blog', params: { id } })
+
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .blog-featured {
+  cursor: pointer;
   margin-right: -100px;
   padding: 46px 100px 30px 30px;
   background: $background-colors-white;

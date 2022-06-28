@@ -24,7 +24,7 @@
     setup() {
       const navigationItems = [
           { title: 'About us', path: '/about'},
-          { title: 'Blog', path: '/blog'},
+          { title: 'Blog', path: '/blogs'},
           { title: 'Disclaimer', path: '/disclaimer'},
           { title: 'Contact', path: '/about'},
       ];

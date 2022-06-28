@@ -3,19 +3,19 @@
     <h4>learn more about</h4>
     <h1>Blockchain &<br/>Crypto</h1>
     <p>All content provided herein our website, hyperlinked sites, associated applications, forums, blogs, social media accounts and other platforms on CertiK’s website does not constitute an endorsement. </p>
-    <button @click="readMode">Read more</button>
+<!--    <button @click="readMode">Read more</button>-->
   </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    readMode() {
-      alert('read more')
-    }
-  }
-}
-</script>
+<!--<script>-->
+<!--export default {-->
+<!--  methods: {-->
+<!--    readMode() {-->
+<!--      alert('read more')-->
+<!--    }-->
+<!--  }-->
+<!--}-->
+<!--</script>-->
 
 <style scoped lang="scss">
 .blog-about {
