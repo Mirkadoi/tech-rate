@@ -15,6 +15,27 @@
       </div>
 
       <div class="finder">
+        <VSelect
+            class="select"
+            label="token"
+            :noDrop="!options.length"
+            :filterable="false"
+            placeholder="Search project by name or token"
+            :options="options"
+            @search="onSearch"
+        >
+          <template #no-options>
+            Type to search...
+          </template>
+          <template #search="{ attributes, events }">
+            <InlineSvg  :src="require('@/assets/icons/magnifier.svg')" width="16" height="16" fill="#5E6A7B" />
+            <input
+                class="vs__search"
+                v-bind="attributes"
+                v-on="events"
+            />
+          </template>
+        </VSelect>
 
       </div>
     </div>
@@ -23,7 +44,7 @@
       <div class="carousel-controller">
         <ArrowButton @onClick="myCarousel.prev()" />
         <ArrowButton @onClick="myCarousel.next()" rotate />
-<!--        <ArrowButton @onClick="myCarousel.next()" rotate />-->
+        <!--        <ArrowButton @onClick="myCarousel.next()" rotate />-->
       </div>
       <Carousel wrapAround ref="myCarousel" :settings="settings" :breakpoints="breakpoints">
         <Slide v-for="slide in slides" :key="slide.id">
@@ -35,13 +56,22 @@
 </template>
 
 <script>
-  import { defineComponent, ref } from 'vue';
+  import {
+    defineComponent,
+    ref
+  } from 'vue';
 
   import {
     Carousel,
     Slide
   } from 'vue3-carousel';
   import 'vue3-carousel/dist/carousel.css';
+
+  import VSelect from 'vue-select'
+  import 'vue-select/dist/vue-select.css';
+
+  import debounce from 'debounce';
+
 
   import Card from '@/components/ui/Card';
   import ArrowButton from '@/components/ArrowButton';
@@ -53,6 +83,23 @@
       Slide,
       Card,
       ArrowButton,
+      VSelect
+    },
+
+    methods: {
+      onSearch(search, loading) {
+        if (search.length) {
+          loading(true);
+          this.search(loading, search, this);
+        }
+      },
+      search: debounce((loading, search) => {
+        fetch(
+            `https://api.github.com/search/repositories?q=${escape(search)}`
+        ).then(() => {
+          // res.json().then(json => (vm.options = json.items));
+        }).finally(() => loading(false));
+      }, 350)
     },
 
     setup() {
@@ -113,16 +160,16 @@
         },
       ]
 
-      const  settings =  {
+      const settings = {
         itemsToShow: 1.5,
-          // snapAlign: 'center',
+        // snapAlign: 'center',
         snapAlign: 'center',
       }
 
       const breakpoints = {
         // 576: {
-          // itemsToShow: 2.5,
-          // snapAlign: 'center',
+        // itemsToShow: 2.5,
+        // snapAlign: 'center',
         // },
         // 768: {
         //   itemsToShow: 5,
@@ -143,8 +190,9 @@
       }
 
       const myCarousel = ref(null);
+      const options = ref([]);
 
-      return { columns, slides, breakpoints, settings, myCarousel  }
+      return { columns, slides, breakpoints, settings, myCarousel, options }
     }
   })
 </script>
@@ -156,7 +204,10 @@
   }
 
   .wrapper-group {
+    display: flex;
+    flex-direction: column;
     flex: 0 0 auto;
+    gap: 35px;
   }
 
   .wrapper-carousel {
@@ -230,6 +281,51 @@
       font-size: 28px;
       line-height: 38px;
       color: $text-color-black;
+    }
+  }
+
+  //.finder {
+  //
+  //}
+
+  .select::v-deep {
+    .vs__dropdown-toggle,
+    .vs__dropdown-menu {
+      background-color: $color-white;
+      padding: 16px;
+      border: 1px solid $border-color-l1;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.07);
+      border-radius: 8px;
+
+      .vs__search {
+        margin: 0;
+
+        &::placeholder {
+          font-family: $font-base;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 22px;
+          color: #B5BAC2;
+        }
+      }
+
+      .vs__actions {
+        svg {
+          display: none;
+        }
+
+        .vs__spinner, .vs__spinner:after {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .vs__selected-options {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 </style>
