@@ -14,5 +14,5 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY --from=builder /techrate/dist .
 
-EXPOSE 8080
+EXPOSE 3000
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
