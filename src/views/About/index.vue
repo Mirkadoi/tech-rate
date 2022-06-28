@@ -7,23 +7,31 @@
       <p>The information provided on this website does not constitute investment<br/> advice, financial advice, trading advice, or any other sort of advice and<br/> you should not treat any of the website's content as such. </p>
     </div>
 
-    <team-list />
+    <TeamList />
 
     <div class="description-block">
-      <h2>In The News</h2>
+      <h2>Contacts</h2>
       <p>The information provided on this website does not constitute investment<br/> advice, financial advice, trading advice, or any other sort of advice and<br/> you should not treat any of the website's content as such. </p>
     </div>
 
-    <news-list />
+    <ContactList />
+
+<!--    <div class="description-block">-->
+<!--      <h2>In The News</h2>-->
+<!--      <p>The information provided on this website does not constitute investment<br/> advice, financial advice, trading advice, or any other sort of advice and<br/> you should not treat any of the website's content as such. </p>-->
+<!--    </div>-->
+
+<!--    <news-list />-->
   </section>
 </template>
 
 <script>
 import TeamList from "@/views/About/_components/TeamList";
-import NewsList from "@/views/About/_components/NewsList";
+import ContactList from '@/views/About/_components/ContactList';
+// import NewsList from "@/views/About/_components/NewsList";
 
 export default {
-  components: { TeamList, NewsList }
+  components: { TeamList, ContactList }
 }
 </script>
 

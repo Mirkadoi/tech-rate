@@ -16,22 +16,41 @@ export default {
     team: [
       {
         img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
-        name: 'Ivan Smirnov',
-        position: 'Software Engineer',
-        description: 'The information provided on this website does not constitute investment advice, financial advice, trading advice, or any other sort of advice and you should not treat any of the website\'s content as such. '
+        name: 'Zufar G',
+        position: 'Co - founder',
+        description: 'Zufar worked at PwC for several years, managed BizDev unit at the famous startup rating agency and running his own startups. Swimmer, tennis player.'
       },
       {
         img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
-        name: 'Alex Ivanov',
-        position: 'Software Engineer',
-        description: 'The information provided on this website does not constitute investment advice, financial advice, trading advice, or any other sort of advice and you. '
+        name: 'Il K',
+        position: 'Co - founder',
+        description: 'Il is ex Callisto Network and ICORating security engineer and Blockchain analyst, also he is a tech consultant in various fields such as blockchain, mobile development, ML, NN and AI.'
       },
       {
         img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
-        name: 'Oleg Nikolaev',
-        position: 'Software Engineer',
-        description: 'The information provided on this website does not constitute investment advice, financial advice, trading advice, or any other sort of advice and you should not treat any of the website\'s content as such. '
-      }
+        name: 'Farkhad G',
+        position: 'Team Lead',
+        description: 'Farkhad is our Team Lead with several years\' experience of working as a senior engineer in a Russian IT company'
+      },
+      {
+        img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
+        name: 'Alice G',
+        position: 'CMO',
+        description: 'Alice worked as a marketing specialist at top blockchain focused agencies and passioned in crypto growth hacking.'
+      },
+      {
+        img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
+        name: 'Aynoor J',
+        position: 'Sales & Business Development manager',
+        description: 'Aynoor is our experienced Sales leader, previously involved in digital marketing project and client relationships.'
+      },
+      {
+        img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
+        name: 'Emil T',
+        position: 'Sales & Business Development manager\n',
+        description: 'Emil is our experienced Sales leader, previously involved in client relationships.'
+      },
+
     ]
   })
 }
