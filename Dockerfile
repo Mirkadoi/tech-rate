@@ -4,8 +4,7 @@ RUN mkdir /techrate
 WORKDIR /techrate
 COPY . .
 
-RUN npm i @vue/cli-service
-RUN npm run build
+RUN npm install && npm run build
 
 FROM nginx:alpine
 
