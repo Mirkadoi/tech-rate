@@ -13,9 +13,8 @@
     </div>
 
     <Table v-show="selectedTab === 0"/>
-
-    <p v-show="selectedTab === 1">2</p>
-    <p v-show="selectedTab === 2">3</p>
+    <Table v-show="selectedTab === 1"/>
+    <Table v-show="selectedTab === 2"/>
   </div>
 </template>
 
@@ -30,9 +29,9 @@ export default {
   data: () => ({
     selectedTab: 0,
     tabs: [
-      'Leading projects',
-      'Leading projects 2',
-      'Leading projects 3'
+      'All projects',
+      'Ethereum project',
+      'BSC projects'
     ]
   })
 }

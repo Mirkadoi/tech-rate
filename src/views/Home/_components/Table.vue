@@ -145,7 +145,9 @@ export default defineComponent({
   }
 
   .table-wrapper {
+    background-color: $color-white;
     border-radius: 8px;
+    padding: 0 20px;
   }
 
   table {
