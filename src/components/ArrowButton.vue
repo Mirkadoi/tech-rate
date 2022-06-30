@@ -1,5 +1,5 @@
 <template>
-  <div class="btn-arrow" :title="title" @click="$emit('onClick')">
+  <div class="btn-arrow" :class="{'disabled': disabled}" :title="title" @click="$emit('onClick')">
     <InlineSvg class="btn-arrow__icon" :class="{'rotate': rotate}" :src="require('@/assets/icons/arrow-outline.svg')" width="6" height="12" fill="#17181E" />
   </div>
 </template>
@@ -10,6 +10,11 @@
   export default defineComponent ({
     props: {
       rotate: {
+        type: Boolean,
+        default: false,
+      },
+
+      disabled: {
         type: Boolean,
         default: false,
       }
@@ -45,10 +50,14 @@
       background-color: $color-white;
     }
 
-    .disabled {
+    &.disabled {
       background: transparent;
       filter: none;
       pointer-events: none;
+
+      svg {
+        fill: #B9BABB;
+      }
     }
 
     .rotate {

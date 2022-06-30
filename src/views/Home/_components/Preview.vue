@@ -28,7 +28,7 @@
             Type to search...
           </template>
           <template #search="{ attributes, events }">
-            <InlineSvg  :src="require('@/assets/icons/magnifier.svg')" width="16" height="16" fill="#5E6A7B" />
+            <InlineSvg :src="require('@/assets/icons/magnifier.svg')" width="16" height="16" fill="#5E6A7B" />
             <input
                 class="vs__search"
                 v-bind="attributes"
@@ -40,16 +40,15 @@
       </div>
     </div>
 
-    <div class="wrapper-carousel">
+    <div class="wrapper-carousel" ref="myCarouselWrapper">
       <div class="carousel-controller">
-        <ArrowButton @onClick="myCarousel.prev()" />
-        <ArrowButton @onClick="myCarousel.next()" rotate />
-        <!--        <ArrowButton @onClick="myCarousel.next()" rotate />-->
+        <ArrowButton @onClick="myCarousel.prev()" :disabled="isDisabledCarouselPagination === 1" />
+        <ArrowButton @onClick="myCarousel.next()" :disabled="isDisabledCarouselPagination === 2" rotate />
       </div>
-      <Carousel ref="myCarousel" :settings="settings" :breakpoints="breakpoints">
+      <Carousel ref="myCarousel" v-model="currentSlide" :settings="settings" :breakpoints="breakpoints">
 
         <template #slides>
-          <Slide v-for="slide in slides" :key="slide.id" >
+          <Slide v-for="slide in slides" :key="slide.id">
             <div v-if="slide.id === null" class="slide last-card">
               <div class="last-card__img" />
               <router-link :to="{ name: 'blogs'}">
@@ -68,7 +67,9 @@
 <script>
   import {
     defineComponent,
-    ref
+    ref,
+    watch,
+    nextTick
   } from 'vue';
 
   import {
@@ -203,9 +204,44 @@
       }
 
       const myCarousel = ref(null);
+      const myCarouselWrapper = ref(null);
+
+      const currentSlide = ref(0);
       const options = ref([]);
 
-      return { columns, slides, breakpoints, settings, myCarousel, options }
+      const isDisabledCarouselPagination = ref(1)
+
+      watch(currentSlide, async () => {
+        await nextTick()
+
+        const existPrev = myCarouselWrapper.value.querySelector('.carousel__slide--prev')
+        const existNext = myCarouselWrapper.value.querySelector('.carousel__slide--next')
+
+        if(existNext && existPrev) {
+          return isDisabledCarouselPagination.value = 0;
+        }
+        if (!existPrev) {
+          //disabled prev
+          return isDisabledCarouselPagination.value = 1;
+        }
+        if (!existNext) {
+          //disabled next
+          return isDisabledCarouselPagination.value = 2;
+        }
+
+      })
+
+      return {
+        columns,
+        slides,
+        breakpoints,
+        settings,
+        myCarousel,
+        options,
+        currentSlide,
+        myCarouselWrapper,
+        isDisabledCarouselPagination
+      }
     }
   })
 </script>
@@ -302,7 +338,7 @@
     }
   }
 
-  .last-card{
+  .last-card {
     display: flex;
     flex-direction: column;
     background-color: $color-white;
@@ -333,7 +369,9 @@
       color: $brand-color-pink;
     }
 
-    a { text-decoration: none; }
+    a {
+      text-decoration: none;
+    }
   }
 
   //.finder {
