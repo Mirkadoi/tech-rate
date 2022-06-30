@@ -46,10 +46,20 @@
         <ArrowButton @onClick="myCarousel.next()" rotate />
         <!--        <ArrowButton @onClick="myCarousel.next()" rotate />-->
       </div>
-      <Carousel wrapAround ref="myCarousel" :settings="settings" :breakpoints="breakpoints">
-        <Slide v-for="slide in slides" :key="slide.id">
-          <Card :item="slide" />
-        </Slide>
+      <Carousel ref="myCarousel" :settings="settings" :breakpoints="breakpoints">
+
+        <template #slides>
+          <Slide v-for="slide in slides" :key="slide.id" >
+            <div v-if="slide.id === null" class="slide last-card">
+              <div class="last-card__img" />
+              <router-link :to="{ name: 'blogs'}">
+                <div class="last-card__title" v-text="'Read all blogs'" />
+              </router-link>
+            </div>
+
+            <Card v-else class="slide" :item="slide" />
+          </Slide>
+        </template>
       </Carousel>
     </div>
   </div>
@@ -153,10 +163,13 @@
         },
         {
           img: 'https://via.placeholder.com/620x400',
-          title: 'Bitcoin and the Stock to Flow Model#7',
+          title: 'Bitcoin an Flow Model#7',
           tag: 'Crypto',
           date: 'Mar 4, 2022',
           id: '7'
+        },
+        {
+          id: null
         },
       ]
 
@@ -175,14 +188,14 @@
         //   itemsToShow: 5,
         //   snapAlign: 'start',
         // },
-        1200: {
-          itemsToShow: 2.5,
-          // snapAlign: 'center',
-        },
-        // 1400: {
+        // 1200: {
         //   itemsToShow: 2.5,
-        //   // snapAlign: 'start',
+        //   // snapAlign: 'center',
         // },
+        1400: {
+          itemsToShow: 2.5,
+          // snapAlign: 'start',
+        },
         1800: {
           itemsToShow: 3.5,
           // snapAlign: 'start',
@@ -230,11 +243,16 @@
       display: flex;
       gap: 10px;
     }
+
+    .slide {
+      height: 100%;
+      width: 394px;
+    }
   }
 
   .board {
     display: flex;
-    background: $color-white;
+    background-color: $color-white;
     border: 1px solid $border-color-l1;
     border-radius: 20px;
 
@@ -282,6 +300,40 @@
       line-height: 38px;
       color: $text-color-black;
     }
+  }
+
+  .last-card{
+    display: flex;
+    flex-direction: column;
+    background-color: $color-white;
+    border-radius: 20px;
+    padding: 25px;
+    gap: 35px;
+
+    &__img {
+      width: 100%;
+      border-radius: 20px;
+      height: 186px;
+      background-image: url("/src/assets/images/read-all-blogs.png");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+    }
+
+    &__title {
+      font-family: $font-base;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 150%;
+      text-align: center;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: $brand-color-pink;
+    }
+
+    a { text-decoration: none; }
   }
 
   //.finder {

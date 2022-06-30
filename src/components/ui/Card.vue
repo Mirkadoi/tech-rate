@@ -36,10 +36,11 @@
   .card {
     background-color: $color-white;
     border-radius: 20px;
-    //width: 100%;
+    width: 100%;
+    height: 100%;
 
     &__img {
-      width: 100%;
+      //width: 100%;
       border-radius: 20px;
       height: 186px;
       background-repeat: no-repeat;
@@ -60,6 +61,7 @@
         font-size: 14px;
         line-height: 120%;
         color: $text-color-black;
+        text-align: left;
       }
 
       &__footer {
