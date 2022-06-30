@@ -1,6 +1,8 @@
 <template>
   <header class="header">
-    <InlineSvg :src="require('@/assets/icons/tech-rate-logo.svg')" width="83" height="32" fill="white" title="TechRate"/>
+    <router-link to="/">
+      <InlineSvg :src="require('@/assets/icons/tech-rate-logo.svg')" width="83" height="32" fill="white" title="TechRate"/>
+    </router-link>
 
     <div class="btn-group">
       <div class="nav">

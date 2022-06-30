@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper">
-    <InlineSvg :src="require('@/assets/icons/tech-rate-logo.svg')" width="83" height="32" fill="white" title="TechRate"/>
+    <router-link to="/">
+      <InlineSvg :src="require('@/assets/icons/tech-rate-logo.svg')" width="83" height="32" fill="white" title="TechRate"/>
+    </router-link>
 
     <span class="text">@ 2018 by TechRate. All Rights Reserved</span>
   </div>

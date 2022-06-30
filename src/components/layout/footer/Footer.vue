@@ -4,7 +4,7 @@
 
     <MenuList class="nav" title="Navigation" :items="navigationItems"/>
 
-    <Social class="social"/>
+    <SocialList class="social"/>
   </footer>
 </template>
 
@@ -13,13 +13,13 @@
 
   import BrandInfo from '@/components/layout/footer/BrandInfo';
   import MenuList from '@/components/layout/footer/MenuList';
-  import Social from '@/components/layout/footer/Social';
+  import SocialList from '@/components/layout/footer/SocialList';
 
   export default defineComponent ({
     components: {
       BrandInfo,
       MenuList,
-      Social
+      SocialList
     },
     setup() {
       const navigationItems = [
@@ -40,7 +40,7 @@
   .footer {
     display: flex;
     justify-content: space-between;
-    height: 285px;
+    height: 150px;
     width: 100%;
     background-color: $color-black;
     padding-left: 100px;

@@ -288,7 +288,7 @@
   //
   //}
 
-  .select::v-deep {
+  :deep(.select) {
     .vs__dropdown-toggle,
     .vs__dropdown-menu {
       background-color: $color-white;
