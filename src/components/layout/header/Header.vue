@@ -14,9 +14,9 @@
 
             <template #popper>
               <div class="menu-list">
-                <router-link class="menu-list__element" v-for="{ title, to } in products" :key="title" :to="to">
+                <a class="menu-list__element" v-for="{ title, to } in products" :key="title" :href="to" target="_blank">
                   {{ title }}
-                </router-link>
+                </a>
               </div>
 
             </template>
@@ -55,7 +55,7 @@
     },
 
     setup() {
-      const products = [{title: ' Defi Generator', to: ''}]
+      const products = [{title: ' Defi Generator', to: 'https://defigenerator.org/'}]
 
       return { products }
     }
@@ -98,6 +98,7 @@
     color: $color-white;
     text-decoration: none;
     gap: 5px;
+    cursor: pointer;
   }
 
   .menu-list {

@@ -21,6 +21,8 @@
 <script>
 import Table from "@/views/Home/_components/Table";
 
+import { getTokenList } from '@/views/Home/requests';
+
 export default {
   components: {
     Table
@@ -33,7 +35,19 @@ export default {
       'Ethereum project',
       'BSC projects'
     ]
-  })
+  }),
+
+  created() {
+    this.getTableItems()
+  },
+
+  methods: {
+    async getTableItems() {
+      const b = await getTokenList();
+      console.log(b)
+    }
+
+  }
 }
 </script>
 
