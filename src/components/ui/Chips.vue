@@ -1,5 +1,5 @@
 <template>
-  <div class="chips">
+  <div class="chips" :class="{pointer: btn}" @click="$emit('onClick')">
     {{ title }}
   </div>
 </template>
@@ -8,7 +8,10 @@
   import { defineComponent } from 'vue';
 
   export default defineComponent ({
-    props: ['title']
+    props: {
+      title: {type: String, required: true},
+      btn: {type: Boolean, default: false}
+    }
   })
 </script>
 
@@ -23,5 +26,9 @@
     font-size: 12px;
     line-height: 16px;
     color: $brand-color-pink;
+  }
+
+  .pointer {
+    cursor: pointer;
   }
 </style>

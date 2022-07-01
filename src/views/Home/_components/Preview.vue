@@ -28,7 +28,8 @@
             Type to search...
           </template>
           <template #search="{ attributes, events }">
-            <InlineSvg :src="require('@/assets/icons/magnifier.svg')" width="16" height="16" fill="#5E6A7B" />
+            <Chips :title="searchField === 'name' ? 'by name' : 'by token'" btn @onClick="toggleSearchField"/>
+<!--            <InlineSvg :src="require('@/assets/icons/magnifier.svg')" width="16" height="16" fill="#5E6A7B" />-->
             <input
                 class="vs__search"
                 v-bind="attributes"
@@ -86,6 +87,7 @@
 
   import Card from '@/components/ui/Card';
   import ArrowButton from '@/components/ArrowButton';
+  import Chips from '@/components/ui/Chips';
 
 
   export default defineComponent({
@@ -94,15 +96,19 @@
       Slide,
       Card,
       ArrowButton,
-      VSelect
+      VSelect,
+      Chips
     },
 
     methods: {
       onSearch(search, loading) {
-        if (search.length) {
+        if (search.length > 3) {
           loading(true);
           this.search(loading, search, this);
         }
+      },
+      toggleSearchField() {
+        this.searchField = this.searchField === 'name' ? 'token' : 'name';
       },
       search: debounce((loading, search) => {
         fetch(
@@ -207,6 +213,7 @@
       const myCarouselWrapper = ref(null);
 
       const currentSlide = ref(0);
+      const searchField = ref('name');
       const options = ref([]);
 
       const isDisabledCarouselPagination = ref(1)
@@ -238,6 +245,7 @@
         settings,
         myCarousel,
         options,
+        searchField,
         currentSlide,
         myCarouselWrapper,
         isDisabledCarouselPagination
@@ -382,12 +390,17 @@
     .vs__dropdown-toggle,
     .vs__dropdown-menu {
       background-color: $color-white;
-      padding: 16px;
+      padding: 16px 10px;
       border: 1px solid $border-color-l1;
       box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.07);
       border-radius: 8px;
 
+      .vs__selected-options {
+        //align-items: baseline !important;
+      }
+
       .vs__search {
+        height: 22px;
         margin: 0;
 
         &::placeholder {
