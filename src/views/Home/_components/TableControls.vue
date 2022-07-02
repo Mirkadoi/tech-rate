@@ -5,9 +5,17 @@
     <div class="d-flex pagination">
       <button class="control control-prev" @click="$emit('prev')"/>
 
+      <button v-if="currentPage === 3 && lastPageNumber === 3" @click="$emit('goToPage', 1)">
+        1
+      </button>
+
       <button v-if="currentPage > 1" @click="$emit('prev')">{{ currentPage - 1  }}</button>
       <button class="current-page" disabled>{{ currentPage }}</button>
       <button v-if="showNextNumberButton" @click="$emit('next')">{{ currentPage + 1  }}</button>
+
+      <button v-if="currentPage === 1 && showNextNumberButton" @click="$emit('goToPage', 3)">
+        3
+      </button>
 
       <template v-if="showLastPageButton">
         <span class="dots">...</span>
