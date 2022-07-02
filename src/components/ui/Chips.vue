@@ -27,7 +27,7 @@
     font-size: 12px;
     line-height: 16px;
     color: $brand-color-pink;
-    transition: background-color 0.3s ease-in;
+    transition: background-color 0.3s ease-in, color 0.3s ease-in;
   }
 
   .pointer {
@@ -35,6 +35,7 @@
   }
 
   .active {
-    background-color: rgba(249, 0, 116, 0.6);
+    background-color: rgba(249, 0, 116, 0.3);
+    color: $background-colors-white;
   }
 </style>

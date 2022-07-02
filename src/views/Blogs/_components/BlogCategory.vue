@@ -41,8 +41,8 @@ export default {
       store.setBlogList()
     },
 
-    redirectToBlog(id) {
-      this.$router.push({ name: 'blog', params: { id } })
+    redirectToBlog(uid) {
+      this.$router.push({ name: 'blog', params: { uid } })
     }
   },
 

@@ -12,9 +12,9 @@ const routes = [
     component: () => import("../views/Blogs/index"),
   },
   {
-    path: "/blogs/:id",
+    path: "/blogs/:uid",
     name: "blog",
-    component: () => import("../views/Blog/Index"),
+    component: () => import("../views/Blog"),
   },
   {
     path: "/disclaimer",
