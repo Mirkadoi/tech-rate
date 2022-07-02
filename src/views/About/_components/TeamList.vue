@@ -1,7 +1,7 @@
 <template>
   <div class="team-list">
     <div v-for="(el, i) in team" :key="i" class="team-item">
-      <img class="team-img" :src="el.img">
+      <img class="team-img" :src="require('../_images/' + el.img +'.jpeg')">
 
       <p class="team-name">{{ el.name }}</p>
       <p class="team-position">{{ el.position }}</p>
@@ -15,37 +15,37 @@ export default {
   data: () => ({
     team: [
       {
-        img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
+        img: 'Zufar',
         name: 'Zufar G',
         position: 'Co - founder',
         description: 'Zufar worked at PwC for several years, managed BizDev unit at the famous startup rating agency and running his own startups. Swimmer, tennis player.'
       },
       {
-        img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
+        img: 'LL',
         name: 'Il K',
         position: 'Co - founder',
         description: 'Il is ex Callisto Network and ICORating security engineer and Blockchain analyst, also he is a tech consultant in various fields such as blockchain, mobile development, ML, NN and AI.'
       },
       {
-        img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
+        img: 'Farkhad',
         name: 'Farkhad G',
         position: 'Team Lead',
         description: 'Farkhad is our Team Lead with several years\' experience of working as a senior engineer in a Russian IT company'
       },
       {
-        img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
+        img: 'Alice',
         name: 'Alice G',
         position: 'CMO',
         description: 'Alice worked as a marketing specialist at top blockchain focused agencies and passioned in crypto growth hacking.'
       },
       {
-        img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
+        img: 'Aynoor',
         name: 'Aynoor J',
         position: 'Sales & Business Development manager',
         description: 'Aynoor is our experienced Sales leader, previously involved in digital marketing project and client relationships.'
       },
       {
-        img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
+        img: 'Emil',
         name: 'Emil T',
         position: 'Sales & Business Development manager\n',
         description: 'Emil is our experienced Sales leader, previously involved in client relationships.'
