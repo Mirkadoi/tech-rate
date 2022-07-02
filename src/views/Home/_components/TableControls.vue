@@ -16,16 +16,6 @@
 
       <button class="control control-next" @click="$emit('next')"/>
     </div>
-
-    <div class="settings d-flex">
-      <p>Show rows:</p>
-
-      <select v-model="rowsCount">
-        <option>10</option>
-        <option>20</option>
-        <option>30</option>
-      </select>
-    </div>
   </div>
 </template>
 
@@ -43,7 +33,7 @@ export default {
   },
 
   data: () => ({
-    rowsCount: 10
+    rowsCount: 20
   }),
 
   computed: {
@@ -67,18 +57,6 @@ export default {
       return number ? Math.ceil(number) : 0
     }
   },
-
-  watch: {
-    rowsCount: {
-      immediate: true,
-      handler(val) {
-        const firstItemOnPageNumber = (this.currentPage - 1) * this.rowsCount + 1
-
-        if (firstItemOnPageNumber > this.values.length) this.$emit('toFirstPage')
-        this.$emit('changeRowsCount', val)
-      }
-    }
-  }
 }
 </script>
 
@@ -88,9 +66,13 @@ export default {
   }
 
   .table-controls {
-    justify-content: space-between;
     padding: 17px 0;
     font-size: 14px;
+
+    .pagination {
+      margin: 0 auto;
+      transform: translateX(-70px);
+    }
 
     .dots {
       display: block;
@@ -156,20 +138,6 @@ export default {
       border: none;
       color: $color-white;
       cursor: default;
-    }
-  }
-
-  .settings {
-    display: flex;
-    align-items: center;
-
-    select {
-      margin-left: 10px;
-      background: #F3F2F2;
-      border-radius: 8px;
-      width: 63px;
-      height: 35px;
-      border: none;
     }
   }
 </style>

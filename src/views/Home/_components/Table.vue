@@ -42,7 +42,6 @@
     <table-controls
       @prev="prevPage"
       @next="nextPage"
-      @changeRowsCount="pageSize = $event"
       @toFirstPage="currentPage = 1"
       :values="tableContent"
       :currentPage="currentPage"
@@ -92,7 +91,7 @@ export default defineComponent({
     ],
     currentSort:'name',
     currentSortDir:'asc',
-    pageSize:10,
+    pageSize: 20,
     currentPage:1
   }),
 
