@@ -2,7 +2,7 @@
   <div class="posts-wrapper">
     <div class="posts-top">
       <h3>{{ categoryName }}</h3>
-      <div @click="showAll = !showAll">See all blockchain content</div>
+      <div @click="showAll = !showAll">{{displayedTitleTop}}</div>
     </div>
 
     <div class="posts-list">
@@ -26,38 +26,13 @@ export default {
     categoryName: String
   },
 
-  // data: () => ({
-  //   showAll: false,
-  //   posts: [{
-  //     img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
-  //     title: 'Bdentity Verification. We will collect [multiple forms of] identification ',
-  //     tag: { name: "Forebs", link: 'https://www.google.ru' },
-  //     date: 'Mar 4, 2022',
-  //     id: 1
-  //   },{
-  //     img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
-  //     title: 'The date indicated in a Badge for a project',
-  //     tag: { name: "Bloomberg", link: 'https://www.google.ru' },
-  //     date: 'Mar 4, 2022',
-  //     id: 2
-  //   },{
-  //     img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
-  //     title: 'What Is Leverage in Crypto Trading?',
-  //     tag: { name: "The Block", link: 'https://www.google.ru' },
-  //     date: 'Mar 4, 2022',
-  //     id: 3
-  //   },{
-  //     img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
-  //     title: 'Badge is NOT a guarantee that the information that a developer',
-  //     tag: { name: "Coindesk", link: 'https://www.google.ru' },
-  //     date: 'Mar 4, 2022',
-  //     id: 4
-  //   },]
-  // }),
-
   computed: {
     displayedBlogList() {
       return this.showAll ? store.blogList : store.blogList.slice(0, 3);
+    },
+
+    displayedTitleTop() {
+      return !this.showAll ? 'See all blockchain content' : 'Hide part blockchain content';
     }
   },
 

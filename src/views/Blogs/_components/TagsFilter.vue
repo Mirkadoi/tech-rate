@@ -4,7 +4,7 @@
 
     <div class="tag-list">
       <template v-if="tags.length">
-        <Chips class="tag" v-for="tag in tags" :key="tag.uid" :title="tag.name" btn />
+        <Chips class="tag" v-for="tag in tags" :key="tag.uid" :title="tag.name" :active="tag.uid === activeTag.uid" btn @onClick="filterBlogs(tag)" />
       </template>
 
       <template v-else>
@@ -17,29 +17,42 @@
 
 <script>
   import { defineComponent, ref } from 'vue';
+
   import Chips from '@/components/ui/Chips';
 
   import { getTagsList } from '@/views/Blog/requests';
+  import { store } from '@/views/Blogs/_store';
 
   export default defineComponent ({
     components: {
       Chips,
     },
 
-    created() {
-      this.init()
+    async created() {
+      this.tags = await getTagsList()
     },
 
     methods: {
-      async init () {
-        this.tags = await getTagsList()
+      filterBlogs(val) {
+        if (this.activeTag.uid === val.uid) {
+          this.activeTag = {};
+
+          return store.setBlogList({page:1, size: 99 })
+
+        } else {
+          this.activeTag = val;
+
+          return store.setBlogList({page:1, size: 99, tag: val.name })
+        }
       }
     },
 
+
     setup() {
       const tags = ref([])
+      const activeTag = ref({})
 
-      return { tags }
+      return { tags, activeTag }
     }
   })
 </script>
