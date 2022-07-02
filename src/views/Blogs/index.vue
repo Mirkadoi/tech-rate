@@ -43,6 +43,7 @@
     color: $text-color-black;
     padding: 0 100px;
     background: $color-white;
+    box-sizing: border-box;
 
     .blog-top {
       display: flex;
