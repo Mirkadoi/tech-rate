@@ -112,7 +112,6 @@ export default defineComponent ({
           border: 1px solid #535353;
           border-radius: 20px;
           margin-bottom: 15px;
-          cursor: pointer;
 
           &:not(:last-child) {
             margin-right: 15px;

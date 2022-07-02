@@ -1,9 +1,16 @@
 <template>
-  <div class="topics-tag-categories">
+  <div class="topics-tag-categories" >
     <p>Filter by tag</p>
 
     <div class="tag-list">
-      <Chips class="tag" v-for="tag in tags" :key="tag" :title="tag" />
+      <template v-if="tags.length">
+        <Chips class="tag" v-for="tag in tags" :key="tag.uid" :title="tag.name" btn />
+      </template>
+
+      <template v-else>
+        <p>...</p>
+      </template>
+
     </div>
   </div>
 </template>
@@ -12,14 +19,25 @@
   import { defineComponent, ref } from 'vue';
   import Chips from '@/components/ui/Chips';
 
+  import { getTagsList } from '@/views/Blog/requests';
+
   export default defineComponent ({
     components: {
       Chips,
     },
 
+    created() {
+      this.init()
+    },
+
+    methods: {
+      async init () {
+        this.tags = await getTagsList()
+      }
+    },
+
     setup() {
-      const tags = ref(['Crypto', 'DeFi', 'Economics', 'Crypto', 'DeFi', 'Economics', 'Crypto', 'DeFi', 'Economics','Crypto', 'DeFi', 'Economics', 'Crypto', 'DeFi', 'Economics', 'Crypto', 'DeFi', 'Economics',
-    ])
+      const tags = ref([])
 
       return { tags }
     }
@@ -30,6 +48,7 @@
   .topics-tag-categories {
     display: flex;
     gap: 20px;
+    align-items: baseline;
     //margin-bottom: 15px;
 
     p {
