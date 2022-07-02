@@ -1,8 +1,9 @@
 // const prepareUrl
 //
-const request = (params, error) => {
+const request = async (params, error = console.warn) => {
   try {
-    return fetch(params);
+    const response = await fetch(params);
+    return response.json();
   } catch (e) {
     error(e);
   }
