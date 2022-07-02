@@ -13,12 +13,12 @@
 
 <!--    <blog-category category-name="Essentials"/>-->
 <!--    <blog-category category-name="Blockchain"/>-->
-    <subscription/>
+<!--    <subscription/>-->
   </section>
 </template>
 
 <script>
-  import Subscription from "@/views/Blogs/_components/Subscription";
+  // import Subscription from "@/views/Blogs/_components/Subscription";
   import BlogCategory from "@/views/Blogs/_components/BlogCategory";
   import BlogAbout from "@/views/Blogs/_components/BlogAbout";
   import BlogFeatured from "@/views/Blogs/_components/BlogFeatured";
@@ -27,7 +27,7 @@
 
   export default {
     components: {
-      Subscription,
+      // Subscription,
       BlogCategory,
       BlogAbout,
       BlogFeatured,

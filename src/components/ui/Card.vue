@@ -1,13 +1,15 @@
 <template>
   <div class="card">
-    <div class="card__img" :style="{backgroundImage: `url(${item.img})`}"/>
+    <div class="card__img" :style="{backgroundImage: `url(${item.image})`}"/>
 
     <div class="card__body body">
-      <span class="body__header">{{ item.title }}</span>
+      <span class="body__header">{{ item.name }}</span>
 
       <div class="body__footer">
-        <Chips class="body__tag" :title="item.tag"/>
-        <span class="body__date">{{ item.date }}</span>
+        <div class="body__tags">
+          <Chips v-for="tag in item.tags" :key="tag" class="body__tag" :title="tag"/>
+        </div>
+        <span class="body__date">{{ new Date(item.created).toLocaleDateString('en-us', { month: 'short', year: 'numeric', day: 'numeric' }) }}</span>
       </div>
     </div>
   </div>
@@ -44,8 +46,10 @@
       border-radius: 20px;
       height: 186px;
       background-repeat: no-repeat;
-      background-attachment: fixed;
+      //background-attachment: fixed;
       background-position: center;
+      background-size: cover;
+
     }
 
     .body {
@@ -76,11 +80,16 @@
         //color: $text-color-black;
       }
 
+      &__tags {
+        display: flex;
+        gap: 5px;
+      }
+
       &__date {
         font-family: $font-base;
         font-style: normal;
-        font-weight: 600;
-        font-size: 16px;
+        font-weight: 400;
+        font-size: 14px;
         line-height: 22px;
         color: $text-color-dark-blue;
       }
