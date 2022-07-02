@@ -104,7 +104,9 @@ export default defineComponent({
   methods:{
     sort(column) {
       if(column === this.currentSort) {
-        this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
+        this.currentSortDir = this.currentSortDir === 'default'
+          ? this.currentSortDir = 'asc'
+          : this.currentSortDir === 'asc' ? 'desc' : 'default'
       }
       this.currentSort = column;
     },
@@ -125,6 +127,10 @@ export default defineComponent({
 
   computed:{
     sortedValues() {
+      if (this.currentSortDir === 'default') {
+        return [...this.tableContent]
+      }
+
       return [...this.tableContent].sort((a,b) => {
         let modifier = 1;
 
