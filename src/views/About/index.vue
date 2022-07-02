@@ -11,7 +11,6 @@
 
     <div class="description-block">
       <h2>Contacts</h2>
-      <p>The information provided on this website does not constitute investment<br/> advice, financial advice, trading advice, or any other sort of advice and<br/> you should not treat any of the website's content as such. </p>
     </div>
 
     <ContactList />
