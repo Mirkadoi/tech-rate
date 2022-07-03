@@ -41,27 +41,7 @@
       </div>
     </div>
 
-    <div class="wrapper-carousel" ref="myCarouselWrapper">
-      <div class="carousel-controller">
-        <ArrowButton @onClick="myCarousel.prev()" :disabled="isDisabledCarouselPagination === 1" />
-        <ArrowButton @onClick="myCarousel.next()" :disabled="isDisabledCarouselPagination === 2" rotate />
-      </div>
-      <Carousel ref="myCarousel" v-model="currentSlide" :settings="settings" :breakpoints="breakpoints">
-
-        <template #slides>
-          <Slide v-for="slide in slides" :key="slide.id">
-            <div v-if="slide.id === null" class="slide last-card">
-              <div class="last-card__img" />
-              <router-link :to="{ name: 'blogs'}">
-                <div class="last-card__title" v-text="'Read all blogs'" />
-              </router-link>
-            </div>
-
-            <Card v-else class="slide" :item="slide" />
-          </Slide>
-        </template>
-      </Carousel>
-    </div>
+    <TopCarousel />
   </div>
 </template>
 
@@ -69,33 +49,21 @@
   import {
     defineComponent,
     ref,
-    watch,
-    nextTick
   } from 'vue';
 
-  import {
-    Carousel,
-    Slide
-  } from 'vue3-carousel';
-  import 'vue3-carousel/dist/carousel.css';
 
   import VSelect from 'vue-select'
   import 'vue-select/dist/vue-select.css';
 
   import debounce from 'debounce';
 
-
-  import Card from '@/components/ui/Card';
-  import ArrowButton from '@/components/ArrowButton';
   import Chips from '@/components/ui/Chips';
+  import TopCarousel from '@/views/Home/_components/TopCarousel';
 
 
   export default defineComponent({
     components: {
-      Carousel,
-      Slide,
-      Card,
-      ArrowButton,
+      TopCarousel,
       VSelect,
       Chips
     },
@@ -125,131 +93,10 @@
         { logo: 'binance-logo', title: 'BSC projects', number: 0, subtitle: 'Current finantial year' },
       ]
 
-      const slides = [
-        {
-          img: 'https://via.placeholder.com/620x400',
-          title: 'Bitcoin and the Stock to Flow Model#1',
-          tag: 'Crypto',
-          date: 'Mar 4, 2022',
-          id: '1'
-        },
-        {
-          img: 'https://via.placeholder.com/620x400',
-          title: 'Bitcoin and the Stock to Flow Model#2',
-          tag: 'Crypto',
-          date: 'Mar 4, 2022',
-          id: '2'
-        },
-        {
-          img: 'https://via.placeholder.com/620x400',
-          title: 'Bitcoin and the Stock to Flow Model#3',
-          tag: 'Crypto',
-          date: 'Mar 4, 2022',
-          id: '3'
-        },
-        {
-          img: 'https://via.placeholder.com/620x400',
-          title: 'Bitcoin and the Stock to Flow Model#4',
-          tag: 'Crypto',
-          date: 'Mar 4, 2022',
-          id: '4'
-        },
-        {
-          img: 'https://via.placeholder.com/620x400',
-          title: 'Bitcoin and the Stock to Flow Model#5',
-          tag: 'Crypto',
-          date: 'Mar 4, 2022',
-          id: '5'
-        },
-        {
-          img: 'https://via.placeholder.com/620x400',
-          title: 'Bitcoin and the Stock to Flow Model#6',
-          tag: 'Crypto',
-          date: 'Mar 4, 2022',
-          id: '6'
-        },
-        {
-          img: 'https://via.placeholder.com/620x400',
-          title: 'Bitcoin an Flow Model#7',
-          tag: 'Crypto',
-          date: 'Mar 4, 2022',
-          id: '7'
-        },
-        {
-          id: null
-        },
-      ]
-
-      const settings = {
-        itemsToShow: 1.5,
-        // snapAlign: 'center',
-        snapAlign: 'center',
-      }
-
-      const breakpoints = {
-        // 576: {
-        // itemsToShow: 2.5,
-        // snapAlign: 'center',
-        // },
-        // 768: {
-        //   itemsToShow: 5,
-        //   snapAlign: 'start',
-        // },
-        // 1200: {
-        //   itemsToShow: 2.5,
-        //   // snapAlign: 'center',
-        // },
-        1400: {
-          itemsToShow: 2.5,
-          // snapAlign: 'start',
-        },
-        1800: {
-          itemsToShow: 3.5,
-          // snapAlign: 'start',
-        },
-      }
-
-      const myCarousel = ref(null);
-      const myCarouselWrapper = ref(null);
-
-      const currentSlide = ref(0);
       const searchField = ref('name');
       const options = ref([]);
 
-      const isDisabledCarouselPagination = ref(1)
-
-      watch(currentSlide, async () => {
-        await nextTick()
-
-        const existPrev = myCarouselWrapper.value.querySelector('.carousel__slide--prev')
-        const existNext = myCarouselWrapper.value.querySelector('.carousel__slide--next')
-
-        if(existNext && existPrev) {
-          return isDisabledCarouselPagination.value = 0;
-        }
-        if (!existPrev) {
-          //disabled prev
-          return isDisabledCarouselPagination.value = 1;
-        }
-        if (!existNext) {
-          //disabled next
-          return isDisabledCarouselPagination.value = 2;
-        }
-
-      })
-
-      return {
-        columns,
-        slides,
-        breakpoints,
-        settings,
-        myCarousel,
-        options,
-        searchField,
-        currentSlide,
-        myCarouselWrapper,
-        isDisabledCarouselPagination
-      }
+      return { columns, options, searchField }
     }
   })
 </script>
@@ -265,33 +112,6 @@
     flex-direction: column;
     flex: 0 0 auto;
     gap: 35px;
-  }
-
-  .wrapper-carousel {
-    position: relative;
-    width: calc(100% - 360px);
-
-    //@media (min-width: #{variables.$screen-xxl-min}) {
-    //  @content;
-    //}
-    //
-    //@include xxl() {
-    //  width: auto;
-    //}
-    //flex: 1 0 calc(100% - 389px);
-
-    .carousel-controller {
-      position: absolute;
-      right: 0;
-      top: -55px;
-      display: flex;
-      gap: 10px;
-    }
-
-    .slide {
-      height: 100%;
-      width: 394px;
-    }
   }
 
   .board {
@@ -346,41 +166,6 @@
     }
   }
 
-  .last-card {
-    display: flex;
-    flex-direction: column;
-    background-color: $color-white;
-    border-radius: 20px;
-    padding: 25px;
-    gap: 35px;
-
-    &__img {
-      width: 100%;
-      border-radius: 20px;
-      height: 186px;
-      background-image: url("/src/assets/images/read-all-blogs.png");
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: center;
-    }
-
-    &__title {
-      font-family: $font-base;
-      font-style: normal;
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 150%;
-      text-align: center;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: $brand-color-pink;
-    }
-
-    a {
-      text-decoration: none;
-    }
-  }
 
   //.finder {
   //
