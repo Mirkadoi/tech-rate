@@ -24,9 +24,6 @@
             :options="options"
             @search="onSearch"
         >
-          <template #no-options>
-            Type to search...
-          </template>
           <template #search="{ attributes, events }">
             <Chips :title="searchField === 'name' ? 'by name' : 'by token'" btn @onClick="toggleSearchField"/>
 <!--            <InlineSvg :src="require('@/assets/icons/magnifier.svg')" width="16" height="16" fill="#5E6A7B" />-->
@@ -35,6 +32,9 @@
                 v-bind="attributes"
                 v-on="events"
             />
+          </template>
+          <template #option="option">
+            <div>{{ option.name }}</div>
           </template>
         </VSelect>
 
@@ -62,7 +62,8 @@
 
   import {
     getBSCAudited,
-    getProjectsAudited
+    getProjectsAudited,
+    getTokenBySearch
   } from '@/views/Home/requests';
 
 
@@ -83,13 +84,14 @@
       toggleSearchField() {
         this.searchField = this.searchField === 'name' ? 'token' : 'name';
       },
-      search: debounce((loading, search) => {
-        fetch(
-            `https://api.github.com/search/repositories?q=${escape(search)}`
-        ).then(() => {
-          // res.json().then(json => (vm.options = json.items));
+      search: debounce((loading, search, vm) => {
+        getTokenBySearch(search).then((res) => {
+          const { results } = res;
+          console.log(results);
+
+          vm.options = results;
         }).finally(() => loading(false));
-      }, 350),
+      }, 450),
 
       formatNumber(value = 0) {
         return new Intl.NumberFormat('en-GB', {
