@@ -19,22 +19,35 @@
           <td>{{ el.num }}</td>
 
           <td class="d-flex">
-            <img :src="el.img" width="24" height="24">
-            <p>{{ el.name }}</p>
+            <img :src="el.name.img" width="24" height="24">
+            <p>{{ el.name.value }}</p>
           </td>
 
-          <td>{{ el.price }}</td>
-
-          <td>
-            <Stock :param="el.security"/>
+          <td class="pie-chart">
+            <pie-chart :value="el.score" :color="getChartColor(el.score)"/>
           </td>
 
-          <td>
-            <Stock :param="el.last"/>
+          <td>{{ el.blockchain }}</td>
+          <td>{{ el.category }}</td>
+
+          <td class="d-flex audit">
+            <img :src="el.audit.img" width="24" height="24">
+            <p>{{ el.audit.value }}</p>
           </td>
 
-          <td>{{ el.market }}</td>
-          <td>{{ el.volume }}</td>
+<!--          <td>{{ el.price }}</td>-->
+
+<!--          <td>-->
+<!--            <Stock :param="el.security"/>-->
+<!--          </td>-->
+
+<!--          <td>-->
+<!--            <Stock :param="el.last"/>-->
+<!--          </td>-->
+
+<!--          <td>{{ el.market }}</td>-->
+<!--          <td>{{ el.volume }}</td>-->
+          <td>{{ el.date }}</td>
         </tr>
       </tbody>
     </table>
@@ -42,8 +55,7 @@
     <table-controls
       @prev="prevPage"
       @next="nextPage"
-      @changeRowsCount="pageSize = $event"
-      @toFirstPage="currentPage = 1"
+      @goToPage="currentPage = $event"
       :values="tableContent"
       :currentPage="currentPage"
     />
@@ -52,54 +64,49 @@
 
 <script>
 import { defineComponent } from 'vue'
-import Stock from "@/views/Home/_components/Stock";
+import PieChart from "@/views/Home/_components/PieChart";
+// import Stock from "@/views/Home/_components/Stock";
 import TableControls from "@/views/Home/_components/TableControls";
 
 export default defineComponent({
-  components: { Stock, TableControls },
+  components: {
+    // Stock,
+    TableControls,
+    PieChart
+  },
 
   data: () => ({
     tableHeader: [
       { text: '#', key: 'num' },
       { text: 'Name', key: 'name' },
-      { text: 'Price', key: 'price' },
-      { text: 'Security Score/24h', key: 'security' },
-      { text: 'Last 7 days', key: 'last' },
-      { text: 'Market Cap', key: 'market' },
-      { text: 'Volume (24h)', key: 'volume' },
+      { text: 'Score', key: 'score' },
+      { text: 'Blockchain', key: 'blockchain' },
+      { text: 'Category', key: 'category' },
+      { text: 'Audit', key: 'audit' },
+      // { text: 'Price', key: 'price' },
+      // { text: 'Security Score/24h', key: 'security' },
+      // { text: 'Last 7 days', key: 'last' },
+      // { text: 'Market Cap', key: 'market' },
+      // { text: 'Volume (24h)', key: 'volume' },
+      { text: 'Date', key: 'date' },
     ],
-    tableContent: [
-      {
-        num: 2,
-        img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
-        name: 'Carbon',
-        price: '$ 39 043.65',
-        security: { stocks: false, value: "5.69%" },
-        last: { stocks: true, value: "5.69%" },
-        market: '$ 741 601 948.65',
-        volume: '$ 27 601 948.65',
-      },
-      {
-        num: 1,
-        img: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg',
-        name: 'Aave',
-        price: '$ 39 043.55',
-        security: { stocks: false, value: "5.79%" },
-        last: { stocks: true, value: "5.79%" },
-        market: '$ 741 601 948.55',
-        volume: '$ 27 601 948.55',
-      },
-    ],
+    tableContent: [],
     currentSort:'name',
     currentSortDir:'asc',
-    pageSize:10,
+    pageSize: 20,
     currentPage:1
   }),
+
+  created() {
+    this.tableContent = require('../generated.json')
+  },
 
   methods:{
     sort(column) {
       if(column === this.currentSort) {
-        this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
+        this.currentSortDir = this.currentSortDir === 'default'
+          ? this.currentSortDir = 'asc'
+          : this.currentSortDir === 'asc' ? 'desc' : 'default'
       }
       this.currentSort = column;
     },
@@ -108,11 +115,22 @@ export default defineComponent({
     },
     prevPage() {
       if(this.currentPage > 1) this.currentPage--;
+    },
+    getChartColor(val) {
+      if (val >= 90)  return 'green'
+      if (val >= 80)  return 'lightgreen'
+      if (val >= 70)  return 'yellow'
+      if (val >= 50)  return 'orange'
+      if (val <= 49)  return 'red'
     }
   },
 
   computed:{
     sortedValues() {
+      if (this.currentSortDir === 'default') {
+        return [...this.tableContent]
+      }
+
       return [...this.tableContent].sort((a,b) => {
         let modifier = 1;
 
@@ -237,6 +255,14 @@ export default defineComponent({
           }
           &:not(:first-child) {
             text-align: right;
+          }
+
+          &.pie-chart {
+            padding: 0;
+          }
+
+          &.audit {
+            justify-content: end;
           }
 
           img {

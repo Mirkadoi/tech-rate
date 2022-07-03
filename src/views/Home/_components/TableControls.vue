@@ -5,9 +5,17 @@
     <div class="d-flex pagination">
       <button class="control control-prev" @click="$emit('prev')"/>
 
+      <button v-if="currentPage === 3 && lastPageNumber === 3" @click="$emit('goToPage', 1)">
+        1
+      </button>
+
       <button v-if="currentPage > 1" @click="$emit('prev')">{{ currentPage - 1  }}</button>
       <button class="current-page" disabled>{{ currentPage }}</button>
       <button v-if="showNextNumberButton" @click="$emit('next')">{{ currentPage + 1  }}</button>
+
+      <button v-if="currentPage === 1 && showNextNumberButton" @click="$emit('goToPage', 3)">
+        3
+      </button>
 
       <template v-if="showLastPageButton">
         <span class="dots">...</span>
@@ -15,16 +23,6 @@
       </template>
 
       <button class="control control-next" @click="$emit('next')"/>
-    </div>
-
-    <div class="settings d-flex">
-      <p>Show rows:</p>
-
-      <select v-model="rowsCount">
-        <option>10</option>
-        <option>20</option>
-        <option>30</option>
-      </select>
     </div>
   </div>
 </template>
@@ -43,7 +41,7 @@ export default {
   },
 
   data: () => ({
-    rowsCount: 10
+    rowsCount: 20
   }),
 
   computed: {
@@ -67,18 +65,6 @@ export default {
       return number ? Math.ceil(number) : 0
     }
   },
-
-  watch: {
-    rowsCount: {
-      immediate: true,
-      handler(val) {
-        const firstItemOnPageNumber = (this.currentPage - 1) * this.rowsCount + 1
-
-        if (firstItemOnPageNumber > this.values.length) this.$emit('toFirstPage')
-        this.$emit('changeRowsCount', val)
-      }
-    }
-  }
 }
 </script>
 
@@ -88,9 +74,13 @@ export default {
   }
 
   .table-controls {
-    justify-content: space-between;
     padding: 17px 0;
     font-size: 14px;
+
+    .pagination {
+      margin: 0 auto;
+      transform: translateX(-70px);
+    }
 
     .dots {
       display: block;
@@ -156,20 +146,6 @@ export default {
       border: none;
       color: $color-white;
       cursor: default;
-    }
-  }
-
-  .settings {
-    display: flex;
-    align-items: center;
-
-    select {
-      margin-left: 10px;
-      background: #F3F2F2;
-      border-radius: 8px;
-      width: 63px;
-      height: 35px;
-      border: none;
     }
   }
 </style>
