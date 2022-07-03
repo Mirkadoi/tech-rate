@@ -1,5 +1,13 @@
 import RequestManager from "@/tools/api";
 
+export const getProjectsAudited = (queries = { page: 1, size: 1 }) => {
+  return RequestManager.get({ path: "/token/all/", queries });
+};
+
+export const getBSCAudited = (queries = { page: 1, size: 1, blockchain: "BSC" }) => {
+  return RequestManager.get({ path: "/token/all/", queries });
+};
+
 export const getTokenList = (queries = { page: 1, size: 20 }) => {
   return RequestManager.get({ path: "/token/all/", queries });
 };

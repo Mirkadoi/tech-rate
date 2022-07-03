@@ -2,11 +2,11 @@
   <div class="wrapper-preview">
     <div class="wrapper-group">
       <div class="board">
-        <template v-for="({ logo, title, number, subtitle}, index) in columns" :key="title">
+        <template v-for="({ logo, title, code, subtitle}, index) in columns" :key="title">
           <div class="board-item">
             <img class="board-item__img" :src="require('@/assets/images/'+ logo +'.png')" :alt="logo">
             <span class="board-item__title">{{ title }}</span>
-            <div class="board-item__number">{{ number }}</div>
+            <div class="board-item__number">{{ columnsValue[code] }}</div>
             <span class="board-item__subtitle">{{ subtitle }}</span>
           </div>
 
@@ -60,6 +60,11 @@
   import Chips from '@/components/ui/Chips';
   import TopCarousel from '@/views/Home/_components/TopCarousel';
 
+  import {
+    getBSCAudited,
+    getProjectsAudited
+  } from '@/views/Home/requests';
+
 
   export default defineComponent({
     components: {
@@ -84,19 +89,39 @@
         ).then(() => {
           // res.json().then(json => (vm.options = json.items));
         }).finally(() => loading(false));
-      }, 350)
+      }, 350),
+
+      formatNumber(value = 0) {
+        return new Intl.NumberFormat('en-GB', {
+          notation: "compact",
+          compactDisplay: "short"
+        }).format(value);
+      }
+    },
+
+    async created() {
+      const { count: allCount } = await getProjectsAudited()
+      const { count: bscCount } = await getBSCAudited()
+
+      this.columnsValue.all = this.formatNumber(allCount);
+      this.columnsValue.bsc = this.formatNumber(bscCount);
     },
 
     setup() {
       const columns = [
-        { logo: 'rocket', title: 'Projects audited', number: 0, subtitle: 'Current finantial year' },
-        { logo: 'binance-logo', title: 'BSC projects', number: 0, subtitle: 'Current finantial year' },
+        { logo: 'rocket', title: 'Projects audited', subtitle: 'Current finantial year', code: 'all' },
+        { logo: 'binance-logo', title: 'BSC projects', subtitle: 'Current finantial year', code: 'bsc' },
       ]
+
+      const columnsValue = ref({
+        all: 0,
+        bsc: 0,
+      })
 
       const searchField = ref('name');
       const options = ref([]);
 
-      return { columns, options, searchField }
+      return { columns, options, searchField, columnsValue }
     }
   })
 </script>
