@@ -115,7 +115,7 @@
       const settings = {
         itemsToShow: 1.5,
         // snapAlign: 'center',
-        snapAlign: 'center',
+        snapAlign: 'start',
       }
 
       const breakpoints = {
@@ -131,11 +131,11 @@
         //   itemsToShow: 2.5,
         //   // snapAlign: 'center',
         // },
-        1400: {
+        1600: {
           itemsToShow: 2.5,
           // snapAlign: 'start',
         },
-        1800: {
+        1900: {
           itemsToShow: 3.5,
           // snapAlign: 'start',
         },

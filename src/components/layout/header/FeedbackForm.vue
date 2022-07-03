@@ -11,31 +11,40 @@
       <a href="https://t.me/EmilTechrate" target="_blank" >@EmilTechrate</a>
     </h4>
 
-    <Form class="form" v-slot="{ validate }">
+    <Form class="form" v-slot="{ validate, values, errors }" :validation-schema="schema">
       <div class="field">
         <label class="field__label" for="name">Name</label>
-        <Field class="field__input" id="name" name="name" />
+        <Field class="field__input field__input--with-error" id="name" name="name" />
+        <div class="field__error field__error--with-error">
+          <span>{{errors.name}}</span>
+        </div>
       </div>
 
       <div class="field">
         <label class="field__label" for="email">Email</label>
-        <Field class="field__input" id="email" name="email"/>
+        <Field class="field__input field__input--with-error" id="email" name="email" type="email"/>
+        <div class="field__error field__error--with-error">
+          <span>{{errors.email}}</span>
+        </div>
       </div>
 
       <div class="field">
         <label class="field__label" for="contact">Personal telegram ID / phone <span>*</span></label>
-        <Field class="field__input field__input--with-error" id="contact" name="contact" :rules="isRequired" />
+        <Field class="field__input field__input--with-error" id="contact" name="contact" />
         <div class="field__error field__error--with-error">
-          <ErrorMessage  name="contact" />
+          <span>{{errors.contact}}</span>
         </div>
       </div>
 
       <div class="field">
         <label class="field__label" for="comments">Comments (link to the contract)</label>
-        <Field class="field__textarea" id="comments" name="comments" as="textarea" />
+        <Field class="field__textarea field__input--with-error" id="comments" name="comments" as="textarea" />
+        <div class="field__error field__error--with-error">
+          <span>{{errors.comments}}</span>
+        </div>
       </div>
 
-      <Button class="btn-apply" title="Apply" @onClick="submit(validate)"></Button>
+      <Button class="btn-apply" title="Apply" @onClick="submit(validate, values)"></Button>
     </Form>
   </div>
 </template>
@@ -43,35 +52,45 @@
 <script>
   import { defineComponent } from 'vue';
   import {
-    ErrorMessage,
     Field,
     Form
   } from 'vee-validate';
+
   import Button from '@/components/ui/Button';
+
+  import { postFeedbackDate } from '@/components/layout/header/requests';
+
+  import './rules'
 
   export default defineComponent ({
     components: {
       Field,
       Form,
-      ErrorMessage,
       Button,
     },
 
     emits: ['closeModal', 'changeStep'],
 
     methods: {
-      isRequired(value) {
-        return value && value.trim() ? true : 'This field is required';
-      },
-
-      async submit(validate) {
+      async submit(validate, data) {
         const { valid } = await validate()
 
         if (!valid) return;
 
-        this.$emit('changeStep', 'FeedbackNotification')
+        postFeedbackDate(data)
+            .then(() => this.$emit('changeStep', 'FeedbackNotification'))
       }
     },
+
+    setup() {
+      const schema = {
+        email: 'email',
+        contact: 'required',
+        comments: 'maxLength:256',
+        name: 'name',
+      }
+      return {schema}
+    }
   })
 </script>
 
