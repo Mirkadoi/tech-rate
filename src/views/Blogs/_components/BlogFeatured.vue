@@ -25,7 +25,7 @@
 <script>
   import { ref } from 'vue';
 
-  import { getBlogList } from '@/views/Blog/requests';
+  import { getBlogList } from '@/views/Blogs/requests';
 
   import Chips from '@/components/ui/Chips';
 

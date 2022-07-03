@@ -1,6 +1,6 @@
 <template>
   <section class="blog">
-    <div class="back-button" @click="$router.push({name: 'blogs'})">
+    <div class="back-button" @click="$router.go(-1)">
       <ArrowButton class="back-button__icon" />
       <span>back</span>
     </div>

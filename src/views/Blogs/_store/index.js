@@ -1,6 +1,6 @@
 import { reactive } from "vue";
 
-import { getBlogList } from "@/views/Blog/requests";
+import { getBlogList } from "@/views/Blogs/requests";
 
 export const store = reactive({
   blogList: [],

@@ -1,8 +1,11 @@
 import { reactive } from "vue";
 
 export const store = reactive({
-  tokenList: [],
-  increment() {
+  tokenListAllProject: [],
+  tokenListEthereumProject: [],
+  tokenListBSCProjects: [],
+
+  getAllProject() {
     this.count++;
   },
 });

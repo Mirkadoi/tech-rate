@@ -20,7 +20,7 @@
 
   import Chips from '@/components/ui/Chips';
 
-  import { getTagsList } from '@/views/Blog/requests';
+  import { getTagsList } from '@/views/Blogs/requests';
   import { store } from '@/views/Blogs/_store';
 
   export default defineComponent ({
