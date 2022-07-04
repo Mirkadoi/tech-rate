@@ -17,7 +17,7 @@
       </thead>
       <tbody>
         <tr v-for="(el, i) in store.projectTokenList" :key="i" :class="{partner: el['is_partner']}">
-<!--          <td>{{ el.num }}</td>-->
+          <td>{{ el.number }}</td>
 
           <td>
             <div class="d-flex">
@@ -91,7 +91,7 @@ export default defineComponent({
 
   data: () => ({
     tableHeader: [
-      // { text: '#', key: 'num' },
+      { text: '#', key: 'number' },
       { text: 'Name', key: 'name', sort: 0 },
       { text: 'Score', key: 'score', sort: 0 },
       { text: 'Blockchain', key: 'blockchain', sort: 0 },
@@ -233,14 +233,15 @@ export default defineComponent({
         cursor: pointer;
         user-select: none;
 
-        &:first-child {
+        &:first-child,
+        &:nth-child(2) {
           p {
             justify-content: start;
           }
         }
 
         p {
-          justify-content: end;
+          justify-content: center;
         }
 
         .arrows {
@@ -326,7 +327,7 @@ export default defineComponent({
             text-align: left;
           }
           &:not(:first-child) {
-            text-align: right;
+            text-align: center;
           }
 
           &.pie-chart {
