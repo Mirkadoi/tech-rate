@@ -1,16 +1,27 @@
 <template>
-  <div class="pie no-round" :style="`--p:${ value };--c:${ color };`">{{ value }}%</div>
+  <div class="pie no-round" :style="`--p:${ value };--c:${ getChartColor(value) };`">{{ value }}%</div>
 </template>
 
 <script>
 export default {
   props: {
     value: Number,
-    color: {
-      type: String,
-      default: '#F90074'
-    }
+    // color: {
+    //   type: String,
+    //   default: '#F90074'
+    // }
   },
+
+  methods: {
+    getChartColor(val) {
+      if (val >= 90)  return 'green'
+      if (val >= 80)  return 'lightgreen'
+      if (val >= 70)  return 'yellow'
+      if (val >= 50)  return 'orange'
+      if (val <= 49)  return 'red'
+      return '#F90074'
+    }
+  }
 }
 </script>
 

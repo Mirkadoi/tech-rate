@@ -27,7 +27,7 @@
           </td>
 
           <td class="pie-chart">
-            <pie-chart :value="el.score" :color="getChartColor(el.score)"/>
+            <pie-chart :value="el.score"/>
           </td>
 
           <td>{{ el.blockchain }}</td>
@@ -156,13 +156,7 @@ export default defineComponent({
     prevPage() {
       if(this.currentPage > 1) this.currentPage--;
     },
-    getChartColor(val) {
-      if (val >= 90)  return 'green'
-      if (val >= 80)  return 'lightgreen'
-      if (val >= 70)  return 'yellow'
-      if (val >= 50)  return 'orange'
-      if (val <= 49)  return 'red'
-    }
+
   },
 
   computed:{
