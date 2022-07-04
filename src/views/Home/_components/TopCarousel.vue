@@ -4,7 +4,7 @@
       <ArrowButton @onClick="myCarousel.prev()" :disabled="isDisabledCarouselPagination === 1" />
       <ArrowButton @onClick="myCarousel.next()" :disabled="isDisabledCarouselPagination === 2" rotate />
     </div>
-    <Carousel ref="myCarousel" v-model="currentSlide" :settings="settings" :breakpoints="breakpoints">
+    <Carousel v-if="slides.length!==0" ref="myCarousel" v-model="currentSlide" :settings="settings" :breakpoints="breakpoints">
 
       <template #slides>
         <Slide v-for="slide in slides" :key="slide.uid">
