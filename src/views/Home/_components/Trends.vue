@@ -40,8 +40,8 @@ export default {
   components: { PieChart },
 
   async created() {
-    const { results: auditScoreList } = await getAuditScore()
-    const { results: recentlyCompletedList} = await getRecentlyCompleted()
+    const auditScoreList = await getAuditScore()
+    const recentlyCompletedList = await getRecentlyCompleted()
 
     this.trends.auditScoreList.list = auditScoreList;
     this.trends.recentlyCompletedList.list = recentlyCompletedList;

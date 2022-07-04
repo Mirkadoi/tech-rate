@@ -22,12 +22,10 @@ export const getTokenBySearch = (search) => {
   });
 };
 
-export const getAuditScore = (queries = { page: 1, size: 3, sort: "desc", field: "score" }) => {
-  return RequestManager.get({ path: "/token/all/", queries });
+export const getAuditScore = () => {
+  return RequestManager.get({ path: "/token/top-last/" });
 };
 
-export const getRecentlyCompleted = (
-  queries = { page: 1, size: 3, sort: "desc", field: "created" }
-) => {
-  return RequestManager.get({ path: "/token/all/", queries });
+export const getRecentlyCompleted = () => {
+  return RequestManager.get({ path: "/token/last/" });
 };
