@@ -2,8 +2,8 @@
   <div class="contacts">
     <div v-for="{logo, link, title, text} in contacts" :key="text" class="contacts--item">
       <InlineSvg class="contacts--item__icon" :src="require('@/assets/icons/' + logo +'.svg')" width="40" height="40" :title="title"/>
-      <a class="contacts--item__link" v-if="title === 'Email'" :href="link" target="_blank">{{text}}</a>
-      <a class="contacts--item__link" v-else :href="link" target="_self">{{text}}</a>
+      <a class="contacts--item__link" v-if="title === 'Email'" :href="link" target="_self">{{text}}</a>
+      <a class="contacts--item__link" v-else :href="link" target="_blank">{{text}}</a>
     </div>
   </div>
 </template>
