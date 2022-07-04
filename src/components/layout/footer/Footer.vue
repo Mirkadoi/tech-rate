@@ -23,10 +23,10 @@
     },
     setup() {
       const navigationItems = [
-          { title: 'About us', path: '/about'},
-          { title: 'Blog', path: '/blogs'},
-          { title: 'Disclaimer', path: '/disclaimer'},
-          { title: 'Contact', path: '/about'},
+          { title: 'About us', to: { name: 'about'}},
+          { title: 'Blog', to: { name: 'blogs' }},
+          { title: 'Disclaimer', to: { name: 'disclaimer' }},
+          { title: 'Contact', to: { name: 'contact', params: { anchor: 'contact' } }},
       ];
       // const productsItems = ['TimeWarp', 'LaborX', 'PaymentX', 'Audit', 'Time Bridge'];
       // const documentsItems = ['TimeWarp', 'PaymentX'];

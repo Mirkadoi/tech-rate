@@ -10,7 +10,7 @@
     <TeamList />
 
     <div class="description-block">
-      <h2>Contacts</h2>
+      <h2 id='contact'>Contacts</h2>
     </div>
 
     <ContactList />
@@ -27,10 +27,30 @@
 <script>
 import TeamList from "@/views/About/_components/TeamList";
 import ContactList from '@/views/About/_components/ContactList';
+
+import { goto } from '@/tools/utils';
+
+import { watch } from 'vue';
+import { useRoute } from 'vue-router';
+
+
+// import Button from '@/components/ui/Button';
 // import NewsList from "@/views/About/_components/NewsList";
 
 export default {
-  components: { TeamList, ContactList }
+  components: { TeamList, ContactList },
+
+  setup() {
+    const route = useRoute();
+
+    watch(() => route.params.anchor,()=> {
+      if (route.params.anchor === 'contact') {
+        setTimeout(() => goto('contact'), 600)
+      }
+    },{immediate:true})
+
+    return { goto }
+  }
 }
 </script>
 

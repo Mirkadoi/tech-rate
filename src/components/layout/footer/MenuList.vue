@@ -3,7 +3,7 @@
 <!--    <span class="list__title list__item">{{ title }}</span>-->
 
     <div class="list__body list__item">
-      <router-link :to="path" v-for="{title, path } in items" :key="title">
+      <router-link :to="to" v-for="{title, to } in items" :key="title">
         {{ title }}
       </router-link>
     </div>

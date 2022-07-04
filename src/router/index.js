@@ -27,8 +27,8 @@ const routes = [
     component: () => import("../views/About/index"),
   },
   {
-    path: "/about",
-    name: "about",
+    path: "/about/:anchor",
+    name: "contact",
     component: () => import("../views/About/index"),
   },
   {
