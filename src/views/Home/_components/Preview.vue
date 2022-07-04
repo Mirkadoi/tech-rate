@@ -24,6 +24,7 @@
             placeholder="Search project by name or token"
             :options="options"
             @search="onSearch"
+            @option:selected="handleInputSearch"
         >
           <template #search="{ attributes, events }">
             <Chips class="vs__search__chip" :class="{'vs__search__chip--disabled': selected && selected.name}" :title="searchField === 'name' ? 'by name' : 'by token'" btn @onClick="toggleSearchField"/>
@@ -106,6 +107,13 @@
           compactDisplay: "short"
         }).format(value);
       },
+
+      handleInputSearch(val) {
+        // console.log(a)
+        store.setSearchValue(val.name)
+        store.setSelectedProject('');
+        store.getAllProjectItems({page: 1})
+      }
     },
 
     async created() {
@@ -119,11 +127,10 @@
     watch: {
       selected(v) {
         if (v === null) {
+          store.setSearchValue('')
+
           return store.getAllProjectItems()
         }
-
-        store.setSelectedProject('');
-        store.getAllProjectItems({page: 1, search: v.name})
       }
     },
 

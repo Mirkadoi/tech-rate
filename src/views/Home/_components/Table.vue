@@ -58,6 +58,10 @@
       </tbody>
     </table>
 
+    <div class="no-data" v-if="!store.projectTokenList.length">
+      No data
+    </div>
+
     <table-controls
       @prev="prevPage"
       @next="nextPage"
@@ -346,5 +350,12 @@ export default defineComponent({
         }
       }
     }
+  }
+
+  .no-data {
+    text-align: center;
+    padding-top: 20px;
+    font-family: $font-base;
+    font-weight: 500;
   }
 </style>
