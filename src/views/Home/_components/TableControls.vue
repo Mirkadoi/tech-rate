@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex table-controls">
-    <p class="info">Showing {{ showingValue }} out of {{ values.length }}</p>
+<!--    <p class="info">Showing {{ showingValue }} out of {{ values.length }}</p>-->
 
     <div class="d-flex pagination">
       <button class="control control-prev" @click="$emit('prev')"/>
@@ -74,13 +74,14 @@ export default {
   }
 
   .table-controls {
+    justify-content: center;
     padding: 17px 0;
     font-size: 14px;
 
-    .pagination {
-      margin: 0 auto;
-      transform: translateX(-70px);
-    }
+    //.pagination {
+    //  margin: 0 auto;
+    //  transform: translateX(-70px);
+    //}
 
     .dots {
       display: block;

@@ -2,26 +2,25 @@
   <div class="tabs-wrapper">
     <div class="tabs-list">
       <p
-        v-for="(tab, i) in tabs"
-        :key="i"
-        :class="{'tab-selected': selectedTab === i}"
-        @click="selectedTab = i"
+        v-for="(tab) in tabs"
+        :key="tab.code"
+        :class="{'tab-selected': selectedTab === tab.code}"
+        @click="handleTab(tab.code)"
         class="tab"
       >
-        {{ tab }}
+        {{ tab.title }}
       </p>
     </div>
 
-    <Table v-show="selectedTab === 0"/>
-    <Table v-show="selectedTab === 1"/>
-    <Table v-show="selectedTab === 2"/>
+    <Table :blockchain="selectedTab"/>
+<!--    <Table v-show="selectedTab === 'ethereum'" blockchain="ethereum"/>-->
+<!--    <Table v-show="selectedTab === 'bsc'" blockchain="bsc"/>-->
   </div>
 </template>
 
 <script>
 import Table from "@/views/Home/_components/Table";
 
-import { getTokenList } from '@/views/Home/requests';
 
 export default {
   components: {
@@ -29,24 +28,18 @@ export default {
   },
 
   data: () => ({
-    selectedTab: 0,
+    selectedTab: '',
     tabs: [
-      'All projects',
-      'Ethereum project',
-      'BSC projects'
+      {code: '', title:'All projects'},
+      {code: 'Etherium', title:'Ethereum project'},
+      {code: 'BSC', title:'BSC projects'}
     ]
   }),
 
-  created() {
-    this.getTableItems()
-  },
-
   methods: {
-    async getTableItems() {
-      const b = await getTokenList();
-      console.log(b)
-    }
-
+    handleTab(code) {
+      this.selectedTab = code
+    },
   }
 }
 </script>

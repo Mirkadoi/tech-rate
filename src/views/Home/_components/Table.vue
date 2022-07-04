@@ -16,11 +16,13 @@
       </thead>
       <tbody>
         <tr v-for="(el, i) in sortedValues" :key="i">
-          <td>{{ el.num }}</td>
+<!--          <td>{{ el.num }}</td>-->
 
-          <td class="d-flex">
-            <img :src="el.name.img" width="24" height="24">
-            <p>{{ el.name.value }}</p>
+          <td>
+            <div class="d-flex">
+              <img :src="el.image" width="24" height="24">
+              <p>{{ el.name }}</p>
+            </div>
           </td>
 
           <td class="pie-chart">
@@ -30,9 +32,12 @@
           <td>{{ el.blockchain }}</td>
           <td>{{ el.category }}</td>
 
-          <td class="d-flex audit">
-            <img :src="el.audit.img" width="24" height="24">
-            <p>{{ el.audit.value }}</p>
+          <td class="audit">
+            <a v-if="el.audit" :href="el.audit" target="_blank">
+              <InlineSvg :src="require('@/assets/icons/pdf.svg')" width="24" height="24" fill="#17181E" />
+            </a>
+<!--            <img :src="el.audit.img" width="24" height="24">-->
+<!--            <p>{{ el.audit.value }}</p>-->
           </td>
 
 <!--          <td>{{ el.price }}</td>-->
@@ -47,7 +52,7 @@
 
 <!--          <td>{{ el.market }}</td>-->
 <!--          <td>{{ el.volume }}</td>-->
-          <td>{{ el.date }}</td>
+          <td>{{ new Date(el['audit_date']).toLocaleDateString() }}</td>
         </tr>
       </tbody>
     </table>
@@ -67,6 +72,7 @@ import { defineComponent } from 'vue'
 import PieChart from "@/views/Home/_components/PieChart";
 // import Stock from "@/views/Home/_components/Stock";
 import TableControls from "@/views/Home/_components/TableControls";
+import { getTokenList } from '@/views/Home/requests';
 
 export default defineComponent({
   components: {
@@ -75,9 +81,11 @@ export default defineComponent({
     PieChart
   },
 
+  props: ['blockchain'],
+
   data: () => ({
     tableHeader: [
-      { text: '#', key: 'num' },
+      // { text: '#', key: 'num' },
       { text: 'Name', key: 'name' },
       { text: 'Score', key: 'score' },
       { text: 'Blockchain', key: 'blockchain' },
@@ -97,11 +105,13 @@ export default defineComponent({
     currentPage:1
   }),
 
-  created() {
-    this.tableContent = require('../generated.json')
-  },
-
   methods:{
+    async getItems(page = this.currentPage) {
+      const { results } = await getTokenList({blockchain: this.blockchain , page, size: this.pageSize});
+
+      this.tableContent = results;
+    },
+
     sort(column) {
       if(column === this.currentSort) {
         this.currentSortDir = this.currentSortDir === 'default'
@@ -148,6 +158,18 @@ export default defineComponent({
         if(index >= start && index < end) return true;
       });
     }
+  },
+
+  watch: {
+    currentPage: {
+      immediate: true,
+      handler(val) {
+        this.getItems(val);
+      }
+    },
+    blockchain() {
+      this.getItems();
+    }
   }
 })
 </script>
@@ -181,8 +203,7 @@ export default defineComponent({
         cursor: pointer;
         user-select: none;
 
-        &:first-child,
-        &:nth-child(2) {
+        &:first-child {
           p {
             justify-content: start;
           }
@@ -247,6 +268,7 @@ export default defineComponent({
 
       tr {
         td {
+          //height: 72px;
           padding: 20px 0;
           border-bottom: 2px solid $border-color-l1;
 
