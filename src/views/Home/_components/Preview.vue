@@ -71,6 +71,7 @@
     getTokenBySearch
   } from '@/views/Home/requests';
 
+  import { store } from '../_store/index'
 
   export default defineComponent({
     components: {
@@ -89,7 +90,7 @@
       toggleSearchField() {
         if (this.selected && this.selected.name) return;
 
-        this.searchField = this.searchField === 'name' ? 'token' : 'name';
+        this.searchField = this.searchField === 'name' ? 'contract_address' : 'name';
       },
       search: debounce((loading, search, vm) => {
         getTokenBySearch(search).then((res) => {
@@ -104,7 +105,7 @@
           notation: "compact",
           compactDisplay: "short"
         }).format(value);
-      }
+      },
     },
 
     async created() {
@@ -113,6 +114,17 @@
 
       this.columnsValue.all = this.formatNumber(allCount);
       this.columnsValue.bsc = this.formatNumber(bscCount);
+    },
+
+    watch: {
+      selected(v) {
+        if (v === null) {
+          return store.getAllProjectItems()
+        }
+
+        store.setSelectedProject('');
+        store.getAllProjectItems({page: 1, search: v.name})
+      }
     },
 
     setup() {

@@ -4,22 +4,24 @@
       <p
         v-for="(tab) in tabs"
         :key="tab.code"
-        :class="{'tab-selected': selectedTab === tab.code}"
-        @click="handleTab(tab.code)"
+        :class="{'tab-selected': store.selectedProject === tab.code}"
+        @click="store.setSelectedProject(tab.code)"
         class="tab"
       >
         {{ tab.title }}
       </p>
     </div>
-
-    <Table :blockchain="selectedTab"/>
-<!--    <Table v-show="selectedTab === 'ethereum'" blockchain="ethereum"/>-->
-<!--    <Table v-show="selectedTab === 'bsc'" blockchain="bsc"/>-->
+<!--TODO убрать пропс blockchain-->
+    <Table :blockchain="store.selectedProject"/>
+<!--    <Table v-show="store.selectedProject === 'ethereum'" blockchain="ethereum"/>-->
+<!--    <Table v-show="store.selectedProject === 'bsc'" blockchain="bsc"/>-->
   </div>
 </template>
 
 <script>
 import Table from "@/views/Home/_components/Table";
+
+import { store } from  "../_store/index"
 
 
 export default {
@@ -28,7 +30,6 @@ export default {
   },
 
   data: () => ({
-    selectedTab: '',
     tabs: [
       {code: '', title:'All projects'},
       {code: 'Etherium', title:'Ethereum project'},
@@ -36,10 +37,8 @@ export default {
     ]
   }),
 
-  methods: {
-    handleTab(code) {
-      this.selectedTab = code
-    },
+  setup() {
+    return { store }
   }
 }
 </script>

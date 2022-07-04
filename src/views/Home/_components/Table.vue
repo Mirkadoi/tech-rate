@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(el, i) in tableContent" :key="i" :class="{partner: el['is_partner']}">
+        <tr v-for="(el, i) in store.projectTokenList" :key="i" :class="{partner: el['is_partner']}">
 <!--          <td>{{ el.num }}</td>-->
 
           <td>
@@ -62,7 +62,7 @@
       @prev="prevPage"
       @next="nextPage"
       @goToPage="currentPage = $event"
-      :values="tableContent"
+      :values="store.projectTokenList"
       :currentPage="currentPage"
     />
   </div>
@@ -73,7 +73,8 @@ import { defineComponent } from 'vue'
 import PieChart from "@/views/Home/_components/PieChart";
 // import Stock from "@/views/Home/_components/Stock";
 import TableControls from "@/views/Home/_components/TableControls";
-import { getTokenList } from '@/views/Home/requests';
+
+import { store } from '../_store/index'
 
 export default defineComponent({
   components: {
@@ -99,7 +100,6 @@ export default defineComponent({
       // { text: 'Volume (24h)', key: 'volume' },
       { text: 'Date', key: 'date', sort: 0 },
     ],
-    tableContent: [],
     currentSort:'name',
     currentSortDir:'asc',
     pageSize: 20,
@@ -107,11 +107,11 @@ export default defineComponent({
   }),
 
   methods:{
-    async getItems(queries = {page: this.currentPage}) {
-      const { results } = await getTokenList({blockchain: this.blockchain , size: this.pageSize, ...queries});
-
-      this.tableContent = results;
-    },
+    // async getItems(queries = {page: this.currentPage}) {
+    //   const { results } = await getTokenList({blockchain: this.blockchain , size: this.pageSize, ...queries});
+    //
+    //   store.projectTokenList = results;
+    // },
 
     sort(column, sortNum) {
       const dic = {
@@ -135,7 +135,7 @@ export default defineComponent({
           if (column === el.key) return {...el, sort: 0}
           return el;
         })
-        return this.getItems({ page: this.currentPage})
+        return store.getAllProjectItems({ page: this.currentPage})
       } else {
         newSortNum += 1
 
@@ -143,11 +143,11 @@ export default defineComponent({
           if (column === el.key) return {...el, sort: newSortNum}
           return el;
         })
-        return this.getItems({ page: this.currentPage, field: column, sort: dic[newSortNum] })
+        return store.getAllProjectItems({ page: this.currentPage, field: column, sort: dic[newSortNum] })
       }
     },
     nextPage() {
-      if((this.currentPage*this.pageSize) < this.tableContent.length) this.currentPage++;
+      if((this.currentPage*this.pageSize) < store.projectTokenList.length) this.currentPage++;
     },
     prevPage() {
       if(this.currentPage > 1) this.currentPage--;
@@ -164,10 +164,10 @@ export default defineComponent({
   computed:{
     // sortedValues() {
     //   if (this.currentSortDir === 'default') {
-    //     return [...this.tableContent]
+    //     return [...store.projectTokenList]
     //   }
     //
-    //   return [...this.tableContent].sort((a,b) => {
+    //   return [...store.projectTokenList].sort((a,b) => {
     //     let modifier = 1;
     //
     //     if(this.currentSortDir === 'desc') modifier = -1;
@@ -190,12 +190,16 @@ export default defineComponent({
     currentPage: {
       immediate: true,
       handler(val) {
-        this.getItems({page: val});
+        store.getAllProjectItems({page: val});
       }
     },
     blockchain() {
-      this.getItems();
+      store.getAllProjectItems();
     }
+  },
+
+  setup() {
+    return { store }
   }
 })
 </script>
