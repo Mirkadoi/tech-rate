@@ -18,6 +18,7 @@
         <VSelect
             class="select"
             label="token"
+            v-model="selected"
             :noDrop="!options.length"
             :filterable="false"
             placeholder="Search project by name or token"
@@ -25,8 +26,7 @@
             @search="onSearch"
         >
           <template #search="{ attributes, events }">
-            <Chips :title="searchField === 'name' ? 'by name' : 'by token'" btn @onClick="toggleSearchField"/>
-<!--            <InlineSvg :src="require('@/assets/icons/magnifier.svg')" width="16" height="16" fill="#5E6A7B" />-->
+            <Chips class="vs__search__chip" :class="{'vs__search__chip--disabled': selected && selected.name}" :title="searchField === 'name' ? 'by name' : 'by token'" btn @onClick="toggleSearchField"/>
             <input
                 class="vs__search"
                 v-bind="attributes"
@@ -35,6 +35,11 @@
           </template>
           <template #option="option">
             <div>{{ option.name }}</div>
+          </template>
+          <template #selected-option="{ name }">
+            <div style="display: flex; align-items: baseline">
+              {{name}}
+            </div>
           </template>
         </VSelect>
 
@@ -82,12 +87,13 @@
         }
       },
       toggleSearchField() {
+        if (this.selected && this.selected.name) return;
+
         this.searchField = this.searchField === 'name' ? 'token' : 'name';
       },
       search: debounce((loading, search, vm) => {
         getTokenBySearch(search).then((res) => {
           const { results } = res;
-          console.log(results);
 
           vm.options = results;
         }).finally(() => loading(false));
@@ -122,8 +128,9 @@
 
       const searchField = ref('name');
       const options = ref([]);
+      const selected = ref([]);
 
-      return { columns, options, searchField, columnsValue }
+      return { columns, options, searchField, columnsValue, selected }
     }
   })
 </script>
@@ -212,7 +219,7 @@
       }
 
       .vs__search {
-        height: 22px;
+        //height: 22px;
         margin: 0;
 
         &::placeholder {
@@ -225,21 +232,37 @@
         }
       }
 
-      .vs__actions {
-        svg {
-          display: none;
-        }
+      .vs__search__chip {
+        position: absolute;
+        top: 2px;
+        left: -72px;
 
-        .vs__spinner, .vs__spinner:after {
-          width: 20px;
-          height: 20px;
+        &--disabled {
+          opacity: 0.6;
+          pointer-events: none;
         }
+      }
+
+      .vs__actions .vs__open-indicator {
+        //svg {
+        display: none;
+        //}
+      }
+      .vs__spinner {
+        width: 17px !important;
+        height: 17px !important;;
       }
 
       .vs__selected-options {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-left: 75px;
+      }
+
+      .vs__selected {
+        margin: 0;
+
       }
     }
   }

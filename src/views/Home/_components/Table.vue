@@ -3,19 +3,20 @@
     <table>
       <thead>
         <tr>
-          <th v-for="(el, i) in tableHeader" :key="i" @click="sort(el.key)">
+          <th v-for="(el, i) in tableHeader" :key="i" @click="sort(el.key, el.sort)">
             <p class="d-flex">
               {{ el.text }}
               <span class="arrows" :class="{
-                'up': el.key === currentSort && currentSortDir === 'asc',
-                'down': el.key === currentSort && currentSortDir === 'desc',
+                'dub-arrow': el.sort === 0,
+                'up': el.sort === 1,
+                'down': el.sort === 2,
               }"/>
             </p>
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(el, i) in sortedValues" :key="i">
+        <tr v-for="(el, i) in tableContent" :key="i" :class="{partner: el['is_partner']}">
 <!--          <td>{{ el.num }}</td>-->
 
           <td>
@@ -86,17 +87,17 @@ export default defineComponent({
   data: () => ({
     tableHeader: [
       // { text: '#', key: 'num' },
-      { text: 'Name', key: 'name' },
-      { text: 'Score', key: 'score' },
-      { text: 'Blockchain', key: 'blockchain' },
-      { text: 'Category', key: 'category' },
-      { text: 'Audit', key: 'audit' },
+      { text: 'Name', key: 'name', sort: 0 },
+      { text: 'Score', key: 'score', sort: 0 },
+      { text: 'Blockchain', key: 'blockchain', sort: 0 },
+      { text: 'Category', key: 'category', sort: 0 },
+      { text: 'Audit', key: 'audit', sort: 0 },
       // { text: 'Price', key: 'price' },
       // { text: 'Security Score/24h', key: 'security' },
       // { text: 'Last 7 days', key: 'last' },
       // { text: 'Market Cap', key: 'market' },
       // { text: 'Volume (24h)', key: 'volume' },
-      { text: 'Date', key: 'date' },
+      { text: 'Date', key: 'date', sort: 0 },
     ],
     tableContent: [],
     currentSort:'name',
@@ -106,19 +107,44 @@ export default defineComponent({
   }),
 
   methods:{
-    async getItems(page = this.currentPage) {
-      const { results } = await getTokenList({blockchain: this.blockchain , page, size: this.pageSize});
+    async getItems(queries = {page: this.currentPage}) {
+      const { results } = await getTokenList({blockchain: this.blockchain , size: this.pageSize, ...queries});
 
       this.tableContent = results;
     },
 
-    sort(column) {
-      if(column === this.currentSort) {
-        this.currentSortDir = this.currentSortDir === 'default'
-          ? this.currentSortDir = 'asc'
-          : this.currentSortDir === 'asc' ? 'desc' : 'default'
+    sort(column, sortNum) {
+      const dic = {
+        0: 'default',
+        1: 'asc',
+        2: 'desc'
       }
+
+      if(column !== this.currentSort)  {
+        this.tableHeader = this.tableHeader.map((el) => {
+          if (this.currentSort === el.key) return {...el, sort: 0}
+          return el;
+        })
+      }
+
+      let newSortNum = sortNum;
       this.currentSort = column;
+
+      if (sortNum >= 2) {
+        this.tableHeader = this.tableHeader.map((el) => {
+          if (column === el.key) return {...el, sort: 0}
+          return el;
+        })
+        return this.getItems({ page: this.currentPage})
+      } else {
+        newSortNum += 1
+
+        this.tableHeader = this.tableHeader.map((el) => {
+          if (column === el.key) return {...el, sort: newSortNum}
+          return el;
+        })
+        return this.getItems({ page: this.currentPage, field: column, sort: dic[newSortNum] })
+      }
     },
     nextPage() {
       if((this.currentPage*this.pageSize) < this.tableContent.length) this.currentPage++;
@@ -136,35 +162,35 @@ export default defineComponent({
   },
 
   computed:{
-    sortedValues() {
-      if (this.currentSortDir === 'default') {
-        return [...this.tableContent]
-      }
-
-      return [...this.tableContent].sort((a,b) => {
-        let modifier = 1;
-
-        if(this.currentSortDir === 'desc') modifier = -1;
-
-        const aItem = a[this.currentSort].value || a[this.currentSort]
-        const bItem = b[this.currentSort].value || b[this.currentSort]
-
-        if(aItem < bItem) return -1 * modifier;
-        if(aItem > bItem) return 1 * modifier;
-        return 0;
-      }).filter((row, index) => {
-        let start = (this.currentPage-1)*this.pageSize;
-        let end = this.currentPage*this.pageSize;
-        if(index >= start && index < end) return true;
-      });
-    }
+    // sortedValues() {
+    //   if (this.currentSortDir === 'default') {
+    //     return [...this.tableContent]
+    //   }
+    //
+    //   return [...this.tableContent].sort((a,b) => {
+    //     let modifier = 1;
+    //
+    //     if(this.currentSortDir === 'desc') modifier = -1;
+    //
+    //     const aItem = a[this.currentSort].value || a[this.currentSort]
+    //     const bItem = b[this.currentSort].value || b[this.currentSort]
+    //
+    //     if(aItem < bItem) return -1 * modifier;
+    //     if(aItem > bItem) return 1 * modifier;
+    //     return 0;
+    //   }).filter((row, index) => {
+    //     let start = (this.currentPage-1)*this.pageSize;
+    //     let end = this.currentPage*this.pageSize;
+    //     if(index >= start && index < end) return true;
+    //   });
+    // }
   },
 
   watch: {
     currentPage: {
       immediate: true,
       handler(val) {
-        this.getItems(val);
+        this.getItems({page: val});
       }
     },
     blockchain() {
@@ -187,7 +213,7 @@ export default defineComponent({
   .table-wrapper {
     background-color: $color-white;
     border-radius: 8px;
-    padding: 0 20px;
+    padding: 0 10px;
   }
 
   table {
@@ -200,6 +226,8 @@ export default defineComponent({
       line-height: 16px;
       th {
         padding-top: 25px;
+        padding-right: 15px;
+        padding-left: 15px;
         cursor: pointer;
         user-select: none;
 
@@ -220,14 +248,16 @@ export default defineComponent({
           position: relative;
           margin-left: 6px;
 
-          &::before, &::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            display: block;
-            border-left: 4.5px solid transparent;
-            border-right: 4.5px solid transparent;
-            border-bottom: 5px solid #C4C4C4;
+          &.dub-arrow{
+            &::before, &::after {
+              content: '';
+              position: absolute;
+              left: 0;
+              display: block;
+              border-left: 4.5px solid transparent;
+              border-right: 4.5px solid transparent;
+              border-bottom: 5px solid #C4C4C4;
+            }
           }
 
           &::before {
@@ -244,6 +274,13 @@ export default defineComponent({
               display: none;
             }
             &::before {
+              content: '';
+              position: absolute;
+              left: 0;
+              display: block;
+              border-left: 4.5px solid transparent;
+              border-right: 4.5px solid transparent;
+              border-bottom: 5px solid #C4C4C4;
               bottom: 3px;
               border-bottom-color: #388E3C;
             }
@@ -251,6 +288,13 @@ export default defineComponent({
 
           &.down {
             &::after {
+              content: '';
+              position: absolute;
+              left: 0;
+              display: block;
+              border-left: 4.5px solid transparent;
+              border-right: 4.5px solid transparent;
+              border-bottom: 5px solid #C4C4C4;
               top: 3px;
               border-bottom-color: $brand-color-pink;
             }
@@ -266,10 +310,14 @@ export default defineComponent({
       font-size: 14px;
       line-height: 19px;
 
+      .partner {
+        background-color: rgba(255,215,0,0.3);
+      }
+
       tr {
         td {
           //height: 72px;
-          padding: 20px 0;
+          padding: 20px 15px;
           border-bottom: 2px solid $border-color-l1;
 
           &:first-child {
