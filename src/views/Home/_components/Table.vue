@@ -314,7 +314,7 @@ export default defineComponent({
       line-height: 19px;
 
       .partner {
-        background-color: rgba(255,215,0,0.3);
+        background-color: rgba(255,215,0,0.1);
       }
 
       tr {
