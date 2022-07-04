@@ -35,7 +35,7 @@
 
           <td class="audit">
             <a v-if="el.audit" :href="el.audit" target="_blank">
-              <InlineSvg :src="require('@/assets/icons/pdf.svg')" width="24" height="24" fill="#17181E" />
+              <InlineSvg :src="require('@/assets/icons/pdf.svg')" width="24" height="24" fill="#17181E" :title="el.audit" />
             </a>
 <!--            <img :src="el.audit.img" width="24" height="24">-->
 <!--            <p>{{ el.audit.value }}</p>-->
