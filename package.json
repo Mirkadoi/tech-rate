@@ -14,15 +14,15 @@
   },
   "dependencies": {
     "core-js": "~3.23.1",
-    "debounce": "^1.2.1",
-    "floating-vue": "^2.0.0-beta.17",
-    "gitart-vue-dialog": "^2.2.2",
-    "vee-validate": "^4.5.11",
+    "floating-vue": "~2.0.0-beta.17",
+    "gitart-vue-dialog": "~2.2.2",
+    "js-debounce-throttle": "~1.0.1",
+    "vee-validate": "~4.5.11",
     "vue": "~3.2.13",
-    "vue-inline-svg": "^3.1.0",
+    "vue-inline-svg": "~3.1.0",
     "vue-router": "~4.0.16",
-    "vue-select": "^4.0.0-beta.3",
-    "vue3-carousel": "^0.1.40"
+    "vue-select": "~4.0.0-beta.3",
+    "vue3-carousel": "~0.1.40"
   },
   "devDependencies": {
     "@babel/core": "~7.18.5",

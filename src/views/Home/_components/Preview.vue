@@ -61,7 +61,7 @@
   import VSelect from 'vue-select'
   import 'vue-select/dist/vue-select.css';
 
-  import debounce from 'debounce';
+  import { debounce } from "js-debounce-throttle";
 
   import Chips from '@/components/ui/Chips';
   import TopCarousel from '@/views/Home/_components/TopCarousel';
