@@ -35,10 +35,16 @@
 
           <td class="audit">
             <a v-if="el.audit" :href="el.audit" target="_blank">
-              <InlineSvg :src="require('@/assets/icons/pdf.svg')" width="24" height="24" fill="#17181E" :title="el.audit" />
+              <InlineSvg :src="require('@/assets/icons/pdf.svg')" width="20" height="20" fill="#17181E" :title="el.audit" />
             </a>
 <!--            <img :src="el.audit.img" width="24" height="24">-->
 <!--            <p>{{ el.audit.value }}</p>-->
+          </td>
+          <td class="links">
+            <div>
+              <a v-if="el.website" :href="el.website" target="_blank"><InlineSvg :src="require('@/assets/icons/internet.svg')" width="20" height="20" fill="#17181E" :title="el.website" /></a>
+              <a v-if="el.twitter" :href="el.twitter" target="_blank"><InlineSvg  :src="require('@/assets/icons/twitter-logo.svg')" width="20" height="20" fill="#17181E" :title="el.twitter" /></a>
+            </div>
           </td>
 
 <!--          <td>{{ el.price }}</td>-->
@@ -97,6 +103,7 @@ export default defineComponent({
       { text: 'Blockchain', key: 'blockchain', sort: 0 },
       { text: 'Category', key: 'category', sort: 0 },
       { text: 'Audit', key: 'audit', sort: 0 },
+      { text: 'Links', key: 'links', sort: 0 },
       // { text: 'Price', key: 'price' },
       // { text: 'Security Score/24h', key: 'security' },
       // { text: 'Last 7 days', key: 'last' },
@@ -156,32 +163,6 @@ export default defineComponent({
     prevPage() {
       if(this.currentPage > 1) this.currentPage--;
     },
-
-  },
-
-  computed:{
-    // sortedValues() {
-    //   if (this.currentSortDir === 'default') {
-    //     return [...store.projectTokenList]
-    //   }
-    //
-    //   return [...store.projectTokenList].sort((a,b) => {
-    //     let modifier = 1;
-    //
-    //     if(this.currentSortDir === 'desc') modifier = -1;
-    //
-    //     const aItem = a[this.currentSort].value || a[this.currentSort]
-    //     const bItem = b[this.currentSort].value || b[this.currentSort]
-    //
-    //     if(aItem < bItem) return -1 * modifier;
-    //     if(aItem > bItem) return 1 * modifier;
-    //     return 0;
-    //   }).filter((row, index) => {
-    //     let start = (this.currentPage-1)*this.pageSize;
-    //     let end = this.currentPage*this.pageSize;
-    //     if(index >= start && index < end) return true;
-    //   });
-    // }
   },
 
   watch: {
@@ -227,9 +208,7 @@ export default defineComponent({
       font-size: 12px;
       line-height: 16px;
       th {
-        padding-top: 25px;
-        padding-right: 15px;
-        padding-left: 15px;
+        padding: 15px;
         cursor: pointer;
         user-select: none;
 
@@ -328,6 +307,14 @@ export default defineComponent({
           }
           &:not(:first-child) {
             text-align: center;
+          }
+
+          &.links {
+            div {
+              display: flex;
+              gap: 10px;
+              justify-content: center;
+            }
           }
 
           &.pie-chart {
