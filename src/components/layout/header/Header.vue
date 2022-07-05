@@ -68,13 +68,13 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 100px;
-    height: 30px;
+    height: 78px;
     background-color: $color-black;
     box-sizing: border-box;
 
-    @include xl {
-      height: 78px;
-    }
+    //@include xl {
+    //  height: 78px;
+    //}
   }
 
   .btn-group {

@@ -33,11 +33,22 @@ export default {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: $background-colors-white;
+    min-width: $screen-xl-min;
+
   }
 
   .main {
-    background-color: $background-colors-white;
     display: flex;
+    align-self: center;
     flex: 1;
+    width: $screen-xl-min;
+
+    @include xxl {
+      width: calc($screen-xxl-min);
+    }
+
   }
+
+
 </style>

@@ -119,24 +119,8 @@
       }
 
       const breakpoints = {
-        // 576: {
-        // itemsToShow: 2.5,
-        // snapAlign: 'center',
-        // },
-        // 768: {
-        //   itemsToShow: 5,
-        //   snapAlign: 'start',
-        // },
-        // 1200: {
-        //   itemsToShow: 2.5,
-        //   // snapAlign: 'center',
-        // },
-        1600: {
+        1650: {
           itemsToShow: 2.5,
-          // snapAlign: 'start',
-        },
-        1900: {
-          itemsToShow: 3.5,
           // snapAlign: 'start',
         },
       }
@@ -175,7 +159,7 @@
 <style lang="scss" scoped>
   .container-carousel {
     position: relative;
-    width: calc(100% - 360px);
+    width: calc(100% - 390px);
 
     .carousel-controller {
       position: absolute;
