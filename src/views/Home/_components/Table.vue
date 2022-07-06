@@ -218,7 +218,7 @@ export default defineComponent({
           }
         }
 
-        &:nth-child(5),&:nth-child(6) {
+        &:nth-child(5) {
           p {
             justify-content: center;
           }
@@ -339,7 +339,7 @@ export default defineComponent({
             div {
               display: flex;
               gap: 10px;
-              justify-content: center;
+              //justify-content: center;
             }
           }
 
