@@ -116,8 +116,8 @@ export default {
         align-items: center;
 
         img {
-          width: 16px;
-          height: 16px;
+          width: 24px;
+          height: 24px;
           border-radius: 50%;
           margin-right: 8px;
         }

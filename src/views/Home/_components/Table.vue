@@ -5,7 +5,7 @@
         <tr>
           <th v-for="(el, i) in tableHeader" :key="i" @click="sort(el.key, el.sort)">
             <p class="d-flex">
-              {{ el.text }}
+              <span>{{ el.text }}</span>
               <span class="arrows" :class="{
                 'dub-arrow': el.sort === 0,
                 'up': el.sort === 1,
@@ -201,13 +201,14 @@ export default defineComponent({
   }
 
   table {
-    border-spacing: 0px;
+    border-spacing: 0;
     font-weight: 400;
     width: 100%;
 
     thead {
-      font-size: 12px;
+      font-size: 13px;
       line-height: 16px;
+
       th {
         padding: 15px;
         cursor: pointer;
@@ -218,6 +219,10 @@ export default defineComponent({
           p {
             justify-content: start;
           }
+
+        span {
+          color: $text-color-dark-blue;
+        }
         //}
         //
         //p {
@@ -290,8 +295,10 @@ export default defineComponent({
     }
 
     tbody {
+      font-family: $font-base;
       font-size: 14px;
       line-height: 19px;
+      font-weight: 400;
 
       .partner {
         background-color: rgba(255,215,0,0.1);
