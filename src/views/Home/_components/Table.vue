@@ -73,7 +73,6 @@
       @prev="prevPage"
       @next="nextPage"
       @goToPage="currentPage = $event"
-      :values="store.projectTokenList"
       :currentPage="currentPage"
     />
   </div>
@@ -159,7 +158,7 @@ export default defineComponent({
       }
     },
     nextPage() {
-      if((this.currentPage*this.pageSize) < store.projectTokenList.length) this.currentPage++;
+      if((this.currentPage*this.pageSize) < store.count) this.currentPage++;
     },
     prevPage() {
       if(this.currentPage > 1) this.currentPage--;

@@ -1,11 +1,7 @@
 <template>
   <div class="d-flex table-controls">
-<!--    <p class="info">Showing {{ showingValue }} out of {{ values.length }}</p>-->
-
     <div class="d-flex pagination">
       <ArrowButton @onClick="$emit('prev')" :disabled="store.prevPage" />
-
-<!--      <button class="control control-prev" @click="$emit('prev')"/>-->
 
       <button v-if="currentPage === 3 && lastPageNumber === 3" @click="$emit('goToPage', 1)">
         1
@@ -40,11 +36,6 @@ export default {
   },
 
   props: {
-    values: {
-      type: Array,
-      default: () => []
-    },
-
     currentPage: {
       type: Number
     }
@@ -71,7 +62,7 @@ export default {
     },
 
     lastPageNumber() {
-      const number = this.values.length / this.rowsCount
+      const number = store.count / this.rowsCount
       return number ? Math.ceil(number) : 0
     }
   },
