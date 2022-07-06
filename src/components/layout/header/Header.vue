@@ -1,11 +1,12 @@
 <template>
   <header class="header">
-    <router-link to="/">
-      <InlineSvg :src="require('@/assets/icons/tech-rate-logo.svg')" width="83" height="32" fill="white" title="TechRate"/>
-    </router-link>
+    <div class="header-wrapper">
+      <router-link to="/">
+        <InlineSvg :src="require('@/assets/icons/tech-rate-logo.svg')" width="83" height="32" fill="white" title="TechRate"/>
+      </router-link>
 
-    <div class="btn-group">
-      <div class="nav">
+      <div class="btn-group">
+        <div class="nav">
           <VMenu :arrow-padding="999">
             <div class="nav-link">
               <span>Products</span>
@@ -24,13 +25,14 @@
           </VMenu>
 
 
-        <router-link class="nav-link" :to="{ name: 'blogs' }">Blog</router-link>
-        <router-link class="nav-link" :to="{ name: 'about' }">About us</router-link>
-        <router-link class="nav-link" :to="{ name: 'contact', params: { anchor: 'contact'} }">Contact</router-link>
+          <router-link class="nav-link" :to="{ name: 'blogs' }">Blog</router-link>
+          <router-link class="nav-link" :to="{ name: 'about' }">About us</router-link>
+          <router-link class="nav-link" :to="{ name: 'contact', params: { anchor: 'contact'} }">Contact</router-link>
 
+        </div>
+
+        <Button title="Get free audit" mode="primary" @onClick="onOpenFeedbackWindow"/>
       </div>
-
-      <Button title="Get free audit" mode="primary" @onClick="onOpenFeedbackWindow"/>
     </div>
   </header>
 </template>
@@ -68,9 +70,8 @@
 <style scoped lang="scss">
   .header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 100px;
+    justify-content: center;
+    //padding: 0 100px;
     height: 78px;
     background-color: $color-black;
     box-sizing: border-box;
@@ -78,6 +79,12 @@
     //@include xl {
     //  height: 78px;
     //}
+  }
+
+  .header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .btn-group {

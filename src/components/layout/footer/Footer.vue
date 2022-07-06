@@ -1,10 +1,12 @@
 <template>
   <footer class="footer">
-    <BrandInfo class="brand"/>
+    <div class="footer-wrapper">
+      <BrandInfo class="brand"/>
 
-    <MenuList class="nav" title="Navigation" :items="navigationItems"/>
+      <MenuList class="nav" title="Navigation" :items="navigationItems"/>
 
-    <SocialList class="social"/>
+      <SocialList class="social"/>
+    </div>
   </footer>
 </template>
 
@@ -39,13 +41,18 @@
 <style lang="scss" scoped>
   .footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     height: 150px;
     width: 100%;
     background-color: $color-black;
-    padding-left: 100px;
-    padding-right: 100px;
+    //padding-left: 100px;
+    //padding-right: 100px;
     box-sizing: border-box;
+  }
+
+  .footer-wrapper {
+    display: flex;
+    justify-content: space-between;
   }
 
   .brand {

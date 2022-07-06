@@ -37,6 +37,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  @mixin header-footer-width {
+    min-width: calc(#{$screen-lg-min} + 100px);
+
+    @include xxl {
+      width: $screen-xl-min
+    }
+
+    @include xxl {
+      width: $screen-xxl-min;
+    }
+  }
+
   .app {
     display: flex;
     flex-direction: column;
@@ -61,7 +73,14 @@ export default {
     @include xxl {
       width: calc($screen-xxl-min);
     }
+  }
 
+  :deep(.header-wrapper) {
+    @include header-footer-width();
+  }
+
+  :deep(.footer-wrapper) {
+    @include header-footer-width();
   }
 
 
