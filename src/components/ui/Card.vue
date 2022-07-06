@@ -6,10 +6,10 @@
       <span class="body__header">{{ item.name }}</span>
 
       <div class="body__footer">
+        <span class="body__date">{{ new Date(item.created).toLocaleDateString('en-us', { month: 'short', year: 'numeric', day: 'numeric' }) }}</span>
         <div class="body__tags">
           <Chips v-for="tag in item.tags" :key="tag" class="body__tag" :title="tag"/>
         </div>
-        <span class="body__date">{{ new Date(item.created).toLocaleDateString('en-us', { month: 'short', year: 'numeric', day: 'numeric' }) }}</span>
       </div>
     </div>
   </div>

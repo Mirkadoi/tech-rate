@@ -1,25 +1,9 @@
 <template>
   <div class="post-wrapper">
     <div class="post-content">
-      <div class="post-img" :style="{ backgroundImage: `url(${blog.image})` }" />
-      <h1 class="post-title">{{ blog.name }}</h1>
+      <Card v-if="blog.name" class="post-content__card" :item="blog"></Card>
 
-      <div class="post-details">
-        <div class="tags">
-          <Chips v-for="tag in blog.tags" :key="tag" class="body-tags__tag" :title="tag" />
-        </div>
-
-        <span class="date" v-if="blog.created">{{
-            new Date(blog.created).toLocaleDateString('en-us', {
-              month: 'short',
-              year: 'numeric',
-              day: 'numeric'
-            })
-          }}
-        </span>
-      </div>
-
-      <div v-html="blog.text" />
+      <div v-show="blog.text" v-html="blog.text" />
     </div>
   </div>
 </template>
@@ -31,12 +15,11 @@
   } from 'vue';
 
   import { getBlogById } from '@/views/Blog/requests';
-
-  import Chips from '@/components/ui/Chips';
+  import Card from '@/components/ui/Card';
 
   export default defineComponent({
     components: {
-      Chips,
+      Card,
     },
 
     async created() {
@@ -64,32 +47,24 @@
       padding: 44px 0 70px;
       width: 662px;
 
-      .post-img {
-        width: 100%;
-        height: 368px;
-        border-radius: 8px;
-        background-size: cover;
-        background-position: center center;
+      &__card {
+        height: 630px;
       }
 
-      .post-title {
-        font-weight: 700;
-        font-size: 46px;
-        line-height: 120%;
-        color: $text-color-black;
-        margin-bottom: 30px;
-      }
+      :deep(.post-content__card) {
+        .card__img {
+          height: 368px;
+        }
 
-      .post-details {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 50px;
+        .body {
+          padding: 48px 0 0 0;
+        }
 
-        .date {
-          font-size: 14px;
-          line-height: 19px;
-          color: $text-color-dark-blue;
+        .body__header {
+          font-weight: 700;
+          font-size: 46px;
+          line-height: 120%;
+          margin-bottom: 10px;
         }
       }
     }
