@@ -4,7 +4,9 @@
 
     <div class="description-block">
       <h2>Our team</h2>
-      <p>The information provided on this website does not constitute investment<br/> advice, financial advice, trading advice, or any other sort of advice and<br/> you should not treat any of the website's content as such. </p>
+<!--      <p>The information provided on this website does not constitute investment<br/> advice, financial advice, trading advice, or any other sort of advice and<br/> you should not treat any of the website's content as such. </p>-->
+      <p>We are a team of engineers and analysts specialized in blockchain technology and business analytics with wide experience in crypto market. Our core team is famous for its market reports made during 2017-2018 bullish market and technical evaluation of the projects.</p>
+      <p>We started as an Audit & Development firm for smart contracts in the beginning of the ICO rush and expanded our expertise to the market researches and exchange analytics, security and technical valuation of the projects.</p>
     </div>
 
     <TeamList />
@@ -84,6 +86,7 @@ export default {
     font-size: 16px;
     line-height: 140%;
     margin-bottom: 0;
+    max-width: 548px;
   }
 }
 </style>
