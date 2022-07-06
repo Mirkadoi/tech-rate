@@ -2,23 +2,7 @@
   <div class="blog-featured" @click="redirectToBlog(post.uid)">
     <h4 class="blog-category">featured</h4>
 
-    <div class="blog-img" :style="{ backgroundImage: `url(${post.image})` }" />
-
-    <h3 class="blog-title">{{ post.name }}</h3>
-
-    <div class="blog-footer">
-      <div class="body-tags">
-        <Chips v-for="tag in post.tags" :key="tag" class="body-tags__tag" :title="tag" />
-      </div>
-
-      <span class="blog-date" v-if="post.created">{{
-          new Date(post.created).toLocaleDateString('en-us', {
-            month: 'short',
-            year: 'numeric',
-            day: 'numeric'
-          })
-        }}</span>
-    </div>
+    <Card class="blog-card" :item="post" />
   </div>
 </template>
 
@@ -27,11 +11,12 @@
 
   import { getBlogList } from '@/views/Blogs/requests';
 
-  import Chips from '@/components/ui/Chips';
+  // import Chips from '@/components/ui/Chips';
+  import Card from '@/components/ui/Card';
 
   export default {
     components: {
-      Chips,
+      Card,
     },
 
     async created() {
@@ -71,40 +56,8 @@
       margin: 0 0 8px;
     }
 
-    .blog-img {
-      width: 100%;
-      height: 287px;
-      border-radius: 8px;
-      background-size: cover;
-      background-position: center center;
-      margin: 0 0 30px;
-    }
-
-    .blog-title {
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 120%;
-      margin: 0 0 20px;
-    }
-
-    .blog-footer {
-      display: flex;
-      gap: 10px;
-    }
-
-    .blog-date {
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 22px;
-      color: $text-color-dark-blue;
-      //margin: 0 0 16px;
-      display: block;
-    }
-
-    .blog-tags {
-      display: flex;
-      align-items: baseline;
-      gap: 5px;
+    .blog-card {
+      background-color: $background-colors-white;
     }
   }
 </style>
