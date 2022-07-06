@@ -30,7 +30,7 @@
 
       </div>
 
-      <Button title="Get Audit" mode="primary" @onClick="onOpenFeedbackWindow"/>
+      <Button title="Get free audit" mode="primary" @onClick="onOpenFeedbackWindow"/>
     </div>
   </header>
 </template>
