@@ -27,7 +27,7 @@
             @option:selected="handleInputSearch"
         >
           <template #search="{ attributes, events }">
-            <Chips class="vs__search__chip" :class="{'vs__search__chip--disabled': selected && selected.name}" :title="searchField === 'name' ? 'by name' : 'by token'" btn @onClick="toggleSearchField"/>
+            <Chips class="vs__search__chip" :class="{'vs__search__chip--disabled': selected && selected.name}" :title="searchOption.title" btn @onClick="toggleSearchByField"/>
             <input
                 class="vs__search"
                 v-bind="attributes"
@@ -81,6 +81,14 @@
       Chips
     },
 
+    computed: {
+      searchOption() {
+        return this.searchByField === 'name'
+            ? { title: 'by name', query: 'search' }
+            : { title: 'by token', query: 'contract_address' }
+      }
+    },
+
     methods: {
       onSearch(search, loading) {
         if (search.length > 3) {
@@ -88,13 +96,13 @@
           this.search(loading, search, this);
         }
       },
-      toggleSearchField() {
+      toggleSearchByField() {
         if (this.selected && this.selected.name) return;
 
-        this.searchField = this.searchField === 'name' ? 'contract_address' : 'name';
+        this.searchByField = this.searchByField === 'name' ? 'token' : 'name';
       },
       search: debounce((loading, search, vm) => {
-        getTokenBySearch(search).then((res) => {
+        getTokenBySearch({ [vm.searchOption.query]: search}).then((res) => {
           const { results } = res;
 
           vm.options = results;
@@ -145,11 +153,11 @@
         bsc: 0,
       })
 
-      const searchField = ref('name');
+      const searchByField = ref('name');
       const options = ref([]);
       const selected = ref([]);
 
-      return { columns, options, searchField, columnsValue, selected }
+      return { columns, options, searchByField, columnsValue, selected }
     }
   })
 </script>
