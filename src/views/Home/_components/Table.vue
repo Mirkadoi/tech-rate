@@ -17,7 +17,7 @@
       </thead>
       <tbody>
         <tr v-for="(el, i) in store.projectTokenList" :key="i" :class="{partner: el['is_partner']}">
-          <td>{{ el.number }}</td>
+<!--          <td>{{ el.number }}</td>-->
 
           <td>
             <div class="d-flex">
@@ -41,10 +41,11 @@
 <!--            <p>{{ el.audit.value }}</p>-->
           </td>
           <td class="links">
-            <div>
+            <div v-if="el.website || el.twitter">
               <a v-if="el.website" :href="el.website" target="_blank"><InlineSvg :src="require('@/assets/icons/internet.svg')" width="20" height="20" fill="#17181E" :title="el.website" /></a>
               <a v-if="el.twitter" :href="el.twitter" target="_blank"><InlineSvg  :src="require('@/assets/icons/twitter-logo.svg')" width="20" height="20" fill="#17181E" :title="el.twitter" /></a>
             </div>
+            <span v-else>N/A</span>
           </td>
 
 <!--          <td>{{ el.price }}</td>-->
@@ -97,7 +98,7 @@ export default defineComponent({
 
   data: () => ({
     tableHeader: [
-      { text: '#', key: 'number' },
+      // { text: '#', key: 'number' },
       { text: 'Name', key: 'name', sort: 0 },
       { text: 'Score', key: 'score', sort: 0 },
       { text: 'Blockchain', key: 'blockchain', sort: 0 },
@@ -212,16 +213,16 @@ export default defineComponent({
         cursor: pointer;
         user-select: none;
 
-        &:first-child,
-        &:nth-child(2) {
+        //&:first-child,
+        //&:nth-child(2) {
           p {
             justify-content: start;
           }
-        }
-
-        p {
-          justify-content: center;
-        }
+        //}
+        //
+        //p {
+        //  justify-content: center;
+        //}
 
         .arrows {
           display: block;
@@ -299,26 +300,27 @@ export default defineComponent({
       tr {
         td {
           //height: 72px;
-          padding: 20px 15px;
+          padding: 15px;
           border-bottom: 2px solid $border-color-l1;
+          text-align: left;
 
-          &:first-child {
-            text-align: left;
-          }
-          &:not(:first-child) {
-            text-align: center;
-          }
+          //&:first-child {
+          //  text-align: left;
+          //}
+          //&:not(:first-child) {
+          //  text-align: center;
+          //}
 
           &.links {
             div {
               display: flex;
               gap: 10px;
-              justify-content: center;
+              //justify-content: center;
             }
           }
 
           &.pie-chart {
-            padding: 0;
+            padding: 0 15px;
           }
 
           &.audit {
