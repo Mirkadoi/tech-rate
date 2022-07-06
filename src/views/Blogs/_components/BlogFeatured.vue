@@ -59,5 +59,21 @@
     .blog-card {
       background-color: $background-colors-white;
     }
+
+    :deep(.blog-card) {
+      .card__img {
+        height: 287px;
+      }
+
+      .body {
+        padding: 30px 0 0 0;
+      }
+
+      .body__header {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 120%;
+      }
+    }
   }
 </style>
