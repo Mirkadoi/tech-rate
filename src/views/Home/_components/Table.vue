@@ -3,10 +3,10 @@
     <table>
       <thead>
         <tr>
-          <th v-for="(el, i) in tableHeader" :key="i" @click="sort(el.key, el.sort)">
+          <th v-for="(el, i) in tableHeader" :key="i">
             <p class="d-flex">
               <span>{{ el.text }}</span>
-              <span class="arrows" :class="{
+              <span @click="sort(el.key, el.sort)" v-if="el.key !== 'audit' && el.key !== 'links'" class="arrows" :class="{
                 'dub-arrow': el.sort === 0,
                 'up': el.sort === 1,
                 'down': el.sort === 2,
@@ -211,7 +211,6 @@ export default defineComponent({
 
       th {
         padding: 15px;
-        cursor: pointer;
         user-select: none;
 
         //&:first-child,
@@ -235,6 +234,7 @@ export default defineComponent({
           height: 12px;
           position: relative;
           margin-left: 6px;
+          cursor: pointer;
 
           &.dub-arrow{
             &::before, &::after {
