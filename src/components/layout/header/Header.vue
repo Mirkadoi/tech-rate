@@ -24,7 +24,10 @@
           </VMenu>
 
 
-        <router-link class="nav-link" to="/blogs">Blog</router-link>
+        <router-link class="nav-link" :to="{ name: 'blogs' }">Blog</router-link>
+        <router-link class="nav-link" :to="{ name: 'about' }">About us</router-link>
+        <router-link class="nav-link" :to="{ name: 'contact', params: { anchor: 'contact'} }">Contact</router-link>
+
       </div>
 
       <Button title="Get Audit" mode="primary" @onClick="onOpenFeedbackWindow"/>
@@ -80,13 +83,13 @@
   .btn-group {
     display: flex;
     align-items: center;
-    gap: 50px;
+    gap: 40px;
   }
 
   .nav {
     display: flex;
     font-size: 16px;
-    gap: 50px;
+    gap: 40px;
   }
 
   .nav-link {
