@@ -298,7 +298,7 @@ export default defineComponent({
       font-family: $font-base;
       font-size: 14px;
       line-height: 19px;
-      font-weight: 400;
+      font-weight: 600;
 
       .partner {
         background-color: rgba(255,215,0,0.1);
