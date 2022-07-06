@@ -213,11 +213,21 @@ export default defineComponent({
         padding: 15px;
         user-select: none;
 
-        //&:first-child,
-        //&:nth-child(2) {
+        &:last-child {
           p {
-            justify-content: start;
+            justify-content: end;
           }
+        }
+
+        &:nth-child(5),&:nth-child(6) {
+          p {
+            justify-content: center;
+          }
+        }
+
+        //p {
+        //  justify-content: start;
+        //}
 
         span {
           color: $text-color-dark-blue;
@@ -311,8 +321,16 @@ export default defineComponent({
           border-bottom: 2px solid $border-color-l1;
           text-align: left;
 
-          //&:first-child {
-          //  text-align: left;
+          &:last-child {
+            text-align: right;
+          }
+
+          &:nth-child(5) {
+            text-align: center;
+          }
+
+          //&:nth-child(6) {
+          //  justify-content: center;
           //}
           //&:not(:first-child) {
           //  text-align: center;
@@ -322,7 +340,7 @@ export default defineComponent({
             div {
               display: flex;
               gap: 10px;
-              //justify-content: center;
+              justify-content: center;
             }
           }
 
