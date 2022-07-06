@@ -1,24 +1,20 @@
 <template>
-  <div class="pie no-round" :style="`--p:${ value };--c:${ getChartColor(value) };`">{{ value }}%</div>
+  <div class="pie no-round" :style="`--p:${ value };--c:${ getChartColor(value) };`">{{ value }}</div>
 </template>
 
 <script>
 export default {
   props: {
     value: Number,
-    // color: {
-    //   type: String,
-    //   default: '#F90074'
-    // }
   },
 
   methods: {
     getChartColor(val) {
-      if (val >= 90)  return 'green'
-      if (val >= 80)  return 'lightgreen'
-      if (val >= 70)  return 'yellow'
-      if (val >= 50)  return 'orange'
-      if (val <= 49)  return 'red'
+      if (val >= 90)  return '#40b884'
+      if (val >= 80)  return '#88b167'
+      if (val >= 70)  return '#cab130'
+      if (val >= 50)  return '#e1aa4c'
+      // if (val <= 49)  return '#F90074'
       return '#F90074'
     }
   }
@@ -35,7 +31,7 @@ export default {
 
   .pie {
     --p:20;
-    --b:5px;
+    --b:3px;
     --c:darkred;
     --w:35px;
 
@@ -44,9 +40,9 @@ export default {
     position:relative;
     display:inline-grid;
     place-content:center;
-    font-size:11px;
-    font-weight: 600;
-    font-family:sans-serif;
+    font-size:13px;
+    font-weight: 700;
+    font-family: "Roboto", sans-serif;
   }
   .pie:before,
   .pie:after {
