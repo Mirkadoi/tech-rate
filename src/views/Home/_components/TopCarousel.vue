@@ -194,8 +194,7 @@
       height: 186px;
       background-image: url("/src/assets/images/read-all-blogs.png");
       background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: center;
+      background-position: 50%;
     }
 
     &__title {
