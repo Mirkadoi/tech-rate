@@ -1,5 +1,5 @@
 <template>
-  <section class="app">
+  <section class="app" :class="`app--${isFillBackground}`">
     <Header />
 
     <main class="main">
@@ -20,10 +20,18 @@ import { GDialogRoot } from 'gitart-vue-dialog'
 
 export default {
   name: 'App',
+
   components: {
     Header,
     Footer,
     GDialogRoot
+  },
+
+  computed: {
+    isFillBackground() {
+      const isFillBackgroundPage = { products: 'primary', about: 'secondary' }
+      return isFillBackgroundPage[this.$route.name]
+    }
   }
 }
 </script>
@@ -33,9 +41,15 @@ export default {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: $background-colors-white;
     min-width: $screen-xl-min;
 
+    &--primary {
+      background-color: $background-colors-white;
+    }
+
+    &--secondary {
+      background-color: $background-colors-lotion;
+    }
   }
 
   .main {

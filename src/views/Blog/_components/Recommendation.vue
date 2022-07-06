@@ -47,7 +47,7 @@ export default {
 <style scoped lang="scss">
 .recommendation {
   position: relative;
-  background: #FAFAFA;
+  background: $background-colors-lotion;
   padding: 70px 100px 100px;
   margin: 0 -100px;
 
