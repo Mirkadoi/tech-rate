@@ -4,13 +4,16 @@
       <thead>
         <tr>
           <th v-for="(el, i) in tableHeader" :key="i">
-            <p class="d-flex">
+            <p v-if="el.key !== 'audit' && el.key !== 'links'" class="d-flex pointer" @click="sort(el.key, el.sort)">
               <span>{{ el.text }}</span>
-              <span @click="sort(el.key, el.sort)" v-if="el.key !== 'audit' && el.key !== 'links'" class="arrows" :class="{
+              <span class="arrows" :class="{
                 'dub-arrow': el.sort === 0,
                 'up': el.sort === 1,
                 'down': el.sort === 2,
               }"/>
+            </p>
+            <p v-else class="d-flex">
+              <span>{{ el.text }}</span>
             </p>
           </th>
         </tr>
@@ -189,6 +192,10 @@ export default defineComponent({
     align-items: center;
   }
 
+  .pointer {
+    cursor: pointer;
+  }
+
   p {
     margin: 0;
   }
@@ -243,7 +250,6 @@ export default defineComponent({
           height: 12px;
           position: relative;
           margin-left: 6px;
-          cursor: pointer;
 
           &.dub-arrow{
             &::before, &::after {
