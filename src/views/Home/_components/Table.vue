@@ -169,9 +169,20 @@ export default defineComponent({
   },
 
   watch: {
+    'store.searchValue': {
+      handler(val) {
+        if(val) {
+          //TODO перенести currentPage в стор, убрать кастыль
+          this.currentPage = 1;
+        }
+      }
+    },
     currentPage: {
       immediate: true,
       handler(val) {
+        //TODO перенести currentPage в стор, убрать кастыль
+        if(store.searchValue) return;
+
         store.getAllProjectItems({page: val});
       }
     },

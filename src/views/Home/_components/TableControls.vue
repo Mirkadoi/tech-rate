@@ -1,26 +1,21 @@
 <template>
-  <div class="d-flex table-controls">
-    <div class="d-flex pagination">
-      <ArrowButton @onClick="$emit('prev')" :disabled="store.prevPage" />
+  <div class="table-controls">
+    <div class="pagination">
+      <ArrowButton v-show="currentPage !== 1" @onClick="$emit('prev')" />
 
-      <button v-if="currentPage === 3 && lastPageNumber === 3" @click="$emit('goToPage', 1)">
-        1
-      </button>
-      <button v-if="currentPage > 1" @click="$emit('prev')" >{{ currentPage - 1  }}</button>
-      <button class="current-page" disabled>{{ currentPage }}</button>
-      <button v-if="showNextNumberButton" @click="$emit('next')">{{ currentPage + 1  }}</button>
+      <button v-if="showFirstPageButton" @click="$emit('goToPage', 1)">{{ 1 }}</button>
+      <span v-if="showFirstPageDots" class="dots">...</span>
 
-      <button v-if="currentPage === 1 && showNextNumberButton" @click="$emit('goToPage', 3)">
-        3
-      </button>
+      <template v-for="button in paginationMiddleButtons" :key="button">
 
-      <template v-if="showLastPageButton">
-        <span class="dots">...</span>
-        <button @click="$emit('toLastPage')">{{ lastPageNumber }}</button>
+        <button v-if="button > 0 && button <= lastPageNumber" :class="{'current-page': button === currentPage}" @click="$emit('goToPage', button)">{{ button  }}</button>
+
       </template>
 
-      <ArrowButton @onClick="$emit('next')" :disabled="store.nextPage" rotate />
-<!--      <button class="control control-next" @click=""/>-->
+      <span v-if="showLastPageDots" class="dots" >...</span>
+      <button v-if="showLastPageButton" @click="$emit('goToPage', lastPageNumber)">{{ lastPageNumber }}</button>
+
+      <ArrowButton v-show="currentPage !== lastPageNumber" @onClick="$emit('next')" rotate />
     </div>
   </div>
 </template>
@@ -46,19 +41,24 @@ export default {
   }),
 
   computed: {
-    showingValue() {
-      const from = (this.currentPage - 1) * this.rowsCount + 1
-      const to = this.currentPage * this.rowsCount
-
-      return `${ from }-${ to }`
+    paginationMiddleButtons() {
+      return [this.currentPage - 2, this.currentPage - 1, this.currentPage, this.currentPage + 1, this.currentPage + 2]
     },
 
-    showNextNumberButton() {
-      return this.lastPageNumber >= 2 && this.currentPage !== this.lastPageNumber
+    showLastPageDots() {
+      return this.lastPageNumber > 3 && this.currentPage + 3 < this.lastPageNumber;
+    },
+
+    showFirstPageDots() {
+      return this.currentPage > 4;
     },
 
     showLastPageButton() {
-      return this.lastPageNumber > 3 && this.currentPage + 1 < this.lastPageNumber
+      return this.lastPageNumber > 3 && this.currentPage + 2 < this.lastPageNumber
+    },
+
+    showFirstPageButton() {
+      return this.currentPage >= 4
     },
 
     lastPageNumber() {
@@ -74,30 +74,21 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .d-flex {
-    display: flex;
-  }
-
   .table-controls {
+    display: flex;
     justify-content: center;
     padding: 17px 0;
     font-size: 14px;
 
-    //.pagination {
-    //  margin: 0 auto;
-    //  transform: translateX(-70px);
-    //}
-
     .dots {
-      display: block;
-      //display: flex;
-      align-items: end;
-      padding-bottom: 5px;
+      display: flex;
+      align-items: center;
+      cursor: default;
     }
+  }
 
-    p {
-      margin: 0;
-    }
+  .pagination {
+    display: flex;
   }
 
   button {
@@ -111,41 +102,6 @@ export default {
     cursor: pointer;
     border: none;
     margin: 0 7px;
-
-    //&.control {
-    //  display: flex;
-    //  align-items: center;
-    //  justify-content: center;
-    //  border: 1px solid #E4E4E4;
-    //  filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.15));
-    //
-    //  &::before {
-    //    content: '';
-    //    display: block;
-    //    width: 6px;
-    //    height: 6px;
-    //    border-left: 2px solid $text-color-black;
-    //    border-bottom: 2px solid $text-color-black;
-    //  }
-    //  &:first-child {
-    //    margin-right: 10px;
-    //  }
-    //  &:last-child {
-    //    margin-left: 10px;
-    //  }
-    //}
-
-    //&.control-prev {
-    //  &::before {
-    //    transform: translateX(2px) rotate(45deg);
-    //  }
-    //}
-    //
-    //&.control-next {
-    //  &::before {
-    //    transform: translateX(-1px) rotate(-135deg);
-    //  }
-    //}
 
     &.current-page {
       background: $color-black;
