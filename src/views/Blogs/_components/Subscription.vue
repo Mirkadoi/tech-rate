@@ -33,7 +33,6 @@ export default defineComponent ({
     display: flex;
     align-items: center;
     padding: 13px 100px 25px;
-    margin: 0 -100px;
     background: #F5F5F5;
 
     .subscription-img {

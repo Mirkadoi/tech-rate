@@ -42,7 +42,6 @@
 <style scoped lang="scss">
   .blog-featured {
     cursor: pointer;
-    margin-right: -100px;
     padding: 46px 100px 30px 30px;
     background: $background-colors-white;
     border: 1px solid $border-color-l1;
