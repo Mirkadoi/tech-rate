@@ -16,9 +16,9 @@
               </div>
             </td>
             <td>
-<!--              <p v-if="key === 'recentlyCompletedList'">{{ el.value }}</p>-->
+              <p v-if="key === 'recentlyCompletedList'">{{ new Date(el['audit_date']).toLocaleDateString() }}</p>
 <!--              <pie-chart v-else-if="key === 'auditScoreList'" :value="el.score"/>-->
-              <pie-chart :value="el.score"/>
+              <pie-chart v-if="key === 'auditScoreList'" :value="el.score"/>
             </td>
           </tr>
         </tbody>
@@ -131,8 +131,10 @@ export default {
           height: 48px;
           border-top: 1px solid $border-color-l1;
           font-size: 14px;
+          font-weight: 600;
 
           p {
+            text-align: right;
             margin: 0;
           }
         }
