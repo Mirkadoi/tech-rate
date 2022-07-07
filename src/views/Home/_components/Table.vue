@@ -109,7 +109,7 @@ export default defineComponent({
       // { text: 'Last 7 days', key: 'last' },
       // { text: 'Market Cap', key: 'market' },
       // { text: 'Volume (24h)', key: 'volume' },
-      { text: 'Date', key: 'created', sort: 0 },
+      { text: 'Date', key: 'audit_date', sort: 0 },
     ],
     currentSort:'name',
     currentSortDir:'asc',
