@@ -38,14 +38,10 @@ export default {
 
 <style scoped lang="scss">
   @mixin header-footer-width {
-    min-width: calc(#{$screen-lg-min} + 100px);
+    max-width: calc(#{$screen-lg-min} - 200px);
 
     @include xxl {
-      width: $screen-xl-min
-    }
-
-    @include xxl {
-      width: $screen-xxl-min;
+      max-width: calc(#{$screen-xxl-min} - 200px);
     }
   }
 

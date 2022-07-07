@@ -1,5 +1,5 @@
 <template>
-  <section class="container-home">
+  <div class="container-home">
     <Headline class="headline" title="TechRate" subtitle="Provable Trust For All"/>
 
     <Preview />
@@ -7,7 +7,7 @@
     <Tabs />
 
     <Trends />
-  </section>
+  </div>
 </template>
 
 <script>
