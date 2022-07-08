@@ -3,7 +3,7 @@
     <table>
       <thead>
         <tr>
-          <th v-for="(el, i) in tableHeader" :key="i">
+          <th v-for="(el, i) in tableHeader" :key="i" :style="{width: el.width}">
             <p v-if="el.key !== 'audit' && el.key !== 'links'" class="d-flex pointer" @click="sort(el.key, el.sort)">
               <span>{{ el.text }}</span>
               <span class="arrows" :class="{
@@ -101,18 +101,18 @@ export default defineComponent({
   data: () => ({
     tableHeader: [
       // { text: '#', key: 'number' },
-      { text: 'Name', key: 'name', sort: 0 },
-      { text: 'Score', key: 'score', sort: 0 },
-      { text: 'Blockchain', key: 'blockchain', sort: 0 },
-      { text: 'Category', key: 'category', sort: 0 },
-      { text: 'Audit', key: 'audit', sort: 0 },
-      { text: 'Links', key: 'links', sort: 0 },
+      { text: 'Name', key: 'name', sort: 0, width: '29%' },
+      { text: 'Score', key: 'score', sort: 0,  width: '10%' },
+      { text: 'Blockchain', key: 'blockchain', sort: 0,  width: '13%' },
+      { text: 'Category', key: 'category', sort: 0,  width: '13%' },
+      { text: 'Audit', key: 'audit', sort: 0,  width: '10%' },
+      { text: 'Links', key: 'links', sort: 0,  width: '10%' },
       // { text: 'Price', key: 'price' },
       // { text: 'Security Score/24h', key: 'security' },
       // { text: 'Last 7 days', key: 'last' },
       // { text: 'Market Cap', key: 'market' },
       // { text: 'Volume (24h)', key: 'volume' },
-      { text: 'Date', key: 'audit_date', sort: 0 },
+      { text: 'Date', key: 'audit_date', sort: 0,  width: '15%' },
     ],
     currentSort:'name',
     currentSortDir:'asc',
