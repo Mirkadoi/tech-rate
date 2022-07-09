@@ -56,8 +56,8 @@ export default {
     },
 
     lastPageNumber() {
-      const number = store.count / store.pageSize
-      return number ? Math.ceil(number) : 0
+      const number = store.count ? store.count / store.pageSize : 0;
+      return number ? Math.ceil(number) : 1;
     },
   },
 

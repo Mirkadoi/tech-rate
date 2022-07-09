@@ -28,7 +28,7 @@ export default {
 
   data: () => ({
     tabs: [
-      {code: '', title:'All projects'},
+      {code: null, title:'All projects'},
       {code: 'Ethereum', title:'Ethereum projects'},
       {code: 'BSC', title:'BSC projects'}
     ]

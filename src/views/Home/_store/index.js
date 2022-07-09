@@ -8,7 +8,7 @@ const initialStore = {
   prevPage: null,
   nextPage: null,
   count: 0,
-  projectTabSelected: "",
+  projectTabSelected: null,
   searchValue: "",
   sortOption: { field: null, dir: 0 },
   currentPage: 1,
@@ -30,8 +30,8 @@ export const store = reactive({
       size: this.pageSize,
     });
 
-    this.prevPage = !previous;
-    this.nextPage = !next;
+    this.prevPage = !!previous;
+    this.nextPage = !!next;
     this.count = count;
 
     this.projectTokenList = results;
