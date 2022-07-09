@@ -126,10 +126,10 @@
 
     async created() {
       const { count: allCount } = await getProjectsAudited()
-      const { count: bscCount } = await getBSCAudited()
+      const { blockchains_count: blockchainsCount } = await getBSCAudited()
 
       this.columnsValue.all = this.formatNumber(allCount);
-      this.columnsValue.bsc = this.formatNumber(bscCount);
+      this.columnsValue.bsc = this.formatNumber(blockchainsCount);
     },
 
     watch: {
@@ -144,8 +144,9 @@
 
     setup() {
       const columns = [
-        { logo: 'rocket', title: 'Projects audited', subtitle: 'Current finantial year', code: 'all' },
-        { logo: 'binance-logo', title: 'BSC projects', subtitle: 'Current finantial year', code: 'bsc' },
+        { logo: 'rocket', title: 'Projects audited', subtitle: 'Since 2018', code: 'all' },
+
+        { logo: 'blockchain-logo', title: 'Different blockchains', subtitle: 'Supported by Techrate', code: 'bsc' },
       ]
 
       const columnsValue = ref({
@@ -238,7 +239,7 @@
       background-color: $color-white;
       padding: 16px 10px;
       border: 1px solid $border-color-l1;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.07);
+      //box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.07);
       border-radius: 8px;
 
       .vs__selected-options {

@@ -6,8 +6,7 @@ export const getProjectsAudited = () => {
 
 export const getBSCAudited = () => {
   return RequestManager.get({
-    path: "/token/all/",
-    queries: { page: 1, size: 1, blockchain: "BSC" },
+    path: "/token/blockchains/count",
   });
 };
 
