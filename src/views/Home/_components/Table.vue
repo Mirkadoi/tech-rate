@@ -4,13 +4,9 @@
       <thead>
         <tr>
           <th v-for="(el, i) in tableHeader" :key="i" :style="{width: el.width}">
-            <p v-if="el.key !== 'audit' && el.key !== 'links'" class="d-flex pointer" @click="sort(el.key, el.sort)">
+            <p v-if="el.key !== 'audit' && el.key !== 'links'" class="d-flex pointer" @click="sort(el.key)">
               <span>{{ el.text }}</span>
-              <span class="arrows" :class="{
-                'dub-arrow': el.sort === 0,
-                'up': el.sort === 1,
-                'down': el.sort === 2,
-              }"/>
+              <span class="arrows" :class="toggleSortArrow(el.key)"/>
             </p>
             <p v-else class="d-flex">
               <span>{{ el.text }}</span>
@@ -20,7 +16,6 @@
       </thead>
       <tbody>
         <tr v-for="(el, i) in store.projectTokenList" :key="i" :class="{partner: el['is_partner']}">
-<!--          <td>{{ el.number }}</td>-->
 
           <td>
             <div class="d-flex">
@@ -40,8 +35,6 @@
             <a v-if="el.audit" :href="el.audit" target="_blank">
               <InlineSvg :src="require('@/assets/icons/pdf.svg')" width="20" height="20" fill="#17181E" :title="el.audit" />
             </a>
-<!--            <img :src="el.audit.img" width="24" height="24">-->
-<!--            <p>{{ el.audit.value }}</p>-->
           </td>
           <td class="links">
             <div v-if="el.website || el.twitter">
@@ -51,18 +44,6 @@
             <span v-else>N/A</span>
           </td>
 
-<!--          <td>{{ el.price }}</td>-->
-
-<!--          <td>-->
-<!--            <Stock :param="el.security"/>-->
-<!--          </td>-->
-
-<!--          <td>-->
-<!--            <Stock :param="el.last"/>-->
-<!--          </td>-->
-
-<!--          <td>{{ el.market }}</td>-->
-<!--          <td>{{ el.volume }}</td>-->
           <td>{{ new Date(el['audit_date']).toLocaleDateString() }}</td>
         </tr>
       </tbody>
@@ -89,6 +70,7 @@ import TableControls from "@/views/Home/_components/TableControls";
 
 import { store } from '../_store/index'
 
+
 export default defineComponent({
   components: {
     // Stock,
@@ -100,65 +82,45 @@ export default defineComponent({
 
   data: () => ({
     tableHeader: [
-      // { text: '#', key: 'number' },
-      { text: 'Name', key: 'name', sort: 0, width: '29%' },
-      { text: 'Score', key: 'score', sort: 0,  width: '10%' },
-      { text: 'Blockchain', key: 'blockchain', sort: 0,  width: '13%' },
-      { text: 'Category', key: 'category', sort: 0,  width: '13%' },
-      { text: 'Audit', key: 'audit', sort: 0,  width: '10%' },
-      { text: 'Links', key: 'links', sort: 0,  width: '10%' },
-      // { text: 'Price', key: 'price' },
-      // { text: 'Security Score/24h', key: 'security' },
-      // { text: 'Last 7 days', key: 'last' },
-      // { text: 'Market Cap', key: 'market' },
-      // { text: 'Volume (24h)', key: 'volume' },
-      { text: 'Date', key: 'audit_date', sort: 0,  width: '15%' },
+      { text: 'Name', key: 'name', width: '29%' },
+      { text: 'Score', key: 'score',  width: '10%' },
+      { text: 'Blockchain', key: 'blockchain',  width: '13%' },
+      { text: 'Category', key: 'category',  width: '13%' },
+      { text: 'Audit', key: 'audit',  width: '10%' },
+      { text: 'Links', key: 'links',  width: '10%' },
+      { text: 'Date', key: 'audit_date',  width: '15%' },
     ],
-    currentSort:'name',
-    currentSortDir:'asc',
     pageSize: 20,
     currentPage:1
   }),
 
   methods:{
-    // async getItems(queries = {page: this.currentPage}) {
-    //   const { results } = await getTokenList({blockchain: this.blockchain , size: this.pageSize, ...queries});
-    //
-    //   store.projectTokenList = results;
-    // },
-
-    sort(column, sortNum) {
-      const dic = {
+    sort(column) {
+      const sortDir = {
         0: 'default',
         1: 'asc',
         2: 'desc'
       }
+      const sortOption = { field: store.sortOption.field, dir: store.sortOption.dir}
 
-      if(column !== this.currentSort)  {
-        this.tableHeader = this.tableHeader.map((el) => {
-          if (this.currentSort === el.key) return {...el, sort: 0}
-          return el;
-        })
+      if (sortOption.field !== column) {
+        sortOption.field = column;
+        sortOption.dir = 0;
       }
 
-      let newSortNum = sortNum;
-      this.currentSort = column;
-
-      if (sortNum >= 2) {
-        this.tableHeader = this.tableHeader.map((el) => {
-          if (column === el.key) return {...el, sort: 0}
-          return el;
-        })
-        return store.getAllProjectItems({ page: this.currentPage})
+      if (sortOption.dir >= 2) {
+        sortOption.dir = 0;
       } else {
-        newSortNum += 1
-
-        this.tableHeader = this.tableHeader.map((el) => {
-          if (column === el.key) return {...el, sort: newSortNum}
-          return el;
-        })
-        return store.getAllProjectItems({ page: this.currentPage, field: column, sort: dic[newSortNum] })
+        sortOption.dir += 1;
       }
+
+      store.setHomeStoreState('sortOption', sortOption)
+
+      return store.getAllProjectItems({
+        page: this.currentPage,
+        field: store.sortOption.field,
+        sort: sortDir[store.sortOption.dir]
+      })
     },
     nextPage() {
       if((this.currentPage*this.pageSize) < store.count) this.currentPage++;
@@ -166,6 +128,11 @@ export default defineComponent({
     prevPage() {
       if(this.currentPage > 1) this.currentPage--;
     },
+    toggleSortArrow(field) {
+      if(store.sortOption.field === field && store.sortOption.dir === 1) return 'up'
+      if(store.sortOption.field === field && store.sortOption.dir === 2) return 'down'
+      return 'dub-arrow';
+    }
   },
 
   watch: {
