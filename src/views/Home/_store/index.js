@@ -1,21 +1,27 @@
 import { reactive } from "vue";
 
 import { getTokenList } from "@/views/Home/requests";
+import { projectSortDir } from "@/tools/dictionary";
 
 export const store = reactive({
   projectTokenList: [],
   prevPage: null,
   nextPage: null,
   count: 0,
-  selectedProject: "",
+  projectTabSelected: "",
   searchValue: "",
-  sortOption: { field: "name", dir: 0 },
+  sortOption: { field: null, dir: 0 },
+  currentPage: 1,
 
-  async getAllProjectItems(queries) {
+  async getAllProjectItems(queries = { page: this.currentPage }) {
     const { results, previous, next, count } = await getTokenList({
-      blockchain: this.selectedProject,
       ...queries,
       ...(this.searchValue && { search: this.searchValue }),
+      ...(this.projectTabSelected && { blockchain: this.projectTabSelected }),
+      ...(this.sortOption.field && {
+        field: this.sortOption.field,
+        sort: projectSortDir[store.sortOption.dir],
+      }),
     });
 
     this.prevPage = !previous;
@@ -27,13 +33,5 @@ export const store = reactive({
 
   setHomeStoreState(state, value) {
     this[state] = value;
-  },
-
-  setSelectedProject(value) {
-    this.selectedProject = value;
-  },
-
-  setSearchValue(value) {
-    this.searchValue = value;
   },
 });

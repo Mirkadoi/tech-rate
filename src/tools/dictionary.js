@@ -29,3 +29,5 @@ export const contactList = [
   },
   { logo: "email", title: "Email", link: "mailto:info@techrate.org", text: "info@techrate.org" },
 ];
+
+export const projectSortDir = ["default", "asc", "desc"];

@@ -56,8 +56,6 @@
     <table-controls
       @prev="prevPage"
       @next="nextPage"
-      @goToPage="currentPage = $event"
-      :currentPage="currentPage"
     />
   </div>
 </template>
@@ -91,16 +89,10 @@ export default defineComponent({
       { text: 'Date', key: 'audit_date',  width: '15%' },
     ],
     pageSize: 20,
-    currentPage:1
   }),
 
   methods:{
     sort(column) {
-      const sortDir = {
-        0: 'default',
-        1: 'asc',
-        2: 'desc'
-      }
       const sortOption = { field: store.sortOption.field, dir: store.sortOption.dir}
 
       if (sortOption.field !== column) {
@@ -110,23 +102,20 @@ export default defineComponent({
 
       if (sortOption.dir >= 2) {
         sortOption.dir = 0;
+        sortOption.field = null;
       } else {
         sortOption.dir += 1;
       }
 
       store.setHomeStoreState('sortOption', sortOption)
 
-      return store.getAllProjectItems({
-        page: this.currentPage,
-        field: store.sortOption.field,
-        sort: sortDir[store.sortOption.dir]
-      })
+      return store.getAllProjectItems()
     },
     nextPage() {
-      if((this.currentPage*this.pageSize) < store.count) this.currentPage++;
+      if((store.currentPage*this.pageSize) < store.count) store.setHomeStoreState('currentPage', store.currentPage++);
     },
     prevPage() {
-      if(this.currentPage > 1) this.currentPage--;
+      if(store.currentPage > 1) store.setHomeStoreState('currentPage', store.currentPage--);
     },
     toggleSortArrow(field) {
       if(store.sortOption.field === field && store.sortOption.dir === 1) return 'up'
@@ -140,11 +129,11 @@ export default defineComponent({
       handler(val) {
         if(val) {
           //TODO перенести currentPage в стор, убрать кастыль
-          this.currentPage = 1;
+          store.setHomeStoreState('currentPage', 1);
         }
       }
     },
-    currentPage: {
+    'store.currentPage': {
       immediate: true,
       handler(val) {
         //TODO перенести currentPage в стор, убрать кастыль

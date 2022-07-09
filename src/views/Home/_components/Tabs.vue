@@ -4,17 +4,17 @@
       <p
         v-for="(tab) in tabs"
         :key="tab.code"
-        :class="{'tab-selected': store.selectedProject === tab.code}"
-        @click="store.setSelectedProject(tab.code)"
+        :class="{'tab-selected': store.projectTabSelected === tab.code}"
+        @click="store.setHomeStoreState('projectTabSelected', tab.code)"
         class="tab"
       >
         {{ tab.title }}
       </p>
     </div>
 <!--TODO убрать пропс blockchain-->
-    <Table :blockchain="store.selectedProject"/>
-<!--    <Table v-show="store.selectedProject === 'ethereum'" blockchain="ethereum"/>-->
-<!--    <Table v-show="store.selectedProject === 'bsc'" blockchain="bsc"/>-->
+    <Table :blockchain="store.projectTabSelected"/>
+<!--    <Table v-show="store.projectTabSelected === 'ethereum'" blockchain="ethereum"/>-->
+<!--    <Table v-show="store.projectTabSelected === 'bsc'" blockchain="bsc"/>-->
   </div>
 </template>
 

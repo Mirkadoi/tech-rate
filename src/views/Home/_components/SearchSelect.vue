@@ -63,14 +63,14 @@
   }
 
   function handleInputSearch(val) {
-    store.setSearchValue(val.name)
-    store.setSelectedProject('');
+    store.setHomeStoreState('searchValue', val.name)
+    store.setHomeStoreState('projectTabSelected', null);
     store.getAllProjectItems({page: 1})
   }
 
   watch(() => selected.value, (v)=> {
     if (v === null) {
-      store.setSearchValue('')
+      store.setHomeStoreState('searchValue','')
 
       return store.getAllProjectItems()
     }

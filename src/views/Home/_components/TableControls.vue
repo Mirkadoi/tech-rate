@@ -1,21 +1,21 @@
 <template>
   <div class="table-controls">
     <div class="pagination">
-      <ArrowButton v-show="currentPage !== 1" @onClick="$emit('prev')" />
+      <ArrowButton v-show="store.currentPage !== 1" @onClick="$emit('prev')" />
 
       <button v-if="showFirstPageButton" @click="$emit('goToPage', 1)">{{ 1 }}</button>
       <span v-if="showFirstPageDots" class="dots">...</span>
 
       <template v-for="button in paginationMiddleButtons" :key="button">
 
-        <button v-if="button > 0 && button <= lastPageNumber" :class="{'current-page': button === currentPage}" @click="$emit('goToPage', button)">{{ button  }}</button>
+        <button v-if="button > 0 && button <= lastPageNumber" :class="{'current-page': button === store.currentPage}" @click="$emit('goToPage', button)">{{ button  }}</button>
 
       </template>
 
       <span v-if="showLastPageDots" class="dots" >...</span>
       <button v-if="showLastPageButton" @click="$emit('goToPage', lastPageNumber)">{{ lastPageNumber }}</button>
 
-      <ArrowButton v-show="currentPage !== lastPageNumber" @onClick="$emit('next')" rotate />
+      <ArrowButton v-show="store.currentPage !== lastPageNumber" @onClick="$emit('next')" rotate />
     </div>
   </div>
 </template>
@@ -30,39 +30,31 @@ export default {
     ArrowButton,
   },
 
-  props: {
-    currentPage: {
-      type: Number
-    }
-  },
-
-  data: () => ({
-    rowsCount: 20
-  }),
+  props: ['pageSize'],
 
   computed: {
     paginationMiddleButtons() {
-      return [this.currentPage - 2, this.currentPage - 1, this.currentPage, this.currentPage + 1, this.currentPage + 2]
+      return [store.currentPage - 2, store.currentPage - 1, store.currentPage, store.currentPage + 1, store.currentPage + 2]
     },
 
     showLastPageDots() {
-      return this.lastPageNumber > 3 && this.currentPage + 3 < this.lastPageNumber;
+      return this.lastPageNumber > 3 && store.currentPage + 3 < this.lastPageNumber;
     },
 
     showFirstPageDots() {
-      return this.currentPage > 4;
+      return store.currentPage > 4;
     },
 
     showLastPageButton() {
-      return this.lastPageNumber > 3 && this.currentPage + 2 < this.lastPageNumber
+      return this.lastPageNumber > 3 && store.currentPage + 2 < this.lastPageNumber
     },
 
     showFirstPageButton() {
-      return this.currentPage >= 4
+      return store.currentPage >= 4
     },
 
     lastPageNumber() {
-      const number = store.count / this.rowsCount
+      const number = store.count / this.pageSize
       return number ? Math.ceil(number) : 0
     }
   },
