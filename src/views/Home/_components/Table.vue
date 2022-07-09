@@ -3,7 +3,7 @@
     <table>
       <thead>
         <tr>
-          <th v-for="(el, i) in tableHeader" :key="i" :style="{width: el.width}">
+          <th v-for="(el, i) in header" :key="i" :style="{width: el.width}">
             <p v-if="el.key !== 'audit' && el.key !== 'links'" class="d-flex pointer" @click="sort(el.key)">
               <span>{{ el.text }}</span>
               <span class="arrows" :class="toggleSortArrow(el.key)"/>
@@ -53,17 +53,14 @@
       No data
     </div>
 
-    <table-controls
-      @prev="prevPage"
-      @next="nextPage"
-    />
+    <TableControls />
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
+
 import PieChart from "@/views/Home/_components/PieChart";
-// import Stock from "@/views/Home/_components/Stock";
 import TableControls from "@/views/Home/_components/TableControls";
 
 import { store } from '../_store/index'
@@ -71,25 +68,9 @@ import { store } from '../_store/index'
 
 export default defineComponent({
   components: {
-    // Stock,
     TableControls,
     PieChart
   },
-
-  props: ['blockchain'],
-
-  data: () => ({
-    tableHeader: [
-      { text: 'Name', key: 'name', width: '29%' },
-      { text: 'Score', key: 'score',  width: '10%' },
-      { text: 'Blockchain', key: 'blockchain',  width: '13%' },
-      { text: 'Category', key: 'category',  width: '13%' },
-      { text: 'Audit', key: 'audit',  width: '10%' },
-      { text: 'Links', key: 'links',  width: '10%' },
-      { text: 'Date', key: 'audit_date',  width: '15%' },
-    ],
-    pageSize: 20,
-  }),
 
   methods:{
     sort(column) {
@@ -109,14 +90,9 @@ export default defineComponent({
 
       store.setHomeStoreState('sortOption', sortOption)
 
-      return store.getAllProjectItems()
+      return store.getProjectItems()
     },
-    nextPage() {
-      if((store.currentPage*this.pageSize) < store.count) store.setHomeStoreState('currentPage', store.currentPage++);
-    },
-    prevPage() {
-      if(store.currentPage > 1) store.setHomeStoreState('currentPage', store.currentPage--);
-    },
+
     toggleSortArrow(field) {
       if(store.sortOption.field === field && store.sortOption.dir === 1) return 'up'
       if(store.sortOption.field === field && store.sortOption.dir === 2) return 'down'
@@ -124,31 +100,22 @@ export default defineComponent({
     }
   },
 
-  watch: {
-    'store.searchValue': {
-      handler(val) {
-        if(val) {
-          //TODO перенести currentPage в стор, убрать кастыль
-          store.setHomeStoreState('currentPage', 1);
-        }
-      }
-    },
-    'store.currentPage': {
-      immediate: true,
-      handler(val) {
-        //TODO перенести currentPage в стор, убрать кастыль
-        if(store.searchValue) return;
-
-        store.getAllProjectItems({page: val});
-      }
-    },
-    blockchain() {
-      store.getAllProjectItems();
-    }
+  created() {
+    store.getProjectItems();
   },
 
   setup() {
-    return { store }
+    const header = [
+      { text: 'Name', key: 'name', width: '29%' },
+      { text: 'Score', key: 'score',  width: '10%' },
+      { text: 'Blockchain', key: 'blockchain',  width: '13%' },
+      { text: 'Category', key: 'category',  width: '13%' },
+      { text: 'Audit', key: 'audit',  width: '10%' },
+      { text: 'Links', key: 'links',  width: '10%' },
+      { text: 'Date', key: 'audit_date',  width: '15%' },
+    ]
+
+    return { store, header }
   }
 })
 </script>

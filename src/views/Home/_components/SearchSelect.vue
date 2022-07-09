@@ -65,14 +65,15 @@
   function handleInputSearch(val) {
     store.setHomeStoreState('searchValue', val.name)
     store.setHomeStoreState('projectTabSelected', null);
-    store.getAllProjectItems({page: 1})
+    store.setHomeStoreState('sortOption', { field: null, dir: 0 });
+    store.goToProjectPage(1);
   }
 
   watch(() => selected.value, (v)=> {
     if (v === null) {
       store.setHomeStoreState('searchValue','')
-
-      return store.getAllProjectItems()
+      store.setHomeStoreState('sortOption', { field: null, dir: 0 });
+      store.goToProjectPage(1);
     }
   })
 </script>

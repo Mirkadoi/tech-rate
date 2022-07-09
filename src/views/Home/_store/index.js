@@ -12,16 +12,18 @@ export const store = reactive({
   searchValue: "",
   sortOption: { field: null, dir: 0 },
   currentPage: 1,
+  pageSize: 20,
 
-  async getAllProjectItems(queries = { page: this.currentPage }) {
+  async getProjectItems() {
     const { results, previous, next, count } = await getTokenList({
-      ...queries,
       ...(this.searchValue && { search: this.searchValue }),
       ...(this.projectTabSelected && { blockchain: this.projectTabSelected }),
       ...(this.sortOption.field && {
         field: this.sortOption.field,
         sort: projectSortDir[store.sortOption.dir],
       }),
+      page: this.currentPage,
+      size: this.pageSize,
     });
 
     this.prevPage = !previous;
@@ -29,6 +31,12 @@ export const store = reactive({
     this.count = count;
 
     this.projectTokenList = results;
+  },
+
+  goToProjectPage(value) {
+    this.currentPage = value;
+
+    return this.getProjectItems();
   },
 
   setHomeStoreState(state, value) {

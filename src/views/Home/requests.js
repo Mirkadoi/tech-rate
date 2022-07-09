@@ -10,8 +10,8 @@ export const getBSCAudited = () => {
   });
 };
 
-export const getTokenList = (queries = { page: 1 }) => {
-  return RequestManager.get({ path: "/token/all/", queries: { size: 20, ...queries } });
+export const getTokenList = (queries) => {
+  return RequestManager.get({ path: "/token/all/", queries });
 };
 
 export const getTokenBySearch = (search) => {

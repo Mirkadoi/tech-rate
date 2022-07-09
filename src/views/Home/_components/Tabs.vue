@@ -5,16 +5,13 @@
         v-for="(tab) in tabs"
         :key="tab.code"
         :class="{'tab-selected': store.projectTabSelected === tab.code}"
-        @click="store.setHomeStoreState('projectTabSelected', tab.code)"
+        @click="handleSelectProjectTab(tab.code)"
         class="tab"
       >
         {{ tab.title }}
       </p>
     </div>
-<!--TODO убрать пропс blockchain-->
-    <Table :blockchain="store.projectTabSelected"/>
-<!--    <Table v-show="store.projectTabSelected === 'ethereum'" blockchain="ethereum"/>-->
-<!--    <Table v-show="store.projectTabSelected === 'bsc'" blockchain="bsc"/>-->
+    <Table/>
   </div>
 </template>
 
@@ -36,6 +33,13 @@ export default {
       {code: 'BSC', title:'BSC projects'}
     ]
   }),
+
+  methods: {
+    handleSelectProjectTab(tab) {
+      store.setHomeStoreState('projectTabSelected', tab);
+      store.goToProjectPage(1);
+    }
+  },
 
   setup() {
     return { store }
