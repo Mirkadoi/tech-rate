@@ -17,7 +17,7 @@ export const getTokenList = (queries = { page: 1 }) => {
 export const getTokenBySearch = (search) => {
   return RequestManager.get({
     path: "/token/all/",
-    queries: { ...search, page: 1, size: 99 },
+    queries: { search, page: 1, size: 99 },
   });
 };
 
