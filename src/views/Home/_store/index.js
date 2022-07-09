@@ -3,7 +3,7 @@ import { reactive } from "vue";
 import { getTokenList } from "@/views/Home/requests";
 import { projectSortDir } from "@/tools/dictionary";
 
-export const store = reactive({
+const initialStore = {
   projectTokenList: [],
   prevPage: null,
   nextPage: null,
@@ -13,6 +13,10 @@ export const store = reactive({
   sortOption: { field: null, dir: 0 },
   currentPage: 1,
   pageSize: 20,
+};
+
+export const store = reactive({
+  ...initialStore,
 
   async getProjectItems() {
     const { results, previous, next, count } = await getTokenList({
@@ -43,3 +47,7 @@ export const store = reactive({
     this[state] = value;
   },
 });
+
+export const resetStore = () => {
+  Object.assign(store, initialStore);
+};

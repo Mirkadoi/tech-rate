@@ -10,21 +10,18 @@
   </div>
 </template>
 
-<script>
-  import { defineComponent } from 'vue';
+<script setup>
+  import { resetStore } from './_store/index'
+  import { onBeforeRouteLeave } from 'vue-router'
+
 
   import Headline from '@/components/Headline';
   import Trends from "@/views/Home/_components/Trends";
   import Tabs from "@/views/Home/_components/Tabs";
   import Preview from "@/views/Home/_components/Preview";
 
-  export default defineComponent ({
-    components: {
-      Headline,
-      Trends,
-      Tabs,
-      Preview
-    }
+  onBeforeRouteLeave(() => {
+    resetStore()
   })
 </script>
 
