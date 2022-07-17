@@ -40,6 +40,7 @@
             <div v-if="el.website || el.twitter">
               <a v-if="el.website" :href="el.website" target="_blank"><InlineSvg :src="require('@/assets/icons/internet.svg')" width="20" height="20" fill="#17181E" :title="el.website" /></a>
               <a v-if="el.twitter" :href="el.twitter" target="_blank"><InlineSvg  :src="require('@/assets/icons/twitter-logo.svg')" width="20" height="20" fill="#17181E" :title="el.twitter" /></a>
+              <a v-if="el.telegram" :href="el.telegram" target="_blank"><InlineSvg  :src="require('@/assets/icons/telegram-logo.svg')" width="20" height="20" fill="#17181E" :title="el.telegram" /></a>
             </div>
             <span v-else>N/A</span>
           </td>
@@ -278,7 +279,7 @@ export default defineComponent({
           &.links {
             div {
               display: flex;
-              gap: 10px;
+              gap: 6px;
               //justify-content: center;
             }
           }
