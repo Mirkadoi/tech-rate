@@ -28,3 +28,10 @@ export const getAuditScore = () => {
 export const getRecentlyCompleted = () => {
   return RequestManager.get({ path: "/token/last/" });
 };
+
+export const getProjectsAuditedSubtitle = () => {
+  return RequestManager.get({
+    path: "/token/all/",
+    queries: {size: 1, page: 1, field: 'audit_date', sort: 'asc'}
+  });
+};

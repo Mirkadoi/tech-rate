@@ -2,12 +2,12 @@
   <div class="wrapper-preview">
     <div class="wrapper-group">
       <div class="board">
-        <template v-for="({ logo, title, code, subtitle}, index) in columns" :key="title">
+        <template v-for="({ logo, title, code}, index) in columns" :key="title">
           <div class="board-item">
             <img class="board-item__img" :src="require('@/assets/images/'+ logo +'.png')" :alt="logo">
             <span class="board-item__title">{{ title }}</span>
-            <div class="board-item__number">{{ columnsValue[code] }}</div>
-            <span class="board-item__subtitle">{{ subtitle }}</span>
+            <div class="board-item__number">{{ value[code] }}</div>
+            <span class="board-item__subtitle">{{ subtitle[code] }}</span>
           </div>
 
           <div v-if="columns.length - 1 !== index" class="separator" />
@@ -32,8 +32,8 @@
 
   import {
     getBSCAudited,
-    getProjectsAudited,
-  } from '@/views/Home/requests';
+    getProjectsAudited, getProjectsAuditedSubtitle
+  } from "@/views/Home/requests";
 
   export default defineComponent({
     components: {
@@ -53,20 +53,24 @@
     async created() {
       const { count: allCount } = await getProjectsAudited()
       const { blockchains_count: blockchainsCount } = await getBSCAudited()
+      const { results } = await getProjectsAuditedSubtitle()
 
-      this.columnsValue.all = this.formatNumber(allCount);
-      this.columnsValue.bsc = this.formatNumber(blockchainsCount);
+      this.value.all = this.formatNumber(allCount);
+      this.value.bsc = this.formatNumber(blockchainsCount);
+      this.subtitle.all = `Since ${new Date(results[0]['audit_date'])
+        .toLocaleDateString('en-us', { month: 'short', year: 'numeric' })}`;
     },
 
     setup() {
       const columns = [
-        { logo: 'rocket', title: 'Projects audited', subtitle: 'Since 2018', code: 'all' },
-        { logo: 'blockchain-logo', title: 'Different blockchains', subtitle: 'Supported by Techrate', code: 'bsc' },
+        { logo: 'rocket', title: 'Projects audited', code: 'all' },
+        { logo: 'blockchain-logo', title: 'Different blockchains', code: 'bsc' },
       ]
 
-      const columnsValue = ref({ all: 0, bsc: 0 })
+      const value = ref({ all: 0, bsc: 0 })
+      const subtitle = ref({ all: '...', bsc: 'Supported by Techrate' })
 
-      return { columns, columnsValue }
+      return { columns, value, subtitle}
     }
   })
 </script>
