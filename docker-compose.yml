@@ -8,5 +8,8 @@ services:
     volumes:
       - .:/techrate
       - /techrate/node_modules
+      - /data/certs:/etc/nginx/certs
     ports:
-      - "3000:3000"
+      - "80:80"
+      - "443:443"
+      - "8001:8001"
