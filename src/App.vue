@@ -29,7 +29,9 @@ export default {
 
   computed: {
     isFillBackground() {
-      const isFillBackgroundPage = { products: 'primary', about: 'secondary' }
+      const isFillBackgroundPage = {
+        products: 'primary', about: 'secondary', disclaimer: 'secondary'
+      }
       return isFillBackgroundPage[this.$route.name]
     }
   }

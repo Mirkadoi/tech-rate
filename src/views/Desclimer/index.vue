@@ -2,49 +2,27 @@
   <section class="container-disclaimer">
     <h1 class="desclimer-title">Disclaimer</h1>
 
-    <div v-for="(block, i) in textBlocks" :key="i" class="desclimer-block">
-      <h2 v-if="block.title" class="desclimer-block-title">{{ block.title }}</h2>
-      <p v-if="block.text" class="desclimer-block-text">{{ block.text }}</p>
+    <p class="text" v-for="text in texts" :key="text" v-html="text" />
 
-      <ol v-if="block.list" class="desclimer-block-list">
-        <li v-for="el in block.list" :key="el" v-html="el"/>
-      </ol>
-    </div>
+<!--    <div v-for="(block, i) in textBlocks" :key="i" class="desclimer-block">-->
+<!--      <h2 v-if="block.title" class="desclimer-block-title">{{ block.title }}</h2>-->
+<!--      <p v-if="block.text" class="desclimer-block-text">{{ block.text }}</p>-->
+
+<!--      <ol v-if="block.list" class="desclimer-block-list">-->
+<!--        <li v-for="el in block.list" :key="el" v-html="el"/>-->
+<!--      </ol>-->
+<!--    </div>-->
   </section>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    textBlocks: [{
-      title: 'No Investment Advice',
-      text: 'The information provided on this website does not constitute investment advice, financial advice, trading advice, or any other sort of advice and you should not treat any of the website\'s content as such. CertiK does not recommend that any cryptocurrency should be bought, sold, or held by you. Do conduct your own due diligence and consult your financial advisor before making any investment decisions.'
-    }, {
-      title: 'Accuracy of Information',
-      text: 'CertiK will strive to ensure accuracy of information listed on this website although it will not hold any responsibility for any missing or wrong information. CertiK provides all information as is. You understand that you are using any and all information available here at your own risk. Any use or reliance on our content and services is solely at your own risk and discretion.'
-    }, {
-      title: 'Non Endorsement',
-      text: 'All content provided herein our website, hyperlinked sites, associated applications, forums, blogs, social media accounts and other platforms on CertiK’s website does not constitute an endorsement, guarantee, warranty, or recommendation by CertiK. Do conduct your own due diligence before deciding to use any third party services. No content on our Site is meant to be a solicitation or offer.'
-    }, {
-      title: 'Official Domains',
-      text: 'The domains certik.com, certik.io, and certik.org are official websites owned and operated by CertiK. Please verify that you are interacting with one of the following domains when visiting the Security Leaderboard or in communication with CertiK personnel.'
-    }, {
-      title: 'Important Notes',
-      text: 'A CertiK KYC badge (a “Badge”) is issued to a project upon completion of our “know your customers (KYC)” vetting process for the project. Our vetting process is designed with the aim of de-anonymizing developers and enhancing transparency in the crypto industry. Specifically, our KYC vetting process consists of the following procedures:'
-    }, {
-      list: [
-        'Identity Verification. We will collect [multiple forms of] identification documents from members<br/>of the project and run these documents through a third-party verification platform, in order to<br/> verify ID legitimacy, conduct liveness check and obtain an individualized risk score.',
-        'KYC Questionnaire. We will send the project a questionnaire that collects information from<br/> persons internal to and responsible for the project as well as documentary evidence showing<br/> their roles with respect to the project.',
-        'Investigation & Review. We will analyze and review the information collected through the<br/> procedures set forth above.',
-        'Recorded Video Call. We will conduct a live, recorded meeting to live-verify all of the<br/> identification documents provided.'
-      ]
-    }, {
-      text: 'The date indicated in a Badge for a project is the date on which we have completed our KYC vetting process set forth above for that project. As a result, you may not infer from the Badge that we have performed any procedures or we have renewed the KYC vetting process, in each case, at any time subsequent to the date for the Badge. In addition, our Badge is NOT a guarantee that the information that a developer provides us is trueful or complete, that such persons will not take any malicious actions, or that we can necessarily detect frauds perpetrated with "deep fake" or other sophisticated technologies. Instead, the Badge should be viewed as what it is: it is merely an indication that we have used commercially reasonable efforts to complete our KYC procedures set forth above on the date of the Badge.'
-    }, {
-      text: 'THE BADGE IS NOT A GUARANTEE FOR SAFETY. YOUR RELIANCE ON A BADGE IS SOLELY AT YOUR OWN RISK. WE ARE NOT RESPONSIBLE FOR YOUR INVESTMENT LOSS AND HEREBY EXPRESSLY DISCLAIM ANY LIABILITIES THAT MAY ARISE FROM YOUR USE OR REFERENCE OF THE BADGE.'
-    }]
-  })
-}
+<script setup>
+
+const texts = [
+"This is&nbsp;a&nbsp;limited report on&nbsp;our findings based on&nbsp;our analysis, in&nbsp;accordance with good industry practice as&nbsp;at&nbsp;the date of&nbsp;this report, in&nbsp;relation to&nbsp;cybersecurity vulnerabilities and issues in&nbsp;the framework and algorithms based on&nbsp;smart contracts, the details of&nbsp;which are set out in&nbsp;this report. In&nbsp;order to&nbsp;get a&nbsp;full view of&nbsp;our analysis, it&nbsp;is&nbsp;crucial for you to&nbsp;read the full report. While we&nbsp;have done our best in&nbsp;conducting our analysis and producing this report, it&nbsp;is&nbsp;important to&nbsp;note that you should not rely on&nbsp;this report and cannot claim against&nbsp;us on&nbsp;the basis of&nbsp;what it&nbsp;says or&nbsp;doesn&rsquo;t say, or&nbsp;how we&nbsp;produced&nbsp;it, and it&nbsp;is&nbsp;important for you to&nbsp;conduct your own independent investigations before making any decisions. We&nbsp;go&nbsp;into more detail on&nbsp;this in&nbsp;the disclaimer below&nbsp;&mdash; please make sure to&nbsp;read it&nbsp;in&nbsp;full.",
+  "DISCLAIMER: By&nbsp;reading this report or&nbsp;any part of&nbsp;it, you agree to&nbsp;the terms of&nbsp;this disclaimer. If&nbsp;you do&nbsp;not agree to&nbsp;the terms, then please immediately cease reading this report, and delete and destroy any and all copies of&nbsp;this report downloaded and/or printed by&nbsp;you. This report is&nbsp;provided for information purposes only and on&nbsp;a&nbsp;non-reliance basis, and does not constitute investment advice. No&nbsp;one shall have any right to&nbsp;rely on&nbsp;the report or&nbsp;its contents, and TechRate and its affiliates (including holding companies, shareholders, subsidiaries, employees, directors, officers and other representatives) (TechRate) owe no&nbsp;duty of&nbsp;care towards you or&nbsp;any other person, nor does TechRate make any warranty or&nbsp;representation to&nbsp;any person on&nbsp;the accuracy or&nbsp;completeness of&nbsp;the report. The report is&nbsp;provided &laquo;as&nbsp;is&raquo;, without any conditions, warranties or&nbsp;other terms of&nbsp;any kind except as&nbsp;set out in&nbsp;this disclaimer, and TechRate hereby excludes all representations, warranties, conditions and other terms (including, without limitation, the warranties implied by&nbsp;law of&nbsp;satisfactory quality, fitness for purpose and the use of&nbsp;reasonable care and skill) which, but for this clause, might have effect in&nbsp;relation to&nbsp;the report. Except and only to&nbsp;the extent that it&nbsp;is&nbsp;prohibited by&nbsp;law, TechRate hereby excludes all liability and responsibility, and neither you nor any other person shall have any claim against TechRate, for any amount or&nbsp;kind of&nbsp;loss or&nbsp;damage that may result to&nbsp;you or&nbsp;any other person (including without limitation, any direct, indirect, special, punitive, consequential or&nbsp;pure economic loss or&nbsp;damages, or&nbsp;any loss of&nbsp;income, profits, goodwill, data, contracts, use of&nbsp;money, or&nbsp;business interruption, and whether in&nbsp;delict, tort (including without limitation negligence), contract, breach of&nbsp;statutory duty, misrepresentation (whether innocent or&nbsp;negligent) or&nbsp;otherwise under any claim of&nbsp;any nature whatsoever in&nbsp;any jurisdiction) in&nbsp;any way arising from or&nbsp;connected with this report and the use, inability to&nbsp;use or&nbsp;the results of&nbsp;use of&nbsp;this report, and any reliance on&nbsp;this report.",
+  "The analysis of&nbsp;the security is&nbsp;purely based on&nbsp;the smart contracts alone. No&nbsp;applications or&nbsp;operations were reviewed for security. No&nbsp;product code has been reviewed."
+]
+
 </script>
 
 <style scoped lang="scss">
@@ -53,7 +31,6 @@ export default {
     padding: 24px 40px 80px;
     font-family: $font-base;
     color: $text-color-black;
-    background: $background-colors-lotion;
   }
 
   .title {
@@ -63,24 +40,33 @@ export default {
     margin-bottom: 30px;
   }
 
-  .desclimer-block {
+  .text {
     max-width: 900px;
-
-    .desclimer-block-title {
-      font-weight: 700;
-      font-size: 16px;
+      font-weight: 400;
+      font-size: 14px;
       line-height: 140%;
-      margin: 24px 0 10px;
-    }
+    text-align: justify;
+    margin-bottom: 30px;
   }
 
-  .desclimer-block-text {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 140%;
-  }
-
-  .desclimer-block-list {
-    padding-left: 18px;
-  }
+  //.desclimer-block {
+  //  max-width: 900px;
+  //
+  //  .desclimer-block-title {
+  //    font-weight: 700;
+  //    font-size: 16px;
+  //    line-height: 140%;
+  //    margin: 24px 0 10px;
+  //  }
+  //}
+  //
+  //.desclimer-block-text {
+  //  font-weight: 400;
+  //  font-size: 14px;
+  //  line-height: 140%;
+  //}
+  //
+  //.desclimer-block-list {
+  //  padding-left: 18px;
+  //}
 </style>
