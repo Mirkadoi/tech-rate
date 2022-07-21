@@ -59,7 +59,7 @@ export default {
 <style scoped lang="scss">
 .container-about {
   width: 100%;
-  padding: 24px 40px 80px;
+  padding: 55px 100px 80px 100px;
   font-family: $font-base;
   color: $text-color-black;
 }
