@@ -3,15 +3,6 @@
     <h1 class="desclimer-title">Disclaimer</h1>
 
     <p class="text" v-for="text in texts" :key="text" v-html="text" />
-
-<!--    <div v-for="(block, i) in textBlocks" :key="i" class="desclimer-block">-->
-<!--      <h2 v-if="block.title" class="desclimer-block-title">{{ block.title }}</h2>-->
-<!--      <p v-if="block.text" class="desclimer-block-text">{{ block.text }}</p>-->
-
-<!--      <ol v-if="block.list" class="desclimer-block-list">-->
-<!--        <li v-for="el in block.list" :key="el" v-html="el"/>-->
-<!--      </ol>-->
-<!--    </div>-->
   </section>
 </template>
 
@@ -27,10 +18,12 @@ const texts = [
 
 <style scoped lang="scss">
   .container-disclaimer {
-    width: 100%;
+
+    max-width: 900px;
     padding: 55px 100px 80px 100px;
     font-family: $font-base;
     color: $text-color-black;
+    margin: 0 auto;
   }
 
   .title {
@@ -41,32 +34,12 @@ const texts = [
   }
 
   .text {
-    max-width: 900px;
+    //max-width: 900px;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 140%;
     text-align: justify;
     margin-bottom: 30px;
   }
 
-  //.desclimer-block {
-  //  max-width: 900px;
-  //
-  //  .desclimer-block-title {
-  //    font-weight: 700;
-  //    font-size: 16px;
-  //    line-height: 140%;
-  //    margin: 24px 0 10px;
-  //  }
-  //}
-  //
-  //.desclimer-block-text {
-  //  font-weight: 400;
-  //  font-size: 14px;
-  //  line-height: 140%;
-  //}
-  //
-  //.desclimer-block-list {
-  //  padding-left: 18px;
-  //}
 </style>
