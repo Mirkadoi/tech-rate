@@ -1,5 +1,5 @@
 <template>
-  <div class="chips" :class="{pointer: btn, active: active}" @click="$emit('onClick')">
+  <div class="chips" :class="{pointer: btn, active: active, circle: circle}" @click="$emit('onClick')">
     {{ title }}
   </div>
 </template>
@@ -12,6 +12,7 @@
       title: {type: String, required: true},
       btn: {type: Boolean, default: false},
       active: {type: Boolean, default: false},
+      circle: {type: Boolean, default: false},
     }
   })
 </script>
@@ -37,5 +38,15 @@
   .active {
     background-color: rgba(249, 0, 116, 0.3);
     color: $background-colors-white;
+  }
+
+  .circle {
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
   }
 </style>

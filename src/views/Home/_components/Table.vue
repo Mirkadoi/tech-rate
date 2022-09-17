@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <th v-for="(el, i) in header" :key="i" :style="{width: el.width}">
-            <p v-if="el.key !== 'audit' && el.key !== 'links'" class="d-flex pointer" @click="sort(el.key)">
+            <p v-if="!noSortHeader.includes(el.key)" class="d-flex pointer" @click="sort(el.key)">
               <span>{{ el.text }}</span>
               <span class="arrows" :class="toggleSortArrow(el.key)"/>
             </p>
@@ -28,8 +28,41 @@
             <pie-chart :value="el.score"/>
           </td>
 
-          <td>{{ el.blockchain }}</td>
-          <td>{{ el.category }}</td>
+          <td>{{ el.blockchain.name }}</td>
+          <td>
+              <a
+                style="display: block; width: fit-content;"
+                v-if="el.blockchain.link && el.blockchain.image"
+                :href="el.blockchain.link + el.contract_address"
+                target="_blank"
+                :title="el.blockchain.name + ' ' + 'contract'"
+              >
+                <img
+                  style="display: block; margin-right: 0;"
+                  :src="el.blockchain.image"
+                  width="24"
+                  height="24">
+              </a>
+          </td>
+          <td>
+            <div class="categories">
+              <span class="categories__main">{{ el.categories[0] }}</span>
+
+              <VMenu placement="top" >
+                <span v-if="el.categories.length > 1" style="cursor: pointer">
+                  <Chips  style="padding: 3px 6px"  :title="`+${el.categories.length - 1}`"/>
+                </span>
+
+                <template #popper>
+                  <div class="menu-list" v-for="title in el.categories" :key="title">
+                    <template v-if="title !== el.categories[0]">
+                      {{ title }}
+                    </template>
+                  </div>
+                </template>
+              </VMenu>
+            </div>
+          </td>
 
           <td class="audit">
             <a v-if="el.audit" :href="el.audit" target="_blank">
@@ -65,12 +98,14 @@ import PieChart from "@/views/Home/_components/PieChart";
 import TableControls from "@/views/Home/_components/TableControls";
 
 import { store } from '../_store/index'
+import Chips from "@/components/ui/Chips";
 
 
 export default defineComponent({
   components: {
     TableControls,
-    PieChart
+    PieChart,
+    Chips
   },
 
   methods:{
@@ -107,16 +142,21 @@ export default defineComponent({
 
   setup() {
     const header = [
-      { text: 'Name', key: 'name', width: '29%' },
+      { text: 'Name', key: 'name', width: '20%' },
       { text: 'Score', key: 'score',  width: '10%' },
       { text: 'Blockchain', key: 'blockchain',  width: '13%' },
-      { text: 'Category', key: 'category',  width: '13%' },
+      { text: 'Contract', key: 'contract',  width: '9%' },
+      { text: 'Categories', key: 'categories',  width: '13%' },
       { text: 'Audit', key: 'audit',  width: '10%' },
       { text: 'Links', key: 'links',  width: '10%' },
       { text: 'Date', key: 'audit_date',  width: '15%' },
     ]
 
-    return { store, header }
+    const noSortHeader = [
+      'links', 'audit', 'categories'
+    ]
+
+    return { store, header, noSortHeader }
   }
 })
 </script>
@@ -160,7 +200,7 @@ export default defineComponent({
           }
         }
 
-        &:nth-child(5) {
+        &:nth-child(6) {
           p {
             justify-content: center;
           }
@@ -265,7 +305,7 @@ export default defineComponent({
             text-align: right;
           }
 
-          &:nth-child(5) {
+          &:nth-child(6) {
             text-align: center;
           }
 
@@ -298,6 +338,21 @@ export default defineComponent({
           }
         }
       }
+    }
+  }
+
+  .menu-list {
+    padding: 10px 20px;
+    display: flex;
+    gap: 5px;
+  }
+
+  .categories {
+    display: flex;
+    align-items: baseline;
+
+    &__main {
+      margin-right: 10px;
     }
   }
 
