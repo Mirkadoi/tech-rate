@@ -54,11 +54,12 @@
                 </span>
 
                 <template #popper>
-                  <div class="menu-list" v-for="title in el.categories" :key="title">
-                    <template v-if="title !== el.categories[0]">
-                      {{ title }}
-                    </template>
+                  <div class="menu-list">
+                    <span v-for="(title) in el.categories" :key="title">
+                        {{ title }}
+                    </span>
                   </div>
+
                 </template>
               </VMenu>
             </div>
@@ -342,9 +343,13 @@ export default defineComponent({
   }
 
   .menu-list {
-    padding: 10px 20px;
+    padding: 15px 20px;
     display: flex;
-    gap: 5px;
+    flex-direction: row;
+    gap: 10px;
+    font-family: $font-base;
+    font-size: 14px;
+    font-weight: 500;
   }
 
   .categories {
