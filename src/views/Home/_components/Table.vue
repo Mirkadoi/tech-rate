@@ -43,6 +43,8 @@
                   width="24"
                   height="24">
               </a>
+              <span v-else>N/A</span>
+
           </td>
           <td>
             <div class="categories">
