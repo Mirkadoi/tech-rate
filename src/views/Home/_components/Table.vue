@@ -30,23 +30,6 @@
 
           <td>{{ el.blockchain.name }}</td>
           <td>
-              <a
-                style="display: block; width: fit-content;"
-                v-if="el.blockchain.link && el.blockchain.image"
-                :href="el.blockchain.link + el.contract_address"
-                target="_blank"
-                :title="el.blockchain.name + ' ' + 'contract'"
-              >
-                <img
-                  style="display: block; margin-right: 0;"
-                  :src="el.blockchain.image"
-                  width="24"
-                  height="24">
-              </a>
-              <span v-else>N/A</span>
-
-          </td>
-          <td>
             <div class="categories">
               <span class="categories__main">{{ el.categories[0] }}</span>
 
@@ -65,6 +48,24 @@
                 </template>
               </VMenu>
             </div>
+          </td>
+          <td>
+              <div class="contract">
+                <a
+                  v-if="el.blockchain.link && el.blockchain.image"
+                  :href="el.blockchain.link + el.contract_address"
+                  target="_blank"
+                  :title="el.blockchain.name + ' ' + 'contract'"
+                >
+                  <img
+                    style="display: block; margin-right: 0;"
+                    :src="el.blockchain.image"
+                    width="24"
+                    height="24">
+                </a>
+                <span v-else>N/A</span>
+              </div>
+
           </td>
 
           <td class="audit">
@@ -148,15 +149,15 @@ export default defineComponent({
       { text: 'Name', key: 'name', width: '20%' },
       { text: 'Score', key: 'score',  width: '10%' },
       { text: 'Blockchain', key: 'blockchain',  width: '13%' },
-      { text: 'Contract', key: 'contract',  width: '9%' },
       { text: 'Categories', key: 'categories',  width: '13%' },
+      { text: 'Contract', key: 'contract',  width: '9%' },
       { text: 'Audit', key: 'audit',  width: '10%' },
       { text: 'Links', key: 'links',  width: '10%' },
       { text: 'Date', key: 'audit_date',  width: '15%' },
     ]
 
     const noSortHeader = [
-      'links', 'audit', 'categories'
+      'links', 'audit', 'contract'
     ]
 
     return { store, header, noSortHeader }
@@ -200,6 +201,12 @@ export default defineComponent({
         &:last-child {
           p {
             justify-content: end;
+          }
+        }
+
+        &:nth-child(5) {
+          p {
+            justify-content: center;
           }
         }
 
@@ -308,6 +315,10 @@ export default defineComponent({
             text-align: right;
           }
 
+          &:nth-child(5) {
+            text-align: center;
+          }
+
           &:nth-child(6) {
             text-align: center;
           }
@@ -342,6 +353,11 @@ export default defineComponent({
         }
       }
     }
+  }
+
+  .contract {
+    display: flex;
+    justify-content: center;
   }
 
   .menu-list {
