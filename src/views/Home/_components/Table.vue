@@ -157,7 +157,7 @@ export default defineComponent({
     ]
 
     const noSortHeader = [
-      'links', 'audit', 'contract'
+      'links', 'audit', 'contract', 'categories'
     ]
 
     return { store, header, noSortHeader }
