@@ -16,6 +16,7 @@
       </thead>
       <tbody>
         <tr v-for="(el, i) in store.projectTokenList" :key="i" :class="{partner: el['is_partner']}">
+          <td>{{ el.index }}</td>
 
           <td>
             <div class="d-flex">
@@ -146,10 +147,11 @@ export default defineComponent({
 
   setup() {
     const header = [
-      { text: 'Name', key: 'name', width: '20%' },
+      { text: '#', key: 'index', width: '4%' },
+      { text: 'Name', key: 'name', width: '18%' },
       { text: 'Score', key: 'score',  width: '10%' },
-      { text: 'Blockchain', key: 'blockchain',  width: '13%' },
-      { text: 'Categories', key: 'categories',  width: '13%' },
+      { text: 'Blockchain', key: 'blockchain',  width: '12%' },
+      { text: 'Categories', key: 'categories',  width: '12%' },
       { text: 'Contract', key: 'contract',  width: '9%' },
       { text: 'Audit', key: 'audit',  width: '10%' },
       { text: 'Links', key: 'links',  width: '10%' },
