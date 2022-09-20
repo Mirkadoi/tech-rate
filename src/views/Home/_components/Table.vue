@@ -206,11 +206,11 @@ export default defineComponent({
           }
         }
 
-        &:nth-child(5) {
-          p {
-            justify-content: center;
-          }
-        }
+        //&:nth-child(5) {
+        //  p {
+        //    justify-content: center;
+        //  }
+        //}
 
         &:nth-child(6) {
           p {
@@ -317,9 +317,9 @@ export default defineComponent({
             text-align: right;
           }
 
-          &:nth-child(5) {
-            text-align: center;
-          }
+          //&:nth-child(5) {
+          //  text-align: center;
+          //}
 
           &:nth-child(6) {
             text-align: center;
