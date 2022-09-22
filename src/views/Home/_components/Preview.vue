@@ -55,8 +55,8 @@
       const { blockchains_count: blockchainsCount } = await getBSCAudited()
       const { results } = await getProjectsAuditedSubtitle()
 
-      this.value.all = this.formatNumber(allCount);
-      this.value.bsc = this.formatNumber(blockchainsCount);
+      this.value.all = allCount;
+      this.value.bsc = blockchainsCount;
       this.subtitle.all = `Since ${new Date(results[0]['audit_date'])
         .toLocaleDateString('en-us', { month: 'short', year: 'numeric' })}`;
     },
