@@ -28,7 +28,7 @@ export default {
 
   computed: {
     displayedBlogList() {
-      return this.showAll ? store.blogList : store.blogList.slice(0, 3);
+      return this.showAll ? store.blogList : store.blogList.slice(0, 12);
     },
 
     displayedTitleTop() {
