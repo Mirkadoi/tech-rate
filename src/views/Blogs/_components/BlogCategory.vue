@@ -2,12 +2,12 @@
   <div class="posts-wrapper">
     <div class="posts-top">
       <h3>{{ categoryName }}</h3>
-      <div @click="showAll = !showAll">{{displayedTitleTop}}</div>
+      <div v-show="isShowCollapseBtn" @click="hidePart = !hidePart">{{ collapseBtnTitle }}</div>
     </div>
 
     <div class="posts-list">
-      <template v-if="displayedBlogList.length">
-        <Card v-for="item in displayedBlogList" :key="item.uid" class="posts-item" :item="item" @click="redirectToBlog(item.uid)" />
+      <template v-if="blogList.length">
+        <Card v-for="item in blogList" :key="item.uid" class="posts-item" :item="item" @click="redirectToBlog(item.uid)" />
       </template>
     </div>
   </div>
@@ -20,6 +20,8 @@ import { store } from '../_store/index'
 
 import Card from '@/components/ui/Card';
 
+const MAX_VISIBLE_BLOGS = 12;
+
 export default {
   components: { Card },
   props: {
@@ -27,12 +29,16 @@ export default {
   },
 
   computed: {
-    displayedBlogList() {
-      return this.showAll ? store.blogList : store.blogList.slice(0, 12);
+    blogList() {
+      return this.hidePart ?  store.blogList.slice(0, MAX_VISIBLE_BLOGS) : store.blogList;
     },
 
-    displayedTitleTop() {
-      return !this.showAll ? 'See all blockchain content' : 'Hide part blockchain content';
+    collapseBtnTitle() {
+      return this.hidePart ? 'See all blockchain content' : 'Hide part blockchain content';
+    },
+
+    isShowCollapseBtn() {
+      return store.blogList.length > MAX_VISIBLE_BLOGS;
     }
   },
 
@@ -51,10 +57,10 @@ export default {
   },
 
   setup() {
-    const showAll = ref(false);
+    const hidePart = ref(true);
     // const blogList = ref([]);
 
-    return { showAll }
+    return { hidePart }
   }
 }
 </script>
